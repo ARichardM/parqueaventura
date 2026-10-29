@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Juegos de lenguaje para niños de 7 a 10 años. Sin cuentas, gratis y adaptable a celular.">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#fffaf3">
+  <title>Lenguaje | Mundo Curioso</title>
+  <link rel="icon" type="image/svg+xml" href="../recursos/icono.svg">
+  <link rel="stylesheet" href="../recursos/estilos.css">
+</head><body class="game-body" data-subject="lenguaje">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header"><div class="container header-row">
+  <a class="brand" href="../index.html" aria-label="Mundo Curioso: ir al inicio"><img src="../recursos/icono.svg" alt="" width="45" height="45"><span>Mundo <span>Curioso</span></span></a>
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a href="../index.html" >Inicio</a>
+    <a href="../paginas/matematicas.html" >Matemáticas</a>
+    <a href="../paginas/lenguaje.html" aria-current="page">Lenguaje</a>
+    <a href="../paginas/ciencias.html" >Ciencias</a>
+  </nav>
+</div></header>
+<main id="contenido">
+  <section class="game-hero"><div class="container"><a class="back-link" href="../index.html">← Volver a las aventuras</a>
+    <div class="game-heading"><div><span class="eyebrow">✨ El club de las palabras</span><h1>Lenguaje</h1><p>Descubre letras escondidas y encuentra palabras con poderes parecidos.</p></div><span class="emblem" aria-hidden="true">📚</span></div>
+  </div></section>
+  <section class="container game-layout" aria-label="Zona de juegos">
+    <div class="game-main">
+      <div class="game-panel"><span class="panel-label">🎮 Elige tu desafío</span><div class="mode-grid" role="group" aria-label="Tipos de juegos"><button type="button" class="mode-button" data-mode="letras" aria-pressed="true"><span class="mode-emoji" aria-hidden="true">🔤</span><span class="mode-copy"><strong>Letra perdida</strong><small>Completa la palabra.</small></span></button>
+<button type="button" class="mode-button" data-mode="sinonimos" aria-pressed="false"><span class="mode-emoji" aria-hidden="true">💬</span><span class="mode-copy"><strong>Sinónimos</strong><small>Une significados.</small></span></button></div></div>
+      <div class="game-panel"><span class="panel-label">⭐ Elige tu nivel</span><div class="level-control" role="group" aria-label="Dificultad"><button type="button" class="level-button" data-level="1" aria-pressed="true">🌟 7–8 años</button><button type="button" class="level-button" data-level="2" aria-pressed="false">🚀 9–10 años</button></div></div>
+      <div class="game-panel">
+        <div id="play-area" class="play-area">
+          <div class="question-meta"><span id="question-tag" class="question-badge">Tu desafío</span><span id="question-number">Pregunta 1 de 8</span></div>
+          <div id="question-symbol" class="question-symbol" aria-hidden="true">✨</div>
+          <h2 id="question-title" class="question-title" tabindex="-1">¡A jugar!</h2>
+          <p id="question-hint" class="question-hint">Elige una respuesta.</p>
+          <div id="answer-options" class="answers" role="group" aria-label="Opciones de respuesta"></div>
+          <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+          <div class="next-row"><button type="button" id="next-btn" class="btn next-button" hidden>Siguiente pregunta →</button></div>
+        </div>
+        <div id="results" class="results" hidden><span class="trophy" aria-hidden="true">🏆</span><h2 id="result-title" tabindex="-1">¡Terminaste!</h2><div id="final-score" class="result-score">0 / 8</div><p id="result-message">¡Sigue aprendiendo!</p><button id="play-again" class="btn btn-primary" type="button">Jugar otra vez ↻</button></div>
+      </div>
+    </div>
+    <aside class="game-side" aria-label="Tu avance"><div class="side-panel"><h3>🚀 Tu aventura</h3>
+      <div class="score-box"><div><div class="score-label">Respuestas correctas</div><div class="score-num"><span id="score">0</span> ⭐</div></div><span class="score-star" aria-hidden="true">🏅</span></div>
+      <div class="progress-caption"><span>Tu progreso</span><span id="progress-text">0 de 8</span></div>
+      <div id="progress-bar" class="progress-track" role="progressbar" aria-label="Progreso del juego" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><div class="progress-fill"></div></div>
+      <div class="tip-card"><strong>💡 Consejo:</strong> Lee la pista con calma. Si fallas, mira la explicación para aprender algo nuevo.</div>
+      <button type="button" id="restart-btn" class="restart-button">↻ Empezar de nuevo</button>
+      <div class="subject-links"><strong>¿Otra aventura?</strong><a href="matematicas.html">Matemáticas →</a>
+<a href="ciencias.html">Ciencias →</a></div>
+    </div></aside>
+  </section>
+</main>
+<footer class="site-footer"><div class="container footer-row"><span><strong>Mundo Curioso</strong> · Aprender es una aventura 💛</span><span>Sin cuentas, sin anuncios y sin recopilar datos.</span></div></footer>
+<script src="../recursos/juegos.js" defer></script>
+</body></html>

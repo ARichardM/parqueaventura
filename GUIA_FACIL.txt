@@ -1,0 +1,67 @@
+MUNDO CURIOSO - GUÍA FÁCIL PARA PUBLICAR
+=====================================
+
+¿Qué vas a lograr?
+Tener tu propia página de juegos para niños, con un enlace que puedes compartir.
+¡No necesitas saber programar!
+
+PASO 1: DESCARGAR Y DESCOMPRIMIR
+- Guarda el archivo ZIP en tu computadora.
+- Haz clic derecho sobre él y elige «Extraer todo».
+- Abre la carpeta «mundo-curioso-proyecto».
+- Dentro encontrarás «site», «.github» y esta guía.
+
+PASO 2: VER LA PÁGINA
+- Entra a la carpeta «site».
+- Haz doble clic en «index.html».
+- Se abre la página en tu navegador. ¡Prueba los juegos!
+
+PASO 3: ENTRAR A GITHUB
+- Abre https://github.com
+- Crea tu cuenta o inicia sesión.
+- Esta cuenta es del adulto que administra la página, NO de los niños.
+
+PASO 4: CREAR TU REPOSITORIO
+- Presiona el símbolo + que está arriba.
+- Elige «New repository» (nuevo repositorio).
+- Escribe un nombre como «mundo-curioso».
+- Marca «Public» (público).
+- Pulsa «Create repository» (crear repositorio).
+
+PASO 5: SUBIR LAS CARPETAS
+- En el repositorio busca «Add file» y elige «Upload files».
+- Desde la carpeta que descomprimiste, arrastra «site» y «.github».
+- Importante: NO arrastres solamente el ZIP y NO metas una carpeta
+  «mundo-curioso-proyecto» adicional dentro del repositorio.
+- Comprueba que GitHub incluya «site/index.html» y
+  «.github/workflows/deploy.yml».
+- Al final presiona «Commit changes» (guardar cambios).
+
+PASO 6: ACTIVAR LA PUBLICACIÓN
+- En tu repositorio, entra en «Settings» (configuración).
+- En el menú izquierdo elige «Pages».
+- Busca «Build and deployment», después «Source».
+- Selecciona «GitHub Actions».
+
+PASO 7: COMPROBAR
+- Entra en la pestaña «Actions».
+- Busca «Publicar Mundo Curioso en GitHub Pages».
+- Cuando aparezca un símbolo verde, ¡la publicación está lista!
+- Si no se inició, elige el flujo y después «Run workflow» en «main».
+- Vuelve a «Settings» > «Pages» y pulsa «Visit site».
+
+TU ENLACE
+Suele tener esta forma:
+https://TU-USUARIO.github.io/mundo-curioso/
+
+Reemplaza TU-USUARIO con tu usuario real de GitHub.
+
+¿NECESITAS AYUDA?
+- Si aparece error 404, revisa que «site/index.html» exista
+  directamente en el repositorio.
+- Si no existe el proceso de «Actions», revisa que hayas subido
+  «.github/workflows/deploy.yml» y que estés usando la rama «main».
+- Si aparece error rojo en «Actions», haz clic sobre él para
+  ver el detalle.
+
+Recuerda: los niños no tienen que registrarse ni entregar información.
