@@ -138,6 +138,7 @@ class PractiJuegosApp {
 
     grid.innerHTML = '';
     Object.values(TEMAS_INFO).forEach(t => {
+      const countQuestions = PREGUNTAS_DB.filter(q => q.temaId === t.id).length;
       const card = document.createElement('div');
       card.className = 'tema-card';
       card.innerHTML = `
@@ -148,8 +149,8 @@ class PractiJuegosApp {
           <span class="tema-oa-badge">OA ${t.oa}</span>
         </div>
         <h3 class="tema-title">${t.nombre}</h3>
-        <p class="tema-desc">Practica ejercicios clave de este tema basados en el libro escolar.</p>
-        <button class="tema-btn">Practicar este tema →</button>
+        <p class="tema-desc">${countQuestions} ejercicios extraídos del texto escolar y guía oficial.</p>
+        <button class="tema-btn">Practicar ${countQuestions} retos →</button>
       `;
       card.addEventListener('click', () => {
         this.startTemaQuiz(t.id);
@@ -205,11 +206,9 @@ class PractiJuegosApp {
       container.appendChild(card);
     });
 
-    // Enlazar interactividad de los widgets después de montarlos
     this.bindWidgetInteractions();
   }
 
-  // Generador de Mini-Laboratorios interactivos para las Fichas
   buildInteractiveWidget(tipo, fichaId) {
     switch (tipo) {
       case 'pictograma':
@@ -406,9 +405,7 @@ class PractiJuegosApp {
     }
   }
 
-  // Enlazar eventos de los Mini-Laboratorios
   bindWidgetInteractions() {
-    // 1. Pictograma
     let manzanas = 3;
     let platanos = 2;
     const addManzana = document.getElementById('btn-add-manzana');
@@ -431,7 +428,6 @@ class PractiJuegosApp {
       });
     }
 
-    // 2. Figuras 3D
     document.querySelectorAll('.demo-shape-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const shape = btn.dataset.shape;
@@ -450,7 +446,6 @@ class PractiJuegosApp {
       });
     });
 
-    // 3. Perímetro
     let largo = 6;
     let ancho = 3;
     const valLargo = document.getElementById('val-largo');
@@ -474,7 +469,6 @@ class PractiJuegosApp {
     if (btnAddA) btnAddA.addEventListener('click', () => { if (ancho < 10) ancho++; updatePerim(); });
     if (btnSubA) btnSubA.addEventListener('click', () => { if (ancho > 1) ancho--; updatePerim(); });
 
-    // 4. Peso
     const sliderPeso = document.getElementById('slider-peso');
     const labelPeso = document.getElementById('slider-peso-label');
     const resPeso = document.getElementById('demo-peso-result');
@@ -488,7 +482,6 @@ class PractiJuegosApp {
       });
     }
 
-    // 5. Descomposición
     const inputDesc = document.getElementById('input-desc-num');
     const btnDesc = document.getElementById('btn-desc-calc');
     const resDesc = document.getElementById('demo-desc-result');
@@ -506,7 +499,6 @@ class PractiJuegosApp {
       });
     }
 
-    // 6. Operaciones
     const btnDemoSuma = document.getElementById('btn-demo-suma');
     const btnDemoResta = document.getElementById('btn-demo-resta');
     const resOp = document.getElementById('demo-op-result');
@@ -519,7 +511,6 @@ class PractiJuegosApp {
       });
     }
 
-    // 7. Fracciones
     document.querySelectorAll('.demo-frac-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const frac = btn.dataset.frac;
@@ -535,7 +526,6 @@ class PractiJuegosApp {
       });
     });
 
-    // 8. Patrones
     document.querySelectorAll('.demo-pat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const rule = btn.dataset.rule;
@@ -598,7 +588,8 @@ class PractiJuegosApp {
     document.getElementById('quiz-progress-fill').style.width = `${percent}%`;
 
     const temaInfo = TEMAS_INFO[q.temaId] || { nombre: "Matemática", icono: "📘", oa: "" };
-    document.getElementById('quiz-tema-badge').innerHTML = `${temaInfo.icono} ${temaInfo.nombre} (OA ${temaInfo.oa})`;
+    const origenBadge = q.origen ? `<span style="opacity: 0.8; font-weight: 600; margin-left: 0.4rem;">📖 ${q.origen}</span>` : '';
+    document.getElementById('quiz-tema-badge').innerHTML = `${temaInfo.icono} ${temaInfo.nombre} (OA ${temaInfo.oa}) ${origenBadge}`;
 
     // Texto de la pregunta
     document.getElementById('question-text').textContent = q.pregunta;
@@ -623,80 +614,73 @@ class PractiJuegosApp {
       optionsContainer.appendChild(btn);
     });
 
-    // Ocultar feedback previo
     document.getElementById('feedback-container').innerHTML = '';
   }
 
-  // Construcción de Gráficos Visuales Impecables (Garantiza que ningún texto se corte)
+  // Renderizador integral de ilustraciones para CADA tipo de pregunta
   buildVisualHtml(grafico) {
     if (!grafico) return '';
 
     switch (grafico.tipo) {
-      // 1. CUADRADO DE PERÍMETRO CON PÍLDORAS CLARAS
+      // 1. CUADRADO DE PERÍMETRO CON PÍLDORAS
       case 'cuadrado': {
         return `
           <svg class="figura-svg" width="260" height="220" viewBox="0 0 260 220" style="overflow: visible;">
-            <!-- Sombra -->
             <rect x="74" y="54" width="120" height="120" fill="#E2E8F0" rx="14"/>
-            <!-- Cuadrado Principal -->
             <rect x="70" y="50" width="120" height="120" fill="#EEF2FF" stroke="#4F46E5" stroke-width="4" rx="12"/>
-            
-            <!-- Etiqueta Arriba -->
             <rect x="105" y="14" width="50" height="26" fill="#4F46E5" rx="6"/>
             <text x="130" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            
-            <!-- Etiqueta Abajo -->
             <rect x="105" y="180" width="50" height="26" fill="#4F46E5" rx="6"/>
             <text x="130" y="198" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            
-            <!-- Etiqueta Izquierda (Con margen seguro) -->
             <rect x="10" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
             <text x="35" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            
-            <!-- Etiqueta Derecha (Con margen seguro) -->
             <rect x="200" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
             <text x="225" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
           </svg>
         `;
       }
 
-      // 2. RECTÁNGULO DE PERÍMETRO CON PÍLDORAS CLARAS
+      // 2. RECTÁNGULO DE PERÍMETRO CON PÍLDORAS
       case 'rectangulo': {
         return `
           <svg class="figura-svg" width="300" height="200" viewBox="0 0 300 200" style="overflow: visible;">
-            <!-- Sombra -->
             <rect x="69" y="54" width="170" height="90" fill="#E2E8F0" rx="14"/>
-            <!-- Rectángulo Principal -->
             <rect x="65" y="50" width="170" height="90" fill="#D1FAE5" stroke="#10B981" stroke-width="4" rx="12"/>
-            
-            <!-- Arriba (Largo) -->
             <rect x="125" y="14" width="50" height="26" fill="#10B981" rx="6"/>
             <text x="150" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">6 cm</text>
-            
-            <!-- Abajo (Largo) -->
             <rect x="125" y="150" width="50" height="26" fill="#10B981" rx="6"/>
             <text x="150" y="168" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">6 cm</text>
-            
-            <!-- Izquierda (Ancho) -->
             <rect x="8" y="82" width="50" height="26" fill="#10B981" rx="6"/>
             <text x="33" y="100" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">3 cm</text>
-            
-            <!-- Derecha (Ancho) -->
             <rect x="242" y="82" width="50" height="26" fill="#10B981" rx="6"/>
             <text x="267" y="100" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">3 cm</text>
           </svg>
         `;
       }
 
-      // 3. PIZZA CON REBANADA DE 1/4 DESTACADA
+      // 3. PATIO CUADRADO DE 5 METROS
+      case 'cuadrado_5m': {
+        return `
+          <svg class="figura-svg" width="260" height="200" viewBox="0 0 260 200">
+            <rect x="70" y="40" width="120" height="120" fill="#FEF3C7" stroke="#D97706" stroke-width="3" rx="10"/>
+            <rect x="105" y="8" width="50" height="24" fill="#D97706" rx="6"/>
+            <text x="130" y="24" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+            <rect x="105" y="168" width="50" height="24" fill="#D97706" rx="6"/>
+            <text x="130" y="184" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+            <rect x="10" y="88" width="50" height="24" fill="#D97706" rx="6"/>
+            <text x="35" y="104" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+            <rect x="200" y="88" width="50" height="24" fill="#D97706" rx="6"/>
+            <text x="225" y="104" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+          </svg>
+        `;
+      }
+
+      // 4. PIZZA CON REBANADA DE 1/4 DESTACADA
       case 'pizza': {
         return `
           <svg class="pizza-svg" width="180" height="180" viewBox="0 0 180 180">
-            <!-- Base de masa -->
             <circle cx="90" cy="90" r="75" fill="#FED7AA" stroke="#F97316" stroke-width="5"/>
             <circle cx="90" cy="90" r="66" fill="#FEF08A"/>
-            
-            <!-- Rebanada 1/4 destacada (desplazada hacia arriba) -->
             <g transform="translate(6, -6)">
               <path d="M 90 90 L 90 24 A 66 66 0 0 1 156 90 Z" fill="#F87171" stroke="#DC2626" stroke-width="2.5"/>
               <circle cx="118" cy="55" r="7" fill="#B91C1C"/>
@@ -704,8 +688,6 @@ class PractiJuegosApp {
               <rect x="105" y="62" width="36" height="22" fill="#FFFFFF" rx="4"/>
               <text x="123" y="77" font-size="12" font-weight="900" fill="#DC2626" text-anchor="middle">1/4</text>
             </g>
-            
-            <!-- Otras 3 porciones de 1/4 -->
             <path d="M 90 90 L 156 90 A 66 66 0 0 1 90 156 Z" fill="#FEF08A" stroke="#EA580C" stroke-width="2"/>
             <circle cx="120" cy="120" r="7" fill="#EA580C"/>
             <path d="M 90 90 L 90 156 A 66 66 0 0 1 24 90 Z" fill="#FEF08A" stroke="#EA580C" stroke-width="2"/>
@@ -717,11 +699,25 @@ class PractiJuegosApp {
         `;
       }
 
-      // 4. BARRA DE CHOCOLATE PARTIDA EN 2 MITADES (1/2)
+      // 5. PASTEL DE TRES CUARTOS (3/4)
+      case 'pizza_tres_cuartos': {
+        return `
+          <svg class="pizza-svg" width="180" height="180" viewBox="0 0 180 180">
+            <circle cx="90" cy="90" r="72" fill="#FED7AA" stroke="#F97316" stroke-width="4"/>
+            <!-- 3 porciones servidas (rojas/rosadas) -->
+            <path d="M 90 90 L 90 18 A 72 72 0 1 1 18 90 Z" fill="#FB7185" stroke="#E11D48" stroke-width="2.5"/>
+            <!-- 1 porción vacía / restante -->
+            <path d="M 90 90 L 18 90 A 72 72 0 0 1 90 18 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-dasharray="4" stroke-width="2"/>
+            <rect x="90" y="80" width="50" height="26" fill="#BE123C" rx="6"/>
+            <text x="115" y="98" font-size="13" font-weight="900" fill="#FFFFFF" text-anchor="middle">3 / 4</text>
+          </svg>
+        `;
+      }
+
+      // 6. CHOCOLATE (1/2)
       case 'chocolate': {
         return `
           <svg width="220" height="110" viewBox="0 0 220 110">
-            <!-- Mitad 1 -->
             <g transform="translate(10, 10)">
               <rect x="0" y="0" width="90" height="70" fill="#78350F" stroke="#451A03" stroke-width="3" rx="8"/>
               <rect x="8" y="8" width="74" height="54" fill="#92400E" rx="4"/>
@@ -729,7 +725,6 @@ class PractiJuegosApp {
               <text x="45" y="40" font-size="14" font-weight="900" fill="#FFFFFF" text-anchor="middle">1 / 2</text>
               <text x="45" y="88" font-size="12" font-weight="800" fill="#78350F" text-anchor="middle">Mitad 1</text>
             </g>
-            <!-- Mitad 2 -->
             <g transform="translate(115, 10)">
               <rect x="0" y="0" width="90" height="70" fill="#78350F" stroke="#451A03" stroke-width="3" rx="8"/>
               <rect x="8" y="8" width="74" height="54" fill="#92400E" rx="4"/>
@@ -741,28 +736,22 @@ class PractiJuegosApp {
         `;
       }
 
-      // 5. BALANZA ILUSTRADA 1 kg = 1.000 g
+      // 7. BALANZA ILUSTRADA (1 kg = 1.000 g)
       case 'balanza': {
         return `
           <svg width="240" height="140" viewBox="0 0 240 140">
-            <!-- Base -->
             <path d="M 70 130 L 170 130 L 140 105 L 100 105 Z" fill="#94A3B8"/>
             <rect x="116" y="35" width="8" height="75" fill="#64748B"/>
             <circle cx="120" cy="35" r="7" fill="#F59E0B"/>
-            <!-- Barra horizontal nivelada -->
             <rect x="30" y="32" width="180" height="6" fill="#64748B" rx="3"/>
-            <!-- Cuerdas -->
             <line x1="45" y1="35" x2="30" y2="75" stroke="#94A3B8" stroke-width="2"/>
             <line x1="45" y1="35" x2="60" y2="75" stroke="#94A3B8" stroke-width="2"/>
             <line x1="195" y1="35" x2="180" y2="75" stroke="#94A3B8" stroke-width="2"/>
             <line x1="195" y1="35" x2="210" y2="75" stroke="#94A3B8" stroke-width="2"/>
-            <!-- Platillos -->
             <ellipse cx="45" cy="75" rx="25" ry="6" fill="#CBD5E1"/>
             <ellipse cx="195" cy="75" rx="25" ry="6" fill="#CBD5E1"/>
-            <!-- Pesa 1 kg -->
             <rect x="33" y="55" width="24" height="20" fill="#F59E0B" rx="3"/>
             <text x="45" y="69" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">1 kg</text>
-            <!-- Pesa 1000g -->
             <rect x="178" y="55" width="34" height="20" fill="#0EA5E9" rx="3"/>
             <text x="195" y="69" font-size="8" font-weight="900" fill="#FFFFFF" text-anchor="middle">1000g</text>
             <text x="120" y="15" font-size="14" font-weight="900" fill="#0F172A" text-anchor="middle">1 kg = 1.000 g</text>
@@ -770,11 +759,10 @@ class PractiJuegosApp {
         `;
       }
 
-      // 6. DOS PAQUETES DE 500g (AZÚCAR)
+      // 8. DOS PAQUETES DE 500g (AZÚCAR / HARINA)
       case 'paquetes': {
         return `
           <svg width="280" height="130" viewBox="0 0 280 130" class="figura-svg">
-            <!-- Paquete 1 -->
             <g transform="translate(15, 8)">
               <rect x="0" y="10" width="80" height="85" fill="#E0F2FE" stroke="#0284C7" stroke-width="3" rx="10"/>
               <rect x="10" y="0" width="60" height="16" fill="#BAE6FD" stroke="#0284C7" stroke-width="2" rx="4"/>
@@ -782,10 +770,8 @@ class PractiJuegosApp {
               <rect x="15" y="52" width="50" height="26" fill="#0284C7" rx="6"/>
               <text x="40" y="70" font-size="13" font-weight="900" fill="#FFFFFF" text-anchor="middle">500 g</text>
             </g>
-            <!-- Signo Más -->
             <circle cx="140" cy="55" r="18" fill="#EEF2FF"/>
             <text x="140" y="63" font-size="24" font-weight="900" fill="#4F46E5" text-anchor="middle">+</text>
-            <!-- Paquete 2 -->
             <g transform="translate(185, 8)">
               <rect x="0" y="10" width="80" height="85" fill="#E0F2FE" stroke="#0284C7" stroke-width="3" rx="10"/>
               <rect x="10" y="0" width="60" height="16" fill="#BAE6FD" stroke="#0284C7" stroke-width="2" rx="4"/>
@@ -798,7 +784,18 @@ class PractiJuegosApp {
         `;
       }
 
-      // 7. FIGURAS 3D PARA APILAR
+      // 9. ESTIMAR PESO (MANZANA VS BICICLETA)
+      case 'estimar_peso': {
+        return `
+          <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; background: white; padding: 1rem 1.5rem; border-radius: 12px; border: 2px solid #E2E8F0;">
+            <div style="text-align: center;">🍎<br><b style="color: #059669;">~150 gramos</b><br><span style="font-size: 0.75rem; color:#64748B;">(Liviana)</span></div>
+            <span style="font-size: 1.5rem; color: #94A3B8;">vs</span>
+            <div style="text-align: center;">🚲<br><b style="color: #DC2626;">~12 kilogramos</b><br><span style="font-size: 0.75rem; color:#64748B;">(Pesada)</span></div>
+          </div>
+        `;
+      }
+
+      // 10. FIGURAS 3D PARA APILAR
       case 'figuras3d': {
         return `
           <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap;">
@@ -821,22 +818,77 @@ class PractiJuegosApp {
         `;
       }
 
-      // 8. CUBO 3D DETALLADO
+      // 11. CUBO 3D DETALLADO
       case 'cubo_3d': {
         return `
           <svg width="150" height="150" viewBox="0 0 150 150">
-            <!-- Cara Superior -->
             <polygon points="75,25 125,50 75,75 25,50" fill="#A5B4FC" stroke="#4F46E5" stroke-width="2"/>
-            <!-- Cara Izquierda -->
             <polygon points="25,50 75,75 75,130 25,105" fill="#818CF8" stroke="#4F46E5" stroke-width="2"/>
-            <!-- Cara Derecha -->
             <polygon points="75,75 125,50 125,105 75,130" fill="#6366F1" stroke="#4F46E5" stroke-width="2"/>
             <text x="75" y="145" font-size="11" font-weight="800" fill="#4F46E5" text-anchor="middle">6 caras cuadradas iguales</text>
           </svg>
         `;
       }
 
-      // 9. OPERACIÓN VERTICAL CON CUADRÍCULA ESCOLAR
+      // 12. CILINDRO DESPIECE (BASES CIRCULARES)
+      case 'cilindro_despiece': {
+        return `
+          <div style="display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: white; padding: 0.8rem 1.5rem; border-radius: 12px; border: 2px solid #E2E8F0;">
+            <div style="text-align: center;"><span style="font-size: 2.5rem;">🛢️</span><br><b style="font-size: 0.85rem;">Cilindro</b></div>
+            <span style="font-size: 1.5rem; color: #6366F1;">➔</span>
+            <div style="text-align: center;"><span style="font-size: 2rem;">⭕ ⭕</span><br><b style="font-size: 0.85rem; color: #10B981;">2 caras planas circulares</b></div>
+          </div>
+        `;
+      }
+
+      // 13. DESCOMPOSICIÓN BLOQUES MULTIBASE
+      case 'descomposicion': {
+        const n = grafico.numero;
+        const c = Math.floor(n / 100);
+        const d = Math.floor((n % 100) / 10);
+        const u = n % 10;
+        return `
+          <div style="background: white; border: 2px solid #93C5FD; border-radius: 14px; padding: 1rem 1.5rem; text-align: center; max-width: 440px; margin: 0 auto; box-shadow: var(--shadow-sm);">
+            <div style="font-size: 0.8rem; font-weight: 800; color: #0284C7; text-transform: uppercase; margin-bottom: 0.4rem;">Número: <span style="font-size: 1.6rem; color: #0369A1; font-weight: 900;">${n}</span></div>
+            <div style="display: flex; gap: 0.8rem; justify-content: center; align-items: flex-end; margin-top: 0.5rem; flex-wrap: wrap;">
+              <div style="background: #EFF6FF; border: 1.5px solid #3B82F6; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
+                <span style="font-size: 1.5rem;">🟦</span><br>
+                <b style="font-size: 0.95rem; color: #1D4ED8;">${c} Centenas</b><br>
+                <span style="font-size: 0.8rem; color: #64748B;">(${c * 100})</span>
+              </div>
+              <span style="font-size: 1.2rem; font-weight: 800; color: #94A3B8;">+</span>
+              <div style="background: #FEF2F2; border: 1.5px solid #EF4444; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
+                <span style="font-size: 1.5rem;">🔴</span><br>
+                <b style="font-size: 0.95rem; color: #B91C1C;">${d} Decenas</b><br>
+                <span style="font-size: 0.8rem; color: #64748B;">(${d * 10})</span>
+              </div>
+              <span style="font-size: 1.2rem; font-weight: 800; color: #94A3B8;">+</span>
+              <div style="background: #FEFCE8; border: 1.5px solid #EAB308; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
+                <span style="font-size: 1.5rem;">🟨</span><br>
+                <b style="font-size: 0.95rem; color: #A16207;">${u} Unidades</b><br>
+                <span style="font-size: 0.8rem; color: #64748B;">(${u})</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 14. COMPARAR NÚMEROS HASTA 1.000
+      case 'comparar_numeros': {
+        const cards = grafico.numeros.map(n => `
+          <div style="background: white; border: 2px solid #6366F1; border-radius: 10px; padding: 0.6rem 0.8rem; font-size: 1.3rem; font-weight: 900; color: #4F46E5; box-shadow: var(--shadow-sm);">
+            ${n}
+          </div>
+        `).join('');
+        return `
+          <div style="text-align: center;">
+            <div style="font-size: 0.85rem; font-weight: 800; color: #64748B; margin-bottom: 0.5rem;">Compara las centenas y decenas:</div>
+            <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">${cards}</div>
+          </div>
+        `;
+      }
+
+      // 15. OPERACIÓN VERTICAL (CUADRÍCULA ESCOLAR)
       case 'operacion_vertical': {
         return `
           <div class="cuadricula-operacion">
@@ -854,65 +906,42 @@ class PractiJuegosApp {
         `;
       }
 
-      // 10. DESCOMPOSICIÓN ADITIVA (BLOQUES MULTIBASE)
-      case 'descomposicion': {
-        const n = grafico.numero;
-        const c = Math.floor(n / 100);
-        const d = Math.floor((n % 100) / 10);
-        const u = n % 10;
-        return `
-          <div style="background: white; border: 2px solid #93C5FD; border-radius: 14px; padding: 1rem 1.5rem; text-align: center; max-width: 440px; margin: 0 auto; box-shadow: var(--shadow-sm);">
-            <div style="font-size: 0.8rem; font-weight: 800; color: #0284C7; text-transform: uppercase; margin-bottom: 0.4rem;">Número: <span style="font-size: 1.6rem; color: #0369A1; font-weight: 900;">${n}</span></div>
-            <div style="display: flex; gap: 0.8rem; justify-content: center; align-items: flex-end; margin-top: 0.5rem; flex-wrap: wrap;">
-              <!-- Centenas -->
-              <div style="background: #EFF6FF; border: 1.5px solid #3B82F6; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
-                <span style="font-size: 1.5rem;">🟦</span><br>
-                <b style="font-size: 0.95rem; color: #1D4ED8;">${c} Centenas</b><br>
-                <span style="font-size: 0.8rem; color: #64748B;">(${c * 100})</span>
-              </div>
-              <span style="font-size: 1.2rem; font-weight: 800; color: #94A3B8;">+</span>
-              <!-- Decenas -->
-              <div style="background: #FEF2F2; border: 1.5px solid #EF4444; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
-                <span style="font-size: 1.5rem;">🔴</span><br>
-                <b style="font-size: 0.95rem; color: #B91C1C;">${d} Decenas</b><br>
-                <span style="font-size: 0.8rem; color: #64748B;">(${d * 10})</span>
-              </div>
-              <span style="font-size: 1.2rem; font-weight: 800; color: #94A3B8;">+</span>
-              <!-- Unidades -->
-              <div style="background: #FEFCE8; border: 1.5px solid #EAB308; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
-                <span style="font-size: 1.5rem;">🟨</span><br>
-                <b style="font-size: 0.95rem; color: #A16207;">${u} Unidades</b><br>
-                <span style="font-size: 0.8rem; color: #64748B;">(${u})</span>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      // 11. MULTIPLICACIÓN GRUPOS
+      // 16. MULTIPLICACIÓN GRUPOS
       case 'multiplicacion_grupos': {
         const rows = [];
         for (let g = 0; g < grafico.grupos; g++) {
-          rows.push(`<div style="background: white; border: 1.5px solid #CBD5E1; padding: 0.4rem 0.6rem; border-radius: 8px;">📦 ${'⭐'.repeat(grafico.porGrupo)}</div>`);
+          rows.push(`<div style="background: white; border: 1.5px solid #CBD5E1; padding: 0.4rem 0.6rem; border-radius: 8px; font-weight: 700;">📦 Grupo ${g+1}: <span style="letter-spacing: 2px;">${'⭐'.repeat(grafico.porGrupo)}</span></div>`);
         }
         return `
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; max-width: 450px;">
             ${rows.join('')}
           </div>
         `;
       }
 
-      // 12. DIVISIÓN REPARTO
+      // 17. DIVISIÓN REPARTO
       case 'division_reparto': {
         const porGrupo = Math.floor(grafico.total / grafico.grupos);
         const boxes = [];
         for (let g = 0; g < grafico.grupos; g++) {
-          boxes.push(`<div style="background: white; border: 2px solid #93C5FD; padding: 0.5rem 0.8rem; border-radius: 8px; text-align: center;"><b>Grupo ${g+1}</b><br>${'🔵'.repeat(porGrupo)}</div>`);
+          boxes.push(`<div style="background: white; border: 2px solid #93C5FD; padding: 0.5rem 0.75rem; border-radius: 8px; text-align: center;"><b>Equipo ${g+1}</b><br><span style="font-size: 1.2rem;">${'⚽'.repeat(porGrupo)}</span><br><small style="color:#0284C7; font-weight:800;">${porGrupo} niños</small></div>`);
         }
         return `<div style="display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;">${boxes.join('')}</div>`;
       }
 
-      // 13. PROBLEMAS DE COMPRA Y VUELTO
+      // 18. RESTAS SUCESIVAS
+      case 'restas_sucesivas': {
+        return `
+          <div style="background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 0.8rem 1.25rem; font-family: monospace; font-size: 1.1rem; text-align: center; font-weight: 800;">
+            <div style="color: #6366F1;">15 - 5 = 10 (1ª resta)</div>
+            <div style="color: #8B5CF6;">10 - 5 = 5  (2ª resta)</div>
+            <div style="color: #10B981;"> 5 - 5 = 0  (3ª resta)</div>
+            <div style="margin-top: 0.4rem; font-size: 0.85rem; color: #64748B;">¡Se restó el 5 exactamente 3 veces!</div>
+          </div>
+        `;
+      }
+
+      // 19. PROBLEMAS DE COMPRA Y VUELTO
       case 'problema_compra': {
         return `
           <div style="display: flex; gap: 1rem; align-items: center; background: white; padding: 1rem 1.5rem; border-radius: 12px; border: 2px solid #FED7AA;">
@@ -935,7 +964,19 @@ class PractiJuegosApp {
         `;
       }
 
-      // 14. SECUENCIA
+      case 'problema_lectura': {
+        return `
+          <div style="display: flex; gap: 1rem; align-items: center; background: white; padding: 0.85rem 1.5rem; border-radius: 12px; border: 2px solid #DDD6FE;">
+            <span style="font-size: 2.5rem;">📖</span>
+            <div>
+              <b style="font-size: 1.1rem; color: #6D28D9;">Libro de 60 páginas</b>
+              <div style="font-weight: 700; color: #64748B;">Meta: 10 páginas por día</div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 20. SECUENCIA NUMÉRICA
       case 'secuencia': {
         const chips = grafico.numeros.map(n => `
           <div class="chip-num ${n === '❓' ? 'chip-q' : ''}">${n}</div>
@@ -943,7 +984,7 @@ class PractiJuegosApp {
         return `<div class="secuencia-chips">${chips}</div>`;
       }
 
-      // 15. PICTOGRAMA
+      // 21. PICTOGRAMA CLÁSICO
       case 'pictograma': {
         const rows = grafico.datos.map(d => `
           <tr>
@@ -955,18 +996,37 @@ class PractiJuegosApp {
         return `
           <div style="width: 100%; max-width: 420px;">
             <div style="font-size: 0.85rem; font-weight: 700; color: #6366F1; margin-bottom: 0.5rem; text-align: center;">
-              📗 Pictograma: Cada símbolo = 1 libro
+              📗 Pictograma: Cada 📕 = 1 libro
             </div>
             <table class="pictograma-table">${rows}</table>
           </div>
         `;
       }
 
-      // 16. BARRAS
-      case 'barras': {
+      // 22. PICTOGRAMA CON ESCALA (CADA 🌱 = 2 PLANTAS)
+      case 'pictograma_escala': {
+        const rows = grafico.datos.map(d => `
+          <tr>
+            <td style="width: 110px;">${d.etiqueta}</td>
+            <td style="font-size: 1.4rem; letter-spacing: 4px;">${d.icono.repeat(d.cantidad)}</td>
+            <td style="width: 70px; color: #059669; font-weight: 800;">= ${d.total}</td>
+          </tr>
+        `).join('');
+        return `
+          <div style="width: 100%; max-width: 420px;">
+            <div style="background: #ECFDF5; border: 1.5px solid #A7F3D0; color: #065F46; padding: 0.35rem; border-radius: 6px; font-size: 0.85rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem;">
+              🌱 Escala del huerto: Cada símbolo 🌱 = 2 plantas
+            </div>
+            <table class="pictograma-table">${rows}</table>
+          </div>
+        `;
+      }
+
+      // 23. BARRAS RECICLAJE
+      case 'barras_reciclaje': {
         const cols = grafico.datos.map(d => `
           <div class="barra-col">
-            <div class="barra-rect" style="height: ${d.valor * 24}px; background: ${d.color};">
+            <div class="barra-rect" style="height: ${d.valor * 16}px; background: ${d.color};">
               ${d.valor}
             </div>
             <div class="barra-label">${d.etiqueta}</div>
@@ -976,7 +1036,7 @@ class PractiJuegosApp {
       }
 
       default:
-        return '';
+        return `<div style="text-align:center; font-size: 2.5rem;">🎯</div>`;
     }
   }
 
