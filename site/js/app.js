@@ -66,11 +66,25 @@ class PractiJuegosApp {
       }
     });
 
-    // Botón Leer Pregunta en voz alta
-    document.getElementById('btn-speak-question').addEventListener('click', () => {
+    // Botón Leer Pregunta en voz alta con animación amigable
+    const speakBtn = document.getElementById('btn-speak-question');
+    speakBtn.addEventListener('click', () => {
       const q = this.questionsList[this.currentIndex];
       if (q) {
-        window.soundFx.speak(q.pregunta);
+        speakBtn.textContent = '🗣️';
+        speakBtn.style.transform = 'scale(1.15)';
+        speakBtn.style.background = '#FEF08A';
+        window.soundFx.speak(
+          q.pregunta,
+          () => {
+            speakBtn.textContent = '🗣️';
+          },
+          () => {
+            speakBtn.textContent = '🔊';
+            speakBtn.style.transform = 'scale(1)';
+            speakBtn.style.background = '#FFFBEB';
+          }
+        );
       }
     });
 
