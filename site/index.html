@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- Encabezado Principal -->
+  <!-- Encabezado Principal con Marcadores Claros -->
   <header class="app-header">
     <div class="header-container">
       <div class="logo-group">
@@ -21,13 +21,21 @@
         </div>
       </div>
       <div class="header-stats">
-        <div class="stat-chip" title="Estrellas ganadas">
-          <span>⭐</span>
-          <span id="stat-stars">0</span>
+        <!-- Marcador de Estrellas con Explicación Clara -->
+        <div class="stat-chip stat-chip-stars" title="Estrellas ganadas: ¡Ganas 2 estrellas por cada acierto!">
+          <span class="chip-icon">⭐</span>
+          <div class="stat-info">
+            <span class="stat-title">Estrellas</span>
+            <strong id="stat-stars" class="stat-number">0</strong>
+          </div>
         </div>
-        <div class="stat-chip" title="Racha de aciertos">
-          <span>🔥</span>
-          <span id="stat-streak">0</span>
+        <!-- Marcador de Racha con Explicación Clara -->
+        <div class="stat-chip stat-chip-streak" title="Racha de aciertos: Cuántas preguntas seguidas respondes bien">
+          <span class="chip-icon">🔥</span>
+          <div class="stat-info">
+            <span class="stat-title">Racha</span>
+            <strong id="stat-streak" class="stat-number">0</strong>
+          </div>
         </div>
       </div>
     </div>
@@ -54,7 +62,7 @@
           <h2>¡Acepta el gran desafío de matemáticas! 🚀</h2>
           <p>
             Entrena los 11 temas del libro escolar con juegos y ejercicios interactivos.
-            ¡Gana estrellas, supera retos y conviértete en campeona o campeón de los números!
+            ¡Gana estrellas ⭐, sube tu racha 🔥 y conviértete en campeona o campeón de los números!
           </p>
           <button id="btn-start-simulacro" class="btn-hero">
             <span>🎯</span> Iniciar el Gran Desafío (11 Retos)
@@ -85,7 +93,7 @@
           <button id="btn-quit-quiz" class="btn-quit" title="Salir al menú">✕ Salir</button>
         </div>
 
-        <!-- Pregunta y Botón de Audio -->
+        <!-- Pregunta y Botón de Audio Amigable -->
         <div class="question-header">
           <h3 id="question-text" class="question-text">
             Cargando desafío...
@@ -95,7 +103,7 @@
           </button>
         </div>
 
-        <!-- Ilustración visual o gráfico del problema -->
+        <!-- Ilustración visual o gráfico del problema (Siempre visible y atractivo) -->
         <div id="visual-container" class="visual-container">
           <!-- Se inyecta gráfico interactivo, SVG o diagrama -->
         </div>

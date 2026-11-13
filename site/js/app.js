@@ -770,18 +770,31 @@ class PractiJuegosApp {
         `;
       }
 
-      // 6. DOS PAQUETES DE 500g
+      // 6. DOS PAQUETES DE 500g (AZÚCAR)
       case 'paquetes': {
         return `
-          <div style="display: flex; gap: 1.5rem; align-items: center; justify-content: center;">
-            <div style="background: #FEF3C7; border: 2px solid #F59E0B; padding: 1rem; border-radius: 12px; text-align: center;">
-              📦<br><b style="font-size: 1.1rem; color: #B45309;">500 g</b>
-            </div>
-            <span style="font-size: 2rem; font-weight: 800; color: #4F46E5;">+</span>
-            <div style="background: #FEF3C7; border: 2px solid #F59E0B; padding: 1rem; border-radius: 12px; text-align: center;">
-              📦<br><b style="font-size: 1.1rem; color: #B45309;">500 g</b>
-            </div>
-          </div>
+          <svg width="280" height="130" viewBox="0 0 280 130" class="figura-svg">
+            <!-- Paquete 1 -->
+            <g transform="translate(15, 8)">
+              <rect x="0" y="10" width="80" height="85" fill="#E0F2FE" stroke="#0284C7" stroke-width="3" rx="10"/>
+              <rect x="10" y="0" width="60" height="16" fill="#BAE6FD" stroke="#0284C7" stroke-width="2" rx="4"/>
+              <text x="40" y="42" font-size="10" font-weight="900" fill="#0369A1" text-anchor="middle">AZÚCAR</text>
+              <rect x="15" y="52" width="50" height="26" fill="#0284C7" rx="6"/>
+              <text x="40" y="70" font-size="13" font-weight="900" fill="#FFFFFF" text-anchor="middle">500 g</text>
+            </g>
+            <!-- Signo Más -->
+            <circle cx="140" cy="55" r="18" fill="#EEF2FF"/>
+            <text x="140" y="63" font-size="24" font-weight="900" fill="#4F46E5" text-anchor="middle">+</text>
+            <!-- Paquete 2 -->
+            <g transform="translate(185, 8)">
+              <rect x="0" y="10" width="80" height="85" fill="#E0F2FE" stroke="#0284C7" stroke-width="3" rx="10"/>
+              <rect x="10" y="0" width="60" height="16" fill="#BAE6FD" stroke="#0284C7" stroke-width="2" rx="4"/>
+              <text x="40" y="42" font-size="10" font-weight="900" fill="#0369A1" text-anchor="middle">AZÚCAR</text>
+              <rect x="15" y="52" width="50" height="26" fill="#0284C7" rx="6"/>
+              <text x="40" y="70" font-size="13" font-weight="900" fill="#FFFFFF" text-anchor="middle">500 g</text>
+            </g>
+            <text x="140" y="118" font-size="12" font-weight="800" fill="#64748B" text-anchor="middle">500 g + 500 g = ?</text>
+          </svg>
         `;
       }
 
@@ -841,12 +854,37 @@ class PractiJuegosApp {
         `;
       }
 
-      // 10. DESCOMPOSICIÓN ADITIVA
+      // 10. DESCOMPOSICIÓN ADITIVA (BLOQUES MULTIBASE)
       case 'descomposicion': {
+        const n = grafico.numero;
+        const c = Math.floor(n / 100);
+        const d = Math.floor((n % 100) / 10);
+        const u = n % 10;
         return `
-          <div style="background: white; border: 2px solid #93C5FD; border-radius: 12px; padding: 0.85rem 1.5rem; text-align: center;">
-            <span style="font-size: 0.85rem; font-weight: 800; color: #0284C7; text-transform: uppercase;">Número a descomponer</span>
-            <div style="font-size: 2.2rem; font-weight: 900; color: #0369A1;">${grafico.numero}</div>
+          <div style="background: white; border: 2px solid #93C5FD; border-radius: 14px; padding: 1rem 1.5rem; text-align: center; max-width: 440px; margin: 0 auto; box-shadow: var(--shadow-sm);">
+            <div style="font-size: 0.8rem; font-weight: 800; color: #0284C7; text-transform: uppercase; margin-bottom: 0.4rem;">Número: <span style="font-size: 1.6rem; color: #0369A1; font-weight: 900;">${n}</span></div>
+            <div style="display: flex; gap: 0.8rem; justify-content: center; align-items: flex-end; margin-top: 0.5rem; flex-wrap: wrap;">
+              <!-- Centenas -->
+              <div style="background: #EFF6FF; border: 1.5px solid #3B82F6; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
+                <span style="font-size: 1.5rem;">🟦</span><br>
+                <b style="font-size: 0.95rem; color: #1D4ED8;">${c} Centenas</b><br>
+                <span style="font-size: 0.8rem; color: #64748B;">(${c * 100})</span>
+              </div>
+              <span style="font-size: 1.2rem; font-weight: 800; color: #94A3B8;">+</span>
+              <!-- Decenas -->
+              <div style="background: #FEF2F2; border: 1.5px solid #EF4444; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
+                <span style="font-size: 1.5rem;">🔴</span><br>
+                <b style="font-size: 0.95rem; color: #B91C1C;">${d} Decenas</b><br>
+                <span style="font-size: 0.8rem; color: #64748B;">(${d * 10})</span>
+              </div>
+              <span style="font-size: 1.2rem; font-weight: 800; color: #94A3B8;">+</span>
+              <!-- Unidades -->
+              <div style="background: #FEFCE8; border: 1.5px solid #EAB308; padding: 0.4rem 0.6rem; border-radius: 8px; text-align: center;">
+                <span style="font-size: 1.5rem;">🟨</span><br>
+                <b style="font-size: 0.95rem; color: #A16207;">${u} Unidades</b><br>
+                <span style="font-size: 0.8rem; color: #64748B;">(${u})</span>
+              </div>
+            </div>
           </div>
         `;
       }
@@ -969,7 +1007,7 @@ class PractiJuegosApp {
 
       window.soundFx.playCorrect();
       window.confetti.burst(50);
-      this.showFeedback(true, q.explicacion);
+      this.showFeedback(true, q.explicacion, "+2 ⭐ Estrellas | +1 🔥 Racha");
     } else {
       this.streak = 0;
       localStorage.setItem('pj_streak', '0');
@@ -980,7 +1018,7 @@ class PractiJuegosApp {
     }
   }
 
-  showFeedback(isCorrect, explicacion) {
+  showFeedback(isCorrect, explicacion, puntosTexto) {
     const container = document.getElementById('feedback-container');
     const isLast = (this.currentIndex === this.questionsList.length - 1);
 
@@ -988,7 +1026,10 @@ class PractiJuegosApp {
       <div class="feedback-card ${isCorrect ? 'correct' : 'wrong'}">
         <div class="feedback-icon">${isCorrect ? '🌟' : '💡'}</div>
         <div class="feedback-body" style="flex: 1;">
-          <h4>${isCorrect ? '¡Excelente respuesta!' : '¡Buen intento! Recuerda:'}</h4>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
+            <h4>${isCorrect ? '¡Excelente respuesta!' : '¡Buen intento! Recuerda:'}</h4>
+            ${isCorrect && puntosTexto ? `<span style="background: #10B981; color: white; font-size: 0.82rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 999px; box-shadow: var(--shadow-sm);">${puntosTexto}</span>` : (!isCorrect ? `<span style="background: #F59E0B; color: white; font-size: 0.8rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 999px;">Racha a 0 (¡a seguir!)</span>` : '')}
+          </div>
           <p>${explicacion}</p>
           <button id="btn-next-question" class="btn-next">
             ${isLast ? 'Ver Resultados Finales 🏆' : 'Siguiente Desafío ➜'}
