@@ -54,7 +54,7 @@ const PREGUNTAS_DB = [
   // --- TEMA 2: FIGURAS 2D Y 3D (OA 15) ---
   {
     temaId: 2,
-    pregunta: "Camila quiere construir una torre apilando figuras (poniendo una encima de otra). ¿Cuál de estas figuras NO puede usar porque rodaría y botaría la torre?",
+    pregunta: "En una clase de matemáticas se quiere construir una torre apilando figuras (poniendo una encima de otra). ¿Cuál de estas figuras NO se puede usar porque rodaría y botaría la torre?",
     grafico: {
       tipo: "figuras3d",
       figuras: ["cubo", "cilindro", "esfera"]
@@ -267,7 +267,7 @@ const PREGUNTAS_DB = [
   // --- TEMA 10: FRACCIONES (OA 11) ---
   {
     temaId: 10,
-    pregunta: "Una pizza se dividió en 4 porciones iguales. Si Camila se comió 1 porción, ¿qué fracción de la pizza se comió?",
+    pregunta: "Una pizza se dividió en 4 porciones iguales. Si alguien se come 1 porción, ¿qué fracción de la pizza se comió?",
     grafico: {
       tipo: "pizza",
       totalPartes: 4,
@@ -424,3 +424,4 @@ const FICHAS_ESTUDIO = [
     ]
   }
 ];
+
