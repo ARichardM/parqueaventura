@@ -95,3 +95,4 @@ class ConfettiEffect {
 }
 
 window.confetti = new ConfettiEffect();
+

@@ -1,27 +1,28 @@
 /**
- * Banco completo de preguntas interactivas para Matemática 3° Básico
+ * Banco completo de preguntas y fichas interactivas para Matemática 3° Básico
  * Basado estrictamente en la Guía de Estudio Oficial (11 OA) y las páginas del libro.
+ * Texto 100% anónimo, neutral y sin errores ortográficos.
  */
 
 const TEMAS_INFO = {
-  1: { id: 1, oa: 25, nombre: "Pictogramas y Gráficos", icono: "📊", color: "#FF7675" },
-  2: { id: 2, oa: 15, nombre: "Figuras 2D y 3D", icono: "🔷", color: "#6C5CE7" },
-  3: { id: 3, oa: 21, nombre: "Perímetro", icono: "📐", color: "#00CEC9" },
-  4: { id: 4, oa: 22, nombre: "Medidas de Peso", icono: "⚖️", color: "#FD9644" },
-  5: { id: 5, oa: "2, 5 y 3", nombre: "Números hasta el 1.000", icono: "🔢", color: "#0984E3" },
-  6: { id: 6, oa: 6, nombre: "Adición y Sustracción", icono: "➕➖", color: "#E84393" },
-  7: { id: 7, oa: 8, nombre: "Multiplicación", icono: "✖️", color: "#2ED573" },
-  8: { id: 8, oa: 9, nombre: "División", icono: "➗", color: "#1E90FF" },
-  9: { id: 9, oa: 10, nombre: "Problemas Cotidianos", icono: "🛒", color: "#FFA502" },
-  10: { id: 10, oa: 11, nombre: "Fracciones", icono: "🍕", color: "#FF4757" },
-  11: { id: 11, oa: 12, nombre: "Patrones Numéricos", icono: "🔁", color: "#8E44AD" }
+  1: { id: 1, oa: 25, categoria: "datos", nombre: "Pictogramas y Gráficos", icono: "📊", color: "#FF7675" },
+  2: { id: 2, oa: 15, categoria: "geometria", nombre: "Figuras 2D y 3D", icono: "🔷", color: "#6C5CE7" },
+  3: { id: 3, oa: 21, categoria: "geometria", nombre: "Perímetro", icono: "📐", color: "#00CEC9" },
+  4: { id: 4, oa: 22, categoria: "geometria", nombre: "Medidas de Peso", icono: "⚖️", color: "#FD9644" },
+  5: { id: 5, oa: "2, 5 y 3", categoria: "numeros", nombre: "Números hasta el 1.000", icono: "🔢", color: "#0984E3" },
+  6: { id: 6, oa: 6, categoria: "numeros", nombre: "Adición y Sustracción", icono: "➕➖", color: "#E84393" },
+  7: { id: 7, oa: 8, categoria: "numeros", nombre: "Multiplicación", icono: "✖️", color: "#2ED573" },
+  8: { id: 8, oa: 9, categoria: "numeros", nombre: "División", icono: "➗", color: "#1E90FF" },
+  9: { id: 9, oa: 10, categoria: "numeros", nombre: "Problemas Cotidianos", icono: "🛒", color: "#FFA502" },
+  10: { id: 10, oa: 11, categoria: "datos", nombre: "Fracciones", icono: "🍕", color: "#FF4757" },
+  11: { id: 11, oa: 12, categoria: "numeros", nombre: "Patrones Numéricos", icono: "🔁", color: "#8E44AD" }
 };
 
 const PREGUNTAS_DB = [
   // --- TEMA 1: PICTOGRAMAS Y GRÁFICOS (OA 25) ---
   {
     temaId: 1,
-    pregunta: "En la feria del libro del colegio, Elena registró los libros recolectados en un pictograma donde cada 📕 representa 1 libro. ¿Cuál fue el tipo de libro MÁS recolectado?",
+    pregunta: "En una feria escolar de lectura se registraron los libros recolectados en un pictograma donde cada 📕 representa 1 libro. ¿Cuál fue el tipo de libro MÁS recolectado?",
     grafico: {
       tipo: "pictograma",
       datos: [
@@ -33,22 +34,22 @@ const PREGUNTAS_DB = [
     },
     opciones: ["Poesía", "Cuentos", "Novelas", "Ciencia"],
     correcta: 1,
-    explicacion: "¡Muy bien! Cuentos tiene 7 libros representados (es la fila más larga), por lo tanto es el más recolectado."
+    explicacion: "¡Muy bien! La categoría 'Cuentos' tiene 7 libros representados (es la fila más larga), por lo tanto es la más recolectada."
   },
   {
     temaId: 1,
-    pregunta: "Según la encuesta de 'Frutas favoritas' del curso: Manzana tiene 5 votos, Plátano tiene 3 votos y Naranja tiene 5 votos. ¿Cuántos niños en TOTAL respondieron la encuesta?",
+    pregunta: "En la votación de 'Frutas favoritas' del curso: Manzana obtuvo 5 votos, Plátano obtuvo 3 votos y Naranja obtuvo 5 votos. ¿Cuántos estudiantes en TOTAL participaron?",
     grafico: {
       tipo: "barras",
       datos: [
-        { etiqueta: "Manzana 🍎", valor: 5, color: "#ff7675" },
-        { etiqueta: "Plátano 🍌", valor: 3, color: "#ffeaa7" },
-        { etiqueta: "Naranja 🍊", valor: 5, color: "#fdcb6e" }
+        { etiqueta: "Manzana 🍎", valor: 5, color: "#FF7675" },
+        { etiqueta: "Plátano 🍌", valor: 3, color: "#FDCB6E" },
+        { etiqueta: "Naranja 🍊", valor: 5, color: "#FFA502" }
       ]
     },
-    opciones: ["10 niños", "12 niños", "13 niños", "15 niños"],
+    opciones: ["10 estudiantes", "12 estudiantes", "13 estudiantes", "15 estudiantes"],
     correcta: 2,
-    explicacion: "Sumamos los votos de todas las frutas: 5 (manzana) + 3 (plátano) + 5 (naranja) = 13 niños en total."
+    explicacion: "Sumamos los votos de todas las frutas: 5 (manzana) + 3 (plátano) + 5 (naranja) = 13 estudiantes en total."
   },
 
   // --- TEMA 2: FIGURAS 2D Y 3D (OA 15) ---
@@ -56,10 +57,9 @@ const PREGUNTAS_DB = [
     temaId: 2,
     pregunta: "En una clase de matemáticas se quiere construir una torre apilando figuras (poniendo una encima de otra). ¿Cuál de estas figuras NO se puede usar porque rodaría y botaría la torre?",
     grafico: {
-      tipo: "figuras3d",
-      figuras: ["cubo", "cilindro", "esfera"]
+      tipo: "figuras3d"
     },
-    opciones: ["El cubo", "El cilindro", "La esfera", "Un bloque rectangular"],
+    opciones: ["El cubo", "El cilindro", "La esfera", "Un prisma rectangular"],
     correcta: 2,
     explicacion: "La esfera es un cuerpo redondo sin caras planas. Si intentas poner algo sobre ella o apilarla, rodará y se caerá."
   },
@@ -71,7 +71,7 @@ const PREGUNTAS_DB = [
     },
     opciones: ["Cilindro", "Cubo", "Pirámide triangular", "Cono"],
     correcta: 1,
-    explicacion: "¡Excelente! El cubo (o hexaedro) tiene 6 caras que son cuadrados idénticos, como un dado de juego."
+    explicacion: "¡Exacto! El cubo tiene 6 caras que son cuadrados idénticos, como un dado de juego clásico."
   },
 
   // --- TEMA 3: PERÍMETRO (OA 21) ---
@@ -84,7 +84,7 @@ const PREGUNTAS_DB = [
     },
     opciones: ["8 cm", "12 cm", "16 cm", "20 cm"],
     correcta: 2,
-    explicacion: "El perímetro es el contorno de la figura: sumamos sus 4 lados: 4 cm + 4 cm + 4 cm + 4 cm = 16 cm."
+    explicacion: "El perímetro es la medida de todo el contorno: sumamos sus 4 lados: 4 cm + 4 cm + 4 cm + 4 cm = 16 cm."
   },
   {
     temaId: 3,
@@ -96,7 +96,7 @@ const PREGUNTAS_DB = [
     },
     opciones: ["9 cm", "18 cm", "12 cm", "24 cm"],
     correcta: 1,
-    explicacion: "El rectángulo tiene 2 lados de 6 cm y 2 lados de 3 cm: 6 + 3 + 6 + 3 = 18 cm."
+    explicacion: "El rectángulo tiene dos lados de 6 cm y dos lados de 3 cm: 6 + 3 + 6 + 3 = 18 cm."
   },
 
   // --- TEMA 4: MEDIDAS DE PESO (OA 22) ---
@@ -104,20 +104,17 @@ const PREGUNTAS_DB = [
     temaId: 4,
     pregunta: "¿A cuántos gramos (g) equivale exactamente 1 kilogramo (1 kg)?",
     grafico: {
-      tipo: "balanza",
-      peso: "1 kg = ?"
+      tipo: "balanza"
     },
     opciones: ["100 gramos", "500 gramos", "1.000 gramos", "10 gramos"],
     correcta: 2,
-    explicacion: "¡Regla de oro! 1 kilogramo (1 kg) son exactamente 1.000 gramos (1.000 g)."
+    explicacion: "¡Regla fundamental! 1 kilogramo (1 kg) son exactamente 1.000 gramos (1.000 g)."
   },
   {
     temaId: 4,
-    pregunta: "Si en la cocina tenemos dos paquetes de azúcar de 500 gramos cada uno, ¿cuánto pesan juntos?",
+    pregunta: "Si en la despensa hay dos paquetes de harina de 500 gramos cada uno, ¿cuánto pesan juntos?",
     grafico: {
-      tipo: "paquetes",
-      p1: "500 g",
-      p2: "500 g"
+      tipo: "paquetes"
     },
     opciones: ["1 kilogramo (1 kg)", "2 kilogramos (2 kg)", "500 gramos", "750 gramos"],
     correcta: 0,
@@ -129,8 +126,8 @@ const PREGUNTAS_DB = [
     temaId: 5,
     pregunta: "¿Cuál es la descomposición aditiva correcta del número 356?",
     grafico: {
-      tipo: "tabla_posicional",
-      c: 3, d: 5, u: 6
+      tipo: "descomposicion",
+      numero: 356
     },
     opciones: [
       "30 + 50 + 6",
@@ -143,8 +140,11 @@ const PREGUNTAS_DB = [
   },
   {
     temaId: 5,
-    pregunta: "¿Cómo se escribe con palabras el número 125?",
-    grafico: { tipo: "texto_numero", numero: "125" },
+    pregunta: "¿Cómo se escribe en palabras el número 125?",
+    grafico: {
+      tipo: "descomposicion",
+      numero: 125
+    },
     opciones: [
       "Ciento veinte y cinco",
       "Ciento veinticinco",
@@ -152,7 +152,7 @@ const PREGUNTAS_DB = [
       "Doscientos veinticinco"
     ],
     correcta: 1,
-    explicacion: "Los números entre el 21 y el 29 se escriben en una sola palabra: 'veinticinco', por eso es 'ciento veinticinco'."
+    explicacion: "Los números de la familia del veinte se escriben en una sola palabra: 'veinticinco', por lo tanto es 'ciento veinticinco'."
   },
 
   // --- TEMA 6: ADICIÓN Y SUSTRACCIÓN HASTA EL 1.000 (OA 6) ---
@@ -163,11 +163,12 @@ const PREGUNTAS_DB = [
       tipo: "operacion_vertical",
       op: "+",
       n1: 268,
-      n2: 157
+      n2: 157,
+      reserva: "1 1"
     },
     opciones: ["415", "425", "435", "325"],
     correcta: 1,
-    explicacion: "8 + 7 = 15 (5 y reservamos 1); 6 + 5 + 1 = 12 (2 y reservamos 1); 2 + 1 + 1 = 4. Resultado: 425."
+    explicacion: "8 + 7 = 15 (colocamos 5 y reservamos 1); 6 + 5 + 1 = 12 (colocamos 2 y reservamos 1); 2 + 1 + 1 = 4. Resultado: 425."
   },
   {
     temaId: 6,
@@ -180,7 +181,7 @@ const PREGUNTAS_DB = [
     },
     opciones: ["274", "284", "326", "276"],
     correcta: 0,
-    explicacion: "Al 2 no le podemos restar 8, pedimos canje a la decena (12 - 8 = 4). Luego 14 - 7 = 7 y 3 - 1 = 2. Resultado: 274."
+    explicacion: "Al 2 no le podemos restar 8, hacemos canje con la decena (12 - 8 = 4). Luego 14 - 7 = 7 y 3 - 1 = 2. Resultado: 274."
   },
 
   // --- TEMA 7: MULTIPLICACIÓN (OA 8) ---
@@ -188,22 +189,21 @@ const PREGUNTAS_DB = [
     temaId: 7,
     pregunta: "¿Qué multiplicación representa la suma reiterada: 3 + 3 + 3 + 3 = 12?",
     grafico: {
-      tipo: "grupos",
-      cantGrupos: 4,
-      itemsPorGrupo: 3,
-      icono: "⭐"
+      tipo: "multiplicacion_grupos",
+      grupos: 4,
+      porGrupo: 3
     },
     opciones: ["3 × 3 = 9", "4 × 3 = 12", "4 + 3 = 7", "3 × 5 = 15"],
     correcta: 1,
-    explicacion: "El número 3 se repite 4 veces, por eso se escribe 4 × 3 = 12 (4 veces 3)."
+    explicacion: "El número 3 se repite 4 veces, por eso se expresa como 4 × 3 = 12 (4 veces 3)."
   },
   {
     temaId: 7,
     pregunta: "En una librería hay 6 cajas con 5 lápices cada una. ¿Cuántos lápices hay en total?",
     grafico: {
-      tipo: "cajas",
-      cajas: 6,
-      lapices: 5
+      tipo: "multiplicacion_grupos",
+      grupos: 6,
+      porGrupo: 5
     },
     opciones: ["11 lápices", "25 lápices", "30 lápices", "35 lápices"],
     correcta: 2,
@@ -215,10 +215,9 @@ const PREGUNTAS_DB = [
     temaId: 8,
     pregunta: "Si repartes 9 bolitas en 3 grupos iguales, ¿cuántas bolitas quedan en cada grupo?",
     grafico: {
-      tipo: "reparto",
+      tipo: "division_reparto",
       total: 9,
-      grupos: 3,
-      icono: "🔵"
+      grupos: 3
     },
     opciones: ["2 bolitas", "3 bolitas", "4 bolitas", "6 bolitas"],
     correcta: 1,
@@ -226,26 +225,25 @@ const PREGUNTAS_DB = [
   },
   {
     temaId: 8,
-    pregunta: "Sara tiene 36 pinches y los reparte en 4 bolsitas en partes iguales. ¿Cuántos pinches habrá en cada bolsa?",
+    pregunta: "En un taller de manualidades hay 36 botones y se guardan en 4 cajitas en cantidades iguales. ¿Cuántos botones van en cada cajita?",
     grafico: {
-      tipo: "reparto",
+      tipo: "division_reparto",
       total: 36,
-      grupos: 4,
-      icono: "🎀"
+      grupos: 4
     },
-    opciones: ["8 pinches", "9 pinches", "7 pinches", "6 pinches"],
+    opciones: ["8 botones", "9 botones", "7 botones", "6 botones"],
     correcta: 1,
-    explicacion: "36 ÷ 4 = 9 pinches por bolsita (porque 9 × 4 = 36)."
+    explicacion: "36 ÷ 4 = 9 botones en cada cajita (porque 9 × 4 = 36)."
   },
 
   // --- TEMA 9: PROBLEMAS COTIDIANOS (OA 10) ---
   {
     temaId: 9,
-    pregunta: "Si compras 3 lápices que cuestan $200 cada uno, ¿cuánto debes pagar en total en el almacén?",
+    pregunta: "Si compras 3 lápices que cuestan $200 cada uno, ¿cuánto debes pagar en total?",
     grafico: {
-      tipo: "monedas",
-      precio: "$200 c/u",
-      cantidad: 3
+      tipo: "problema_compra",
+      items: 3,
+      precio: 200
     },
     opciones: ["$500", "$600", "$700", "$200"],
     correcta: 1,
@@ -255,13 +253,13 @@ const PREGUNTAS_DB = [
     temaId: 9,
     pregunta: "Si pagas los $600 con una moneda de $1.000, ¿cuánto dinero te deben dar de vuelto?",
     grafico: {
-      tipo: "vuelto",
-      pago: "$1.000",
-      costo: "$600"
+      tipo: "problema_vuelto",
+      pago: 1000,
+      costo: 600
     },
     opciones: ["$300", "$400", "$500", "$200"],
     correcta: 1,
-    explicacion: "Restamos lo que entregaste menos lo que gastaste: $1.000 - $600 = $400 de vuelto."
+    explicacion: "Restamos el dinero entregado menos el costo: $1.000 - $600 = $400 de vuelto."
   },
 
   // --- TEMA 10: FRACCIONES (OA 11) ---
@@ -275,19 +273,17 @@ const PREGUNTAS_DB = [
     },
     opciones: ["1/2 (un medio)", "1/4 (un cuarto)", "3/4 (tres cuartos)", "1/3 (un tercio)"],
     correcta: 1,
-    explicacion: "La pizza tiene 4 partes en total (denominador = 4) y comió 1 (numerador = 1): se comió 1/4 (un cuarto)."
+    explicacion: "La pizza está dividida en 4 partes iguales (denominador = 4) y se tomó 1 (numerador = 1): representa 1/4 (un cuarto)."
   },
   {
     temaId: 10,
-    pregunta: "Una barra de chocolate tiene 2 partes iguales. Si le compartes 1 mitad a tu mejor amigo, ¿qué fracción le diste?",
+    pregunta: "Una barra de chocolate tiene 2 partes iguales. Si le compartes 1 mitad a un amigo, ¿qué fracción le diste?",
     grafico: {
-      tipo: "chocolate",
-      totalPartes: 2,
-      pintadas: 1
+      tipo: "chocolate"
     },
-    opciones: ["1/4 (un cuarto)", "1/2 (un medio)", "2/2 (todo)", "1/3 (un tercio)"],
+    opciones: ["1/4 (un cuarto)", "1/2 (un medio)", "2/2 (toda la barra)", "1/3 (un tercio)"],
     correcta: 1,
-    explicacion: "1 parte de 2 en total es 1/2, que se lee 'un medio' o la mitad."
+    explicacion: "1 parte de un total de 2 partes iguales es 1/2, que se lee 'un medio' o la mitad."
   },
 
   // --- TEMA 11: PATRONES NUMÉRICOS (OA 12) ---
@@ -305,7 +301,7 @@ const PREGUNTAS_DB = [
       "Regla: Sumar 4 / Viene el 12"
     ],
     correcta: 1,
-    explicacion: "Cada número se obtiene sumando 2 al anterior (2+2=4, 4+2=6, 6+2=8). 8 + 2 = 10."
+    explicacion: "Cada número se obtiene sumando 2 al número anterior: 2+2=4, 4+2=6, 6+2=8. Por lo tanto, 8 + 2 = 10."
   },
   {
     temaId: 11,
@@ -320,108 +316,162 @@ const PREGUNTAS_DB = [
   }
 ];
 
-// Fichas resumen de estudio para repasar rápido (Machete amigable)
+// Fichas de estudio enriquecidas con soporte interactivo
 const FICHAS_ESTUDIO = [
   {
+    id: 1,
     tema: "Pictogramas y Gráficos (OA 25)",
+    categoria: "datos",
     icono: "📊",
+    color: "#FF7675",
+    regla: "Los pictogramas usan símbolos o dibujos para representar cantidades (ejemplo: 📕 = 1 libro).",
     puntos: [
-      "Los pictogramas usan símbolos o dibujos para representar cantidades (ej. 📕 = 1 libro).",
-      "Para saber el total, suma todos los símbolos.",
-      "Para saber la diferencia entre dos elementos, resta el mayor menos el menor."
-    ]
+      "Para saber el total, suma todos los símbolos de todas las filas.",
+      "Para saber cuál es el más elegido o menos elegido, busca la fila más larga o más corta.",
+      "Para encontrar diferencias, resta el valor mayor menos el valor menor."
+    ],
+    widget: "pictograma"
   },
   {
+    id: 2,
     tema: "Figuras 2D y Cuerpos 3D (OA 15)",
+    categoria: "geometria",
     icono: "🔷",
+    color: "#6C5CE7",
+    regla: "Para apilar una torre, el cuerpo 3D DEBE tener al menos una cara plana (como el cubo o cilindro). La esfera rueda y no se puede apilar.",
     puntos: [
       "Figuras 2D (planas): Círculo, Triángulo (3 lados), Cuadrado (4 lados iguales), Rectángulo.",
-      "Cuerpos 3D (con volumen): Cubo (6 caras cuadradas), Cilindro (2 círculos y rueda), Esfera (rueda), Cono.",
-      "Para apilar torres, el cuerpo DEBE tener al menos una cara plana (como el cubo o cilindro)."
-    ]
+      "Cuerpos 3D (volumen): Cubo (6 caras cuadradas), Cilindro (2 caras planas circulares), Esfera (redonda), Cono (1 cara plana circular).",
+      "Los vértices son las esquinas y las aristas son los bordes que unen las caras."
+    ],
+    widget: "figuras3d"
   },
   {
+    id: 3,
     tema: "Perímetro (OA 21)",
+    categoria: "geometria",
     icono: "📐",
+    color: "#00CEC9",
+    regla: "El Perímetro (P) es la medida de TODO el contorno. Se calcula sumando la longitud de TODOS sus lados.",
     puntos: [
-      "El Perímetro (P) es la medida del CONTORNO de una figura.",
-      "Se calcula sumando las medidas de TODOS sus lados.",
       "Cuadrado de lado 4 cm: P = 4 + 4 + 4 + 4 = 16 cm.",
-      "Rectángulo de 6 cm y 3 cm: P = 6 + 3 + 6 + 3 = 18 cm."
-    ]
+      "Rectángulo de 6 cm y 3 cm: P = 6 + 3 + 6 + 3 = 18 cm.",
+      "Si está en una cuadrícula, cuenta el borde exterior de cada cuadrito (cada cuadrito = 1 cm)."
+    ],
+    widget: "perimetro"
   },
   {
+    id: 4,
     tema: "Medidas de Peso (OA 22)",
+    categoria: "geometria",
     icono: "⚖️",
+    color: "#FD9644",
+    regla: "1 kilogramo (1 kg) equivale exactamente a 1.000 gramos (1.000 g).",
     puntos: [
-      "1 kilogramo (1 kg) = 1.000 gramos (1.000 g).",
       "Objetos livianos se miden en gramos (g): una manzana (150 g), un lápiz (10 g).",
-      "Objetos pesados se miden en kilogramos (kg): una persona, un saco de papas."
-    ]
+      "Objetos pesados se miden en kilogramos (kg): una persona, un saco de arroz.",
+      "Dos paquetes de 500 g hacen exactamente 1 kg (500 + 500 = 1.000 g)."
+    ],
+    widget: "peso"
   },
   {
+    id: 5,
     tema: "Números hasta 1.000 (OA 2, 5 y 3)",
+    categoria: "numeros",
     icono: "🔢",
+    color: "#0984E3",
+    regla: "Descomposición aditiva según el valor posicional: Centenas (C = 100), Decenas (D = 10), Unidades (U = 1).",
     puntos: [
-      "Centenas (C) = 100, Decenas (D) = 10, Unidades (U) = 1.",
-      "Descomposición aditiva: 356 = 300 + 50 + 6.",
-      "Se escribe: 'trescientos cincuenta y seis'."
-    ]
+      "Ejemplo: 356 = 300 + 50 + 6 (3 centenas, 5 decenas y 6 unidades).",
+      "Escritura: Números del 21 al 29 van en una sola palabra ('veinticinco').",
+      "Para comparar números de 3 cifras, mira primero las centenas; si empatan, mira las decenas."
+    ],
+    widget: "descomposicion"
   },
   {
+    id: 6,
     tema: "Adición y Sustracción (OA 6)",
+    categoria: "numeros",
     icono: "➕➖",
+    color: "#E84393",
+    regla: "Suma con reserva y resta con canje: alinear siempre columnas de unidades, decenas y centenas.",
     puntos: [
-      "Alinear siempre unidades con unidades, decenas con decenas y centenas con centenas.",
-      "Suma con reserva: si pasa de 9, pasas la decena a la siguiente columna.",
-      "Resta con canje: si no alcanza, le pides prestada 1 decena a la columna vecina."
-    ]
+      "Suma con reserva: si la suma da 10 o más, anotas la unidad y pasas la decena a la siguiente columna como reserva.",
+      "Resta con canje: si el número de arriba es menor, le pides prestada 1 decena al compañero de la izquierda.",
+      "Ejemplo suma: 268 + 157 = 425 | Ejemplo resta: 452 - 178 = 274."
+    ],
+    widget: "operaciones"
   },
   {
+    id: 7,
     tema: "Multiplicación (OA 8)",
+    categoria: "numeros",
     icono: "✖️",
+    color: "#2ED573",
+    regla: "Multiplicar es sumar el mismo número varias veces (suma reiterada).",
     puntos: [
-      "Multiplicar es sumar el mismo número varias veces (suma reiterada).",
-      "3 + 3 + 3 + 3 = 12 es lo mismo que 4 × 3 = 12 (4 veces 3).",
-      "Cualquier número multiplicado por 0 es 0; por 1 es el mismo número."
-    ]
+      "3 + 3 + 3 + 3 = 12 se escribe 4 × 3 = 12 (4 veces 3).",
+      "El orden de los factores no altera el producto: 4 × 3 = 3 × 4 = 12.",
+      "Todo número multiplicado por 1 es el mismo número; multiplicado por 0 es 0."
+    ],
+    widget: "multiplicacion"
   },
   {
+    id: 8,
     tema: "División (OA 9)",
+    categoria: "numeros",
     icono: "➗",
+    color: "#1E90FF",
+    regla: "Dividir es repartir una cantidad en partes exactamente IGUALES sin que sobre nada.",
     puntos: [
-      "Dividir significa repartir una cantidad en partes exactamente IGUALES.",
-      "9 ÷ 3 = 3 porque si repartes 9 bolitas en 3 platos, quedan 3 en cada plato.",
-      "También se puede resolver restando el divisor sucesivamente hasta llegar a 0."
-    ]
+      "9 ÷ 3 = 3 porque al repartir 9 elementos en 3 grupos, cada grupo recibe 3.",
+      "La división es la operación inversa de la multiplicación (3 × 3 = 9).",
+      "También se puede resolver restando el divisor sucesivamente: 15 - 5 - 5 - 5 = 0 (3 veces)."
+    ],
+    widget: "division"
   },
   {
+    id: 9,
     tema: "Problemas Cotidianos (OA 10)",
+    categoria: "numeros",
     icono: "🛒",
+    color: "#FFA502",
+    regla: "Para resolver problemas: lee con atención la pregunta, identifica los datos y selecciona la operación correcta.",
     puntos: [
-      "Paso 1: Lee con calma y anota los datos.",
-      "Paso 2: ¿Qué me están preguntando? (¿total, vuelto, diferencia?).",
-      "Paso 3: Elige la operación (Sumar, Restar, Multiplicar o Dividir) y comprueba tu respuesta."
-    ]
+      "Si juntas o agregas cosas: SUMA (+).",
+      "Si quitas, buscas una diferencia o calculas un vuelto: RESTA (-).",
+      "Si repites la misma cantidad varias veces: MULTIPLICACIÓN (×).",
+      "Si repartes equitativamente en partes iguales: DIVISIÓN (÷)."
+    ],
+    widget: "problemas"
   },
   {
+    id: 10,
     tema: "Fracciones (OA 11)",
+    categoria: "datos",
     icono: "🍕",
+    color: "#FF4757",
+    regla: "Una fracción representa partes iguales de un todo (el denominador indica el total de partes y el numerador las que tomas).",
     puntos: [
-      "Una fracción representa una o varias partes iguales de un todo.",
       "1/2 = Un medio (la mitad).",
-      "1/4 = Un cuarto (1 de 4 partes).",
-      "3/4 = Tres cuartos (3 de 4 partes)."
-    ]
+      "1/4 = Un cuarto (1 de 4 partes iguales).",
+      "3/4 = Tres cuartos (3 de 4 partes iguales).",
+      "Para que sea fracción, las partes SIEMPRE deben ser del mismo tamaño."
+    ],
+    widget: "fracciones"
   },
   {
+    id: 11,
     tema: "Patrones Numéricos (OA 12)",
+    categoria: "numeros",
     icono: "🔁",
+    color: "#8E44AD",
+    regla: "Un patrón sigue una regla constante que se repite en cada paso.",
     puntos: [
-      "Descubre la regla mirando los primeros números.",
-      "Creciente (suma): 2, 4, 6, 8... (Regla: +2).",
-      "Decreciente (resta): 100, 90, 80... (Regla: -10)."
-    ]
+      "Patrón creciente (suma): 2, 4, 6, 8, 10... (Regla: sumar 2).",
+      "Patrón decreciente (resta): 100, 90, 80, 70, 60... (Regla: restar 10).",
+      "Para encontrar la regla, resta dos números consecutivos de la secuencia."
+    ],
+    widget: "patrones"
   }
 ];
-

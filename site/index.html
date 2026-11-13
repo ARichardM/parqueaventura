@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PractiJuegos - Matemática 3° Básico</title>
-  <meta name="description" content="Plataforma de repaso y entrenamiento interactivo para la Última Evaluación de Matemática de 3° Básico.">
+  <meta name="description" content="Plataforma de repaso y desafíos interactivos de Matemática para 3° Básico.">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
 </head>
@@ -17,7 +17,7 @@
         <div class="logo-icon">🎯</div>
         <div class="logo-text">
           <h1>PractiJuegos</h1>
-          <span>Matemática 3° Básico · Prueba Final</span>
+          <span>Matemática 3° Básico · Desafíos y Repaso</span>
         </div>
       </div>
       <div class="header-stats">
@@ -39,7 +39,7 @@
       <span>🏠</span> Menú de Temas
     </button>
     <button class="nav-tab" data-view="fichas">
-      <span>📖</span> Fichas de Repaso
+      <span>⚡</span> Fichas Interactivas y Resumen
     </button>
   </nav>
 
@@ -51,13 +51,13 @@
       <!-- Hero Banner -->
       <div class="hero-card">
         <div class="hero-text">
-          <h2>¡Prepárate para la gran prueba! 🚀</h2>
+          <h2>¡Acepta el gran desafío de matemáticas! 🚀</h2>
           <p>
-            Entrena los 11 temas del libro de matemática con desafíos interactivos.
-            ¡Gana estrellas y conviértete en una campeona de los números!
+            Entrena los 11 temas del libro escolar con juegos y ejercicios interactivos.
+            ¡Gana estrellas, supera retos y conviértete en campeona o campeón de los números!
           </p>
           <button id="btn-start-simulacro" class="btn-hero">
-            <span>📝</span> Iniciar Simulacro de Prueba (11 Retos)
+            <span>🎯</span> Iniciar el Gran Desafío (11 Retos)
           </button>
         </div>
         <div class="hero-badge">🏆</div>
@@ -105,7 +105,7 @@
           <!-- Botones inyectados dinámicamente -->
         </div>
 
-        <!-- Retroalimentación con explicación cariñosa -->
+        <!-- Retroalimentación con explicación pedagógica -->
         <div id="feedback-container"></div>
       </div>
     </section>
@@ -120,7 +120,7 @@
         <div id="results-stars" class="results-stars">⭐⭐⭐</div>
         <div id="results-score-text" class="results-score">11 / 11</div>
         <p id="results-msg" class="results-msg">
-          ¡Extraordinario! Estás lista para la prueba escolar.
+          ¡Extraordinario! Dominas los contenidos a la perfección.
         </p>
 
         <div class="results-actions">
@@ -134,16 +134,24 @@
       </div>
     </section>
 
-    <!-- VISTA 4: FICHAS DE ESTUDIO (Machete para la familia) -->
+    <!-- VISTA 4: FICHAS DE ESTUDIO INTERACTIVAS -->
     <section id="view-fichas" style="display: none;">
       <div style="margin-bottom: 1.5rem;">
-        <h2 class="section-title"><span>📖</span> Fichas de Estudio y Resumen Rápido</h2>
+        <h2 class="section-title"><span>⚡</span> Fichas Interactivas y Resumen del Libro</h2>
         <p style="color: var(--text-muted); font-size: 0.95rem;">
-          Puntos clave y fórmulas de la guía de estudio para repasar en familia antes de dar el examen.
+          Explora los conceptos clave, fórmulas y prueba los mini-laboratorios interactivos para aprender jugando.
         </p>
+        
+        <!-- Filtros de categoría -->
+        <div class="fichas-filters" style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="filter-chip active" data-filter="all">🌟 Todos (11)</button>
+          <button class="filter-chip" data-filter="numeros">🔢 Números y Operaciones</button>
+          <button class="filter-chip" data-filter="geometria">📐 Geometría y Medidas</button>
+          <button class="filter-chip" data-filter="datos">📊 Datos y Fracciones</button>
+        </div>
       </div>
       <div id="fichas-grid-container" class="fichas-grid">
-        <!-- Renderizado dinámico -->
+        <!-- Renderizado dinámico con widgets interactivos -->
       </div>
     </section>
 
@@ -152,7 +160,7 @@
   <!-- Pie de página -->
   <footer class="app-footer">
     <p><strong>PractiJuegos</strong> · Aprender con entusiasmo hace grandes genios 🌟</p>
-    <p style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.8;">Sin registros ni anuncios · Diseñado para niñas y niños de 3° Básico</p>
+    <p style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.8;">Sin registros ni publicidad · Diseñado para estudiantes de 3° Básico</p>
   </footer>
 
   <!-- Scripts -->

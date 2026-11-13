@@ -101,3 +101,4 @@ class SoundEffects {
 }
 
 window.soundFx = new SoundEffects();
+
