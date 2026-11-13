@@ -159,7 +159,7 @@ class PractiJuegosApp {
     });
   }
 
-  // Renderizado de Fichas Interactivas y vistosas
+  // Renderizado de Fichas Interactivas tipo Mini-Juego (Cero texto plano, 100% interactivo)
   renderFichasGrid() {
     const container = document.getElementById('fichas-grid-container');
     if (!container) return;
@@ -173,7 +173,6 @@ class PractiJuegosApp {
     filteredFichas.forEach(f => {
       const card = document.createElement('div');
       card.className = 'ficha-card-interactive';
-      const itemsHtml = f.puntos.map(p => `<li>${p}</li>`).join('');
       const widgetHtml = this.buildInteractiveWidget(f.widget, f.id);
       const temaInfo = TEMAS_INFO[f.id];
       const oaText = temaInfo ? `OA ${temaInfo.oa}` : '';
@@ -183,7 +182,7 @@ class PractiJuegosApp {
         <div class="ficha-header-bar" style="background: linear-gradient(135deg, ${f.color}, #6366F1);">
           <div class="ficha-header-top">
             <span class="ficha-oa-tag">${oaText}</span>
-            <span class="badge-interactive">⚡ Interactivo</span>
+            <span class="badge-interactive">⚡ Mini-Juego</span>
           </div>
           <div class="ficha-header-main">
             <span class="ficha-header-icon">${f.icono}</span>
@@ -192,20 +191,21 @@ class PractiJuegosApp {
         </div>
 
         <div class="ficha-content-body">
-          <div class="regla-oro-box">
-            <strong>💡 Regla de oro:</strong> ${f.regla}
+          <div class="mision-banner">
+            <span class="mision-icon">🎯</span>
+            <div>
+              <div class="mision-label">Misión Interactiva:</div>
+              <div class="mision-desc">${f.mision || f.regla}</div>
+            </div>
           </div>
 
-          <div class="ficha-widget-box">
-            <div class="widget-label">🛠️ Mini-Laboratorio Interactivo</div>
+          <div class="ficha-playground-arena">
             ${widgetHtml}
           </div>
 
-          <div>
-            <strong style="display:block; font-size: 0.95rem; margin-bottom: 0.4rem; color: #1E293B;">
-              📋 Puntos clave del libro:
-            </strong>
-            <ul class="ficha-puntos-list">${itemsHtml}</ul>
+          <div class="ficha-secreto-box" id="secreto-${f.id}">
+            <span class="secreto-star">✨</span>
+            <div class="secreto-text">${f.secreto || f.regla}</div>
           </div>
         </div>
       `;
@@ -220,17 +220,37 @@ class PractiJuegosApp {
       case 'pictograma':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Haz clic para agregar frutas y mira cómo cambia el pictograma:
-            </p>
-            <div style="display: flex; gap: 0.4rem; margin-bottom: 0.75rem;">
-              <button class="btn-stepper" id="btn-add-manzana" title="Agregar manzana" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">🍎 +1</button>
-              <button class="btn-stepper" id="btn-add-platano" title="Agregar plátano" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">🍌 +1</button>
-              <button class="btn-stepper" id="btn-reset-frutas" title="Reiniciar" style="width: auto; padding: 0 0.6rem; font-size: 0.85rem; color: #64748B;">🔄</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.75rem;">
+              <span style="font-size: 0.82rem; font-weight: 800; color: #475569;">Canastas:</span>
+              <button class="btn-game-chip" id="btn-add-manzana">🍎 +1 Manzana</button>
+              <button class="btn-game-chip" id="btn-add-platano">🍌 +1 Plátano</button>
+              <button class="btn-game-chip" id="btn-add-frutilla">🍓 +1 Frutilla</button>
+              <button class="btn-game-chip" id="btn-reset-frutas" style="color: #64748B;">🔄 Reiniciar</button>
             </div>
-            <div id="demo-pictograma-display" style="font-size: 1.1rem; line-height: 1.6; background: white; padding: 0.5rem; border-radius: 8px; border: 1px solid #E2E8F0;">
-              Manzanas: 🍎🍎🍎 (3)<br>
-              Plátanos: 🍌🍌 (2)
+            <div class="mini-game-stage" style="align-items: stretch; text-align: left;">
+              <div style="font-size: 0.8rem; font-weight: 800; color: #64748B; margin-bottom: 0.4rem; text-transform: uppercase;">
+                📊 Pictograma en vivo (1 dibujo = 1 fruta):
+              </div>
+              <div id="demo-picto-rows" style="display: flex; flex-direction: column; gap: 0.4rem; background: #F8FAFC; padding: 0.6rem; border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="width: 75px; font-weight: 800; font-size: 0.85rem;">🍎 Manzanas</span>
+                  <span id="picto-row-manzana" style="font-size: 1.3rem; letter-spacing: 3px; flex: 1;">🍎🍎🍎</span>
+                  <span id="picto-count-manzana" style="font-weight: 900; color: #DC2626; background: #FEE2E2; padding: 0.1rem 0.5rem; border-radius: 6px;">3</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="width: 75px; font-weight: 800; font-size: 0.85rem;">🍌 Plátanos</span>
+                  <span id="picto-row-platano" style="font-size: 1.3rem; letter-spacing: 3px; flex: 1;">🍌🍌</span>
+                  <span id="picto-count-platano" style="font-weight: 900; color: #D97706; background: #FEF3C7; padding: 0.1rem 0.5rem; border-radius: 6px;">2</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="width: 75px; font-weight: 800; font-size: 0.85rem;">🍓 Frutillas</span>
+                  <span id="picto-row-frutilla" style="font-size: 1.3rem; letter-spacing: 3px; flex: 1;">🍓🍓🍓🍓</span>
+                  <span id="picto-count-frutilla" style="font-weight: 900; color: #E11D48; background: #FFE4E6; padding: 0.1rem 0.5rem; border-radius: 6px;">4</span>
+                </div>
+              </div>
+            </div>
+            <div id="demo-picto-stats" class="mini-game-banner" style="margin-top: 0.65rem; background: #FF7675;">
+              🍓 La fruta más elegida es la Frutilla (4). Total de frutas: 9 🌟
             </div>
           </div>
         `;
@@ -238,16 +258,22 @@ class PractiJuegosApp {
       case 'figuras3d':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Toca una figura para probar si se puede apilar en una torre:
-            </p>
-            <div style="display: flex; gap: 0.5rem; justify-content: space-around;">
-              <button class="btn-stepper demo-shape-btn" data-shape="cubo" style="width: auto; padding: 0.4rem 0.6rem; font-size: 1.2rem;">🎲 Cubo</button>
-              <button class="btn-stepper demo-shape-btn" data-shape="cilindro" style="width: auto; padding: 0.4rem 0.6rem; font-size: 1.2rem;">🛢️ Cilindro</button>
-              <button class="btn-stepper demo-shape-btn" data-shape="esfera" style="width: auto; padding: 0.4rem 0.6rem; font-size: 1.2rem;">⚽ Esfera</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.75rem;">
+              <button class="btn-game-chip active demo-shape-btn" data-shape="cubo">🎲 Cubo</button>
+              <button class="btn-game-chip demo-shape-btn" data-shape="cilindro">🛢️ Cilindro</button>
+              <button class="btn-game-chip demo-shape-btn" data-shape="esfera">⚽ Esfera</button>
+              <button class="btn-game-chip demo-shape-btn" data-shape="cono">🍦 Cono</button>
             </div>
-            <div id="demo-shape-result" class="widget-result-badge" style="width: 100%; margin-top: 0.6rem; background: #6366F1;">
-              🎲 ¡El cubo tiene caras planas! Se puede apilar perfectamente.
+            <div id="demo-shape-stage" class="mini-game-stage" style="min-height: 140px;">
+              <div id="demo-shape-visual" style="font-size: 3.5rem; line-height: 1; margin-bottom: 0.4rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">
+                🎲
+              </div>
+              <div id="demo-shape-info" style="font-size: 0.88rem; font-weight: 800; color: #1E293B; text-align: center;">
+                6 caras planas cuadradas • 8 vértices • 12 aristas
+              </div>
+            </div>
+            <div id="demo-shape-result" class="mini-game-banner" style="margin-top: 0.65rem; background: #10B981;">
+              🧱 ¡APILADO PERFECTO! Tiene caras planas para apoyarse firmemente en la torre.
             </div>
           </div>
         `;
@@ -255,25 +281,39 @@ class PractiJuegosApp {
       case 'perimetro':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Cambia las medidas del rectángulo y observa el perímetro:
-            </p>
-            <div class="widget-control-row">
-              <span style="font-weight: 700; font-size: 0.9rem;">Largo: <b id="val-largo">6</b> cm</span>
-              <div style="display: flex; gap: 0.3rem;">
-                <button class="btn-stepper" id="btn-sub-largo">-</button>
-                <button class="btn-stepper" id="btn-add-largo">+</button>
+            <div style="display: flex; gap: 0.75rem; justify-content: space-around; margin-bottom: 0.6rem;">
+              <div style="display: flex; align-items: center; gap: 0.35rem;">
+                <span style="font-weight: 800; font-size: 0.88rem;">Largo: <b id="val-largo" style="color:#0284C7;">6</b> m</span>
+                <button class="btn-stepper" id="btn-sub-largo" style="width:30px; height:30px; font-size:1rem;">-</button>
+                <button class="btn-stepper" id="btn-add-largo" style="width:30px; height:30px; font-size:1rem;">+</button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.35rem;">
+                <span style="font-weight: 800; font-size: 0.88rem;">Ancho: <b id="val-ancho" style="color:#0284C7;">4</b> m</span>
+                <button class="btn-stepper" id="btn-sub-ancho" style="width:30px; height:30px; font-size:1rem;">-</button>
+                <button class="btn-stepper" id="btn-add-ancho" style="width:30px; height:30px; font-size:1rem;">+</button>
               </div>
             </div>
-            <div class="widget-control-row">
-              <span style="font-weight: 700; font-size: 0.9rem;">Ancho: <b id="val-ancho">3</b> cm</span>
-              <div style="display: flex; gap: 0.3rem;">
-                <button class="btn-stepper" id="btn-sub-ancho">-</button>
-                <button class="btn-stepper" id="btn-add-ancho">+</button>
-              </div>
+            <div class="mini-game-stage" style="background: #F0FDF4; border-color: #86EFAC; padding: 0.75rem;">
+              <svg id="svg-granja-perimetro" width="260" height="130" viewBox="0 0 260 130">
+                <!-- Pasto verde -->
+                <rect x="35" y="25" width="190" height="80" fill="#DCFCE7" stroke="#16A34A" stroke-width="4" stroke-dasharray="6,4" rx="10"/>
+                <!-- Ovejitas dentro -->
+                <text x="80" y="70" font-size="22">🐑</text>
+                <text x="140" y="70" font-size="22">🐑</text>
+                <text x="180" y="70" font-size="20">🌱</text>
+                <!-- Etiquetas de los 4 lados con píldoras -->
+                <rect x="105" y="6" width="50" height="20" fill="#16A34A" rx="5"/>
+                <text id="lbl-perim-top" x="130" y="20" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">6 m</text>
+                <rect x="105" y="104" width="50" height="20" fill="#16A34A" rx="5"/>
+                <text id="lbl-perim-bottom" x="130" y="118" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">6 m</text>
+                <rect x="4" y="55" width="45" height="20" fill="#16A34A" rx="5"/>
+                <text id="lbl-perim-left" x="26" y="69" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">4 m</text>
+                <rect x="211" y="55" width="45" height="20" fill="#16A34A" rx="5"/>
+                <text id="lbl-perim-right" x="233" y="69" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">4 m</text>
+              </svg>
             </div>
-            <div id="demo-perimetro-calc" class="widget-result-badge" style="width: 100%;">
-              P = 6 + 3 + 6 + 3 = 18 cm
+            <div id="demo-perimetro-calc" class="mini-game-banner" style="margin-top: 0.65rem; background: #00CEC9;">
+              P = 6 m + 4 m + 6 m + 4 m = 20 metros de cerca 🪵
             </div>
           </div>
         `;
@@ -281,15 +321,36 @@ class PractiJuegosApp {
       case 'peso':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Convertidor instantáneo de Kilogramos a Gramos:
-            </p>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="range" id="slider-peso" min="1" max="10" value="2" style="flex: 1; accent-color: #FD9644;">
-              <span id="slider-peso-label" style="font-weight: 800; font-size: 1rem; width: 50px;">2 kg</span>
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <button class="btn-game-chip" id="btn-add-peso-500">🍚 +500 g Azúcar</button>
+              <button class="btn-game-chip" id="btn-add-peso-250">🌾 +250 g Harina</button>
+              <button class="btn-game-chip" id="btn-add-peso-100">🍬 +100 g Dulces</button>
+              <button class="btn-game-chip" id="btn-reset-peso" style="color:#64748B;">🔄 Vaciar</button>
             </div>
-            <div id="demo-peso-result" class="widget-result-badge" style="width: 100%; background: #FD9644;">
-              ⚖️ 2 kg equivalen a 2.000 gramos
+            <div class="mini-game-stage" style="padding: 0.5rem; background: #FFFBEB;">
+              <svg id="svg-balanza-demo" width="240" height="110" viewBox="0 0 240 110">
+                <!-- Base -->
+                <polygon points="120,50 90,100 150,100" fill="#64748B"/>
+                <!-- Brazo que se inclina -->
+                <g id="balanza-brazo" style="transform-origin: 120px 50px; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                  <line x1="30" y1="50" x2="210" y2="50" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                  <!-- Platillo Izquierdo (Fijo 1 kg) -->
+                  <line x1="45" y1="50" x2="30" y2="85" stroke="#94A3B8" stroke-width="2"/>
+                  <line x1="45" y1="50" x2="60" y2="85" stroke="#94A3B8" stroke-width="2"/>
+                  <ellipse cx="45" cy="85" rx="28" ry="6" fill="#CBD5E1"/>
+                  <rect x="33" y="65" width="24" height="20" fill="#F59E0B" rx="3"/>
+                  <text x="45" y="79" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">1 kg</text>
+                  <!-- Platillo Derecho (Interactiva) -->
+                  <line x1="195" y1="50" x2="180" y2="85" stroke="#94A3B8" stroke-width="2"/>
+                  <line x1="195" y1="50" x2="210" y2="85" stroke="#94A3B8" stroke-width="2"/>
+                  <ellipse cx="195" cy="85" rx="28" ry="6" fill="#CBD5E1"/>
+                  <rect x="180" y="65" width="30" height="20" fill="#0284C7" rx="3"/>
+                  <text id="txt-balanza-der" x="195" y="79" font-size="8" font-weight="900" fill="#FFFFFF" text-anchor="middle">0 g</text>
+                </g>
+              </svg>
+            </div>
+            <div id="demo-peso-result" class="mini-game-banner" style="margin-top: 0.65rem; background: #FD9644;">
+              ⚖️ Platillo derecho vacío (0 g). ¡Agrega paquetes hasta equilibrar 1.000 g!
             </div>
           </div>
         `;
@@ -297,15 +358,21 @@ class PractiJuegosApp {
       case 'descomposicion':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Escribe un número hasta 999 para descomponerlo:
-            </p>
-            <div style="display: flex; gap: 0.5rem; align-items: center;">
-              <input type="number" id="input-desc-num" value="356" min="1" max="999" style="width: 80px; padding: 0.35rem 0.5rem; font-weight: 800; font-size: 1.1rem; border: 2px solid #CBD5E1; border-radius: 8px;">
-              <button class="btn-stepper" id="btn-desc-calc" style="width: auto; padding: 0 0.8rem; font-size: 0.9rem;">Descomponer ➜</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <button class="btn-game-chip" id="btn-add-c" style="background:#DCFCE7; border-color:#86EFAC; color:#15803D;">🟩 +100 (C)</button>
+              <button class="btn-game-chip" id="btn-add-d" style="background:#EFF6FF; border-color:#93C5FD; color:#1D4ED8;">🟦 +10 (D)</button>
+              <button class="btn-game-chip" id="btn-add-u" style="background:#FEF3C7; border-color:#FDE047; color:#A16207;">🟨 +1 (U)</button>
+              <button class="btn-game-chip" id="btn-reset-desc" style="color:#64748B;">🔄 Borrar</button>
             </div>
-            <div id="demo-desc-result" class="widget-result-badge" style="width: 100%; background: #0984E3; margin-top: 0.5rem;">
-              356 = 300 + 50 + 6 (3C + 5D + 6U)
+            <div class="mini-game-stage" style="background: white; padding: 0.75rem;">
+              <div id="desc-blocks-visual" style="display: flex; gap: 0.75rem; align-items: center; justify-content: center; min-height: 50px; flex-wrap: wrap;">
+                <div style="background:#DCFCE7; border:2px solid #22C55E; padding:0.3rem 0.6rem; border-radius:8px; font-weight:800; font-size:0.9rem;">🟩 3 Placas (300)</div>
+                <div style="background:#EFF6FF; border:2px solid #3B82F6; padding:0.3rem 0.6rem; border-radius:8px; font-weight:800; font-size:0.9rem;">🟦 5 Barras (50)</div>
+                <div style="background:#FEF3C7; border:2px solid #EAB308; padding:0.3rem 0.6rem; border-radius:8px; font-weight:800; font-size:0.9rem;">🟨 4 Cubitos (4)</div>
+              </div>
+            </div>
+            <div id="demo-desc-result" class="mini-game-banner" style="margin-top: 0.65rem; background: #0984E3;">
+              354 = 300 + 50 + 4 (3C + 5D + 4U) ⭐ "Trescientos cincuenta y cuatro"
             </div>
           </div>
         `;
@@ -313,15 +380,20 @@ class PractiJuegosApp {
       case 'operaciones':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Ejemplo visual con reserva y canje:
-            </p>
-            <div style="display: flex; gap: 0.5rem;">
-              <button class="btn-stepper" id="btn-demo-suma" style="flex: 1; font-size: 0.9rem; font-weight: 700;">➕ Suma (268 + 157)</button>
-              <button class="btn-stepper" id="btn-demo-resta" style="flex: 1; font-size: 0.9rem; font-weight: 700;">➖ Resta (452 - 178)</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <button class="btn-game-chip active" id="btn-op-suma">➕ Suma con Reserva (158 + 274)</button>
+              <button class="btn-game-chip" id="btn-op-resta">➖ Resta con Canje (432 - 168)</button>
             </div>
-            <div id="demo-op-result" style="background: white; border: 1.5px solid #CBD5E1; border-radius: 8px; padding: 0.6rem; margin-top: 0.5rem; font-family: monospace; font-size: 1.1rem; text-align: center; font-weight: 800;">
-              268 + 157 = 425 (con reserva)
+            <div class="mini-game-stage" style="background: white; padding: 0.75rem;">
+              <div id="demo-col-calc" style="font-family: monospace; font-size: 1.35rem; font-weight: 900; line-height: 1.5; text-align: right; width: 160px; margin: 0 auto; background: #F8FAFC; border: 2px solid #CBD5E1; padding: 0.6rem 1rem; border-radius: 10px;">
+                <div id="demo-op-reserva-line" style="color: #EF4444; font-size: 0.95rem; text-align: center; border-bottom: 1px dashed #CBD5E1;">¹ ¹ (Reserva)</div>
+                <div id="demo-op-line1">&nbsp; 1 5 8</div>
+                <div id="demo-op-line2" style="border-bottom: 3px solid #1E293B;">+ 2 7 4</div>
+                <div id="demo-op-line3" style="color: #10B981; font-weight: 900;">&nbsp; 4 3 2</div>
+              </div>
+            </div>
+            <div id="demo-op-result" class="mini-game-banner" style="margin-top: 0.65rem; background: #E84393;">
+              🚀 ¡El cohete de reserva sube a la siguiente columna al llegar a 10!
             </div>
           </div>
         `;
@@ -329,16 +401,26 @@ class PractiJuegosApp {
       case 'multiplicacion':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Suma reiterada: <b id="demo-mult-label">4 veces 3</b>
-            </p>
-            <div style="display: flex; gap: 0.4rem; margin-bottom: 0.5rem;">
-              <button class="btn-stepper" id="btn-mult-3x3" style="width: auto; padding: 0 0.5rem; font-size: 0.85rem;">3 × 3</button>
-              <button class="btn-stepper" id="btn-mult-4x3" style="width: auto; padding: 0 0.5rem; font-size: 0.85rem;">4 × 3</button>
-              <button class="btn-stepper" id="btn-mult-5x4" style="width: auto; padding: 0 0.5rem; font-size: 0.85rem;">5 × 4</button>
+            <div style="display: flex; gap: 0.6rem; align-items: center; justify-content: center; margin-bottom: 0.6rem; flex-wrap: wrap;">
+              <span style="font-weight: 800; font-size: 0.85rem;">Filas:</span>
+              <button class="btn-game-chip btn-mult-filas" data-filas="2">2</button>
+              <button class="btn-game-chip active btn-mult-filas" data-filas="3">3</button>
+              <button class="btn-game-chip btn-mult-filas" data-filas="4">4</button>
+              <span style="font-weight: 800; font-size: 0.85rem; margin-left: 0.4rem;">Columnas:</span>
+              <button class="btn-game-chip btn-mult-cols" data-cols="3">3</button>
+              <button class="btn-game-chip active btn-mult-cols" data-cols="4">4</button>
+              <button class="btn-game-chip btn-mult-cols" data-cols="5">5</button>
             </div>
-            <div id="demo-mult-visual" class="widget-result-badge" style="width: 100%; background: #2ED573;">
-              3 + 3 + 3 + 3 = 12 ⭐ (4 × 3 = 12)
+            <div class="bandeja-horno">
+              <div style="font-size: 0.78rem; font-weight: 900; color: #CBD5E1; text-transform: uppercase; letter-spacing: 1px;">
+                🍪 Bandeja de Horno (¡Toca las galletas para probarlas!):
+              </div>
+              <div id="bandeja-galletas-display" class="bandeja-grid" style="grid-template-columns: repeat(4, 45px);">
+                <!-- Galletas generadas dinámicamente -->
+              </div>
+            </div>
+            <div id="mult-res-banner" class="mini-game-banner" style="margin-top: 0.65rem; background: #2ED573;">
+              3 filas × 4 columnas = 12 galletas 🍪 (Suma reiterada: 4 + 4 + 4 = 12)
             </div>
           </div>
         `;
@@ -346,16 +428,38 @@ class PractiJuegosApp {
       case 'division':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Reparto equitativo: <b>9 bolitas en 3 grupos</b>
-            </p>
-            <div id="demo-div-visual" style="display: flex; gap: 0.5rem; justify-content: center; background: white; padding: 0.5rem; border-radius: 8px; border: 1px solid #E2E8F0;">
-              <div style="background: #EFF6FF; border: 1px solid #93C5FD; padding: 0.3rem 0.6rem; border-radius: 6px;">🔵🔵🔵 (3)</div>
-              <div style="background: #EFF6FF; border: 1px solid #93C5FD; padding: 0.3rem 0.6rem; border-radius: 6px;">🔵🔵🔵 (3)</div>
-              <div style="background: #EFF6FF; border: 1px solid #93C5FD; padding: 0.3rem 0.6rem; border-radius: 6px;">🔵🔵🔵 (3)</div>
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <span style="font-weight: 800; font-size: 0.85rem;">Total dulces:</span>
+              <button class="btn-game-chip btn-div-total" data-total="6">6</button>
+              <button class="btn-game-chip btn-div-total" data-total="9">9</button>
+              <button class="btn-game-chip active btn-div-total" data-total="12">12</button>
+              <button class="btn-game-chip btn-div-total" data-total="15">15</button>
+              <button class="btn-game-chip" id="btn-repartir-monstruos" style="background:#10B981; border-color:#059669; color:white; font-weight:900;">🍬 ¡Repartir!</button>
             </div>
-            <div class="widget-result-badge" style="width: 100%; background: #1E90FF; margin-top: 0.5rem;">
-              9 ÷ 3 = 3 bolitas por grupo
+            <div class="mini-game-stage" style="padding: 0.6rem; background: #F0F9FF;">
+              <div style="display: flex; gap: 0.6rem; justify-content: space-around; width: 100%;">
+                <div style="background: white; border: 2px solid #C084FC; border-radius: 10px; padding: 0.5rem; text-align: center; flex: 1;">
+                  <span style="font-size: 1.8rem;">👾</span><br>
+                  <b style="font-size: 0.8rem; color:#7E22CE;">Bobi</b><br>
+                  <span id="monstruo-1-candies" style="font-size: 1rem; letter-spacing: 2px;">🍬🍬🍬🍬</span><br>
+                  <small id="monstruo-1-count" style="font-weight:900; color:#7E22CE;">(4)</small>
+                </div>
+                <div style="background: white; border: 2px solid #86EFAC; border-radius: 10px; padding: 0.5rem; text-align: center; flex: 1;">
+                  <span style="font-size: 1.8rem;">🐸</span><br>
+                  <b style="font-size: 0.8rem; color:#15803D;">Piti</b><br>
+                  <span id="monstruo-2-candies" style="font-size: 1rem; letter-spacing: 2px;">🍬🍬🍬🍬</span><br>
+                  <small id="monstruo-2-count" style="font-weight:900; color:#15803D;">(4)</small>
+                </div>
+                <div style="background: white; border: 2px solid #FDE047; border-radius: 10px; padding: 0.5rem; text-align: center; flex: 1;">
+                  <span style="font-size: 1.8rem;">🐥</span><br>
+                  <b style="font-size: 0.8rem; color:#A16207;">Tito</b><br>
+                  <span id="monstruo-3-candies" style="font-size: 1rem; letter-spacing: 2px;">🍬🍬🍬🍬</span><br>
+                  <small id="monstruo-3-count" style="font-weight:900; color:#A16207;">(4)</small>
+                </div>
+              </div>
+            </div>
+            <div id="demo-div-banner" class="mini-game-banner" style="margin-top: 0.65rem; background: #1E90FF;">
+              12 dulces ÷ 3 amigos = 4 dulces para cada uno (¡Resto 0, reparto justo!) 🥳
             </div>
           </div>
         `;
@@ -363,11 +467,33 @@ class PractiJuegosApp {
       case 'problemas':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Simulador de compras: Compras 3 lápices de $200 y pagas con $1.000
-            </p>
-            <div id="demo-prob-result" class="widget-result-badge" style="width: 100%; background: #FFA502;">
-              Total: $600 | Tu vuelto: $400 💵
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <span style="font-weight: 800; font-size: 0.85rem;">Elige qué comprar:</span>
+              <button class="btn-game-chip active btn-kiosco-item" data-price="400" data-name="Helado">🍦 Helado ($400)</button>
+              <button class="btn-game-chip btn-kiosco-item" data-price="600" data-name="Libreta">📓 Libreta ($600)</button>
+              <button class="btn-game-chip btn-kiosco-item" data-price="350" data-name="Jugo">🧃 Jugo ($350)</button>
+              <button class="btn-game-chip btn-kiosco-item" data-price="700" data-name="Estuche">✏️ Estuche ($700)</button>
+            </div>
+            <div class="mini-game-stage" style="background: #FFFBEB; padding: 0.6rem;">
+              <div style="display: flex; gap: 0.75rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <div style="background: white; border: 2px solid #CBD5E1; padding: 0.4rem 0.8rem; border-radius: 8px; text-align: center;">
+                  <span style="font-size: 1.5rem;">💵</span><br>
+                  <b style="font-size: 0.85rem;">Pagas: $1.000</b>
+                </div>
+                <span style="font-size: 1.3rem; color: #94A3B8;">➜</span>
+                <div style="background: white; border: 2px solid #CBD5E1; padding: 0.4rem 0.8rem; border-radius: 8px; text-align: center;">
+                  <span id="kiosco-item-icon" style="font-size: 1.5rem;">🍦</span><br>
+                  <b id="kiosco-item-label" style="font-size: 0.85rem; color:#DC2626;">Cuesta: $400</b>
+                </div>
+                <span style="font-size: 1.3rem; color: #94A3B8;">➜</span>
+                <div style="background: #ECFDF5; border: 2px solid #10B981; padding: 0.4rem 0.8rem; border-radius: 8px; text-align: center;">
+                  <span style="font-size: 1.5rem;">🪙</span><br>
+                  <b id="kiosco-vuelto-label" style="font-size: 0.85rem; color:#059669;">Vuelto: $600</b>
+                </div>
+              </div>
+            </div>
+            <div id="demo-kiosco-banner" class="mini-game-banner" style="margin-top: 0.65rem; background: #FFA502;">
+              🛒 $1.000 (pago) - $400 (costo) = $600 de vuelto (🪙 $500 + 🪙 $100)
             </div>
           </div>
         `;
@@ -375,16 +501,20 @@ class PractiJuegosApp {
       case 'fracciones':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Toca una porción para ver su nombre:
-            </p>
-            <div style="display: flex; gap: 0.4rem; justify-content: center;">
-              <button class="btn-stepper demo-frac-btn" data-frac="1/4" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">1 / 4</button>
-              <button class="btn-stepper demo-frac-btn" data-frac="1/2" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">1 / 2</button>
-              <button class="btn-stepper demo-frac-btn" data-frac="3/4" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">3 / 4</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <span style="font-weight: 800; font-size: 0.85rem;">Cortes de pizza:</span>
+              <button class="btn-game-chip btn-pizza-cut" data-cut="2">2 mitades (1/2)</button>
+              <button class="btn-game-chip active btn-pizza-cut" data-cut="4">4 cuartos (1/4)</button>
+              <button class="btn-game-chip btn-pizza-cut" data-cut="6">6 sextos (1/6)</button>
+              <button class="btn-game-chip btn-pizza-cut" data-cut="8">8 octavos (1/8)</button>
             </div>
-            <div id="demo-frac-result" class="widget-result-badge" style="width: 100%; background: #FF4757; margin-top: 0.5rem;">
-              🍕 1/4 representa un cuarto (1 de 4 partes iguales)
+            <div class="mini-game-stage" style="padding: 0.4rem; background: #FFF7ED;">
+              <svg id="svg-pizza-demo" width="160" height="160" viewBox="0 0 160 160" style="cursor: pointer;">
+                <!-- Pizza interactiva generada dinámicamente -->
+              </svg>
+            </div>
+            <div id="demo-pizza-banner" class="mini-game-banner" style="margin-top: 0.65rem; background: #FF4757;">
+              🍕 Toca las porciones de la pizza: 1 de 4 pedazos servidos = 1/4 (un cuarto)
             </div>
           </div>
         `;
@@ -392,77 +522,134 @@ class PractiJuegosApp {
       case 'patrones':
         return `
           <div>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.5rem;">
-              Prueba secuencias con distintas reglas:
-            </p>
-            <div style="display: flex; gap: 0.4rem; justify-content: center;">
-              <button class="btn-stepper demo-pat-btn" data-rule="+2" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">+2</button>
-              <button class="btn-stepper demo-pat-btn" data-rule="+5" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">+5</button>
-              <button class="btn-stepper demo-pat-btn" data-rule="-10" style="width: auto; padding: 0 0.6rem; font-size: 0.9rem;">-10</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
+              <span style="font-weight: 800; font-size: 0.85rem;">Regla del tren:</span>
+              <button class="btn-game-chip btn-train-rule" data-rule="2">+2</button>
+              <button class="btn-game-chip btn-train-rule" data-rule="5">+5</button>
+              <button class="btn-game-chip active btn-train-rule" data-rule="10">+10</button>
+              <button class="btn-game-chip btn-train-rule" data-rule="-5">-5</button>
             </div>
-            <div id="demo-pat-result" class="widget-result-badge" style="width: 100%; background: #8E44AD; margin-top: 0.5rem;">
-              🔁 2, 4, 6, 8, 10... (Sumar 2)
+            <div class="mini-game-stage" style="padding: 0.6rem; background: #FAF5FF; border-color:#E9D5FF;">
+              <div class="train-wagon-track" id="train-track-display">
+                <span class="train-loco">🚂</span>
+                <span class="train-wagon">10</span>
+                <span style="color:#94A3B8;">➔</span>
+                <span class="train-wagon">20</span>
+                <span style="color:#94A3B8;">➔</span>
+                <span class="train-wagon">30</span>
+                <span style="color:#94A3B8;">➔</span>
+                <span class="train-wagon missing" id="train-wagon-q" style="cursor:pointer;" title="¡Tócame para revelar!">❓</span>
+                <span style="color:#94A3B8;">➔</span>
+                <span class="train-wagon">50</span>
+              </div>
+            </div>
+            <div id="demo-train-banner" class="mini-game-banner" style="margin-top: 0.65rem; background: #8E44AD;">
+              🚂 ¡Regla constante: Sumar 10 en cada vagón! Toca el vagón ❓ para comprobar.
             </div>
           </div>
         `;
 
       default:
-        return `<div class="widget-result-badge" style="background:#6366F1;">¡A practicar!</div>`;
+        return `<div class="mini-game-banner" style="background:#6366F1;">¡A practicar!</div>`;
     }
   }
 
   bindWidgetInteractions() {
+    // 1. PICTOGRAMA
     let manzanas = 3;
     let platanos = 2;
-    const addManzana = document.getElementById('btn-add-manzana');
-    const addPlatano = document.getElementById('btn-add-platano');
+    let frutillas = 4;
+    const addM = document.getElementById('btn-add-manzana');
+    const addP = document.getElementById('btn-add-platano');
+    const addF = document.getElementById('btn-add-frutilla');
     const resetFrutas = document.getElementById('btn-reset-frutas');
-    const displayFrutas = document.getElementById('demo-pictograma-display');
+    const rowM = document.getElementById('picto-row-manzana');
+    const rowP = document.getElementById('picto-row-platano');
+    const rowF = document.getElementById('picto-row-frutilla');
+    const cntM = document.getElementById('picto-count-manzana');
+    const cntP = document.getElementById('picto-count-platano');
+    const cntF = document.getElementById('picto-count-frutilla');
+    const statsFrutas = document.getElementById('demo-picto-stats');
 
-    if (addManzana && displayFrutas) {
-      addManzana.addEventListener('click', () => {
-        if (manzanas < 8) manzanas++;
-        displayFrutas.innerHTML = `Manzanas: ${'🍎'.repeat(manzanas)} (${manzanas})<br>Plátanos: ${'🍌'.repeat(platanos)} (${platanos})`;
-      });
-      addPlatano.addEventListener('click', () => {
-        if (platanos < 8) platanos++;
-        displayFrutas.innerHTML = `Manzanas: ${'🍎'.repeat(manzanas)} (${manzanas})<br>Plátanos: ${'🍌'.repeat(platanos)} (${platanos})`;
-      });
-      resetFrutas.addEventListener('click', () => {
-        manzanas = 1; platanos = 1;
-        displayFrutas.innerHTML = `Manzanas: 🍎 (1)<br>Plátanos: 🍌 (1)`;
-      });
-    }
+    const updateFrutas = () => {
+      if (rowM) rowM.textContent = '🍎'.repeat(manzanas);
+      if (rowP) rowP.textContent = '🍌'.repeat(platanos);
+      if (rowF) rowF.textContent = '🍓'.repeat(frutillas);
+      if (cntM) cntM.textContent = manzanas;
+      if (cntP) cntP.textContent = platanos;
+      if (cntF) cntF.textContent = frutillas;
+      if (statsFrutas) {
+        const total = manzanas + platanos + frutillas;
+        let fav = '🍓 Frutillas';
+        if (manzanas >= platanos && manzanas >= frutillas) fav = '🍎 Manzanas';
+        else if (platanos >= manzanas && platanos >= frutillas) fav = '🍌 Plátanos';
+        statsFrutas.textContent = `Fruta más elegida: ${fav}. Total de frutas recolectadas: ${total} 🌟`;
+      }
+      if (window.soundFx) window.soundFx.playCorrect();
+    };
 
+    if (addM) addM.addEventListener('click', () => { if (manzanas < 8) manzanas++; updateFrutas(); });
+    if (addP) addP.addEventListener('click', () => { if (platanos < 8) platanos++; updateFrutas(); });
+    if (addF) addF.addEventListener('click', () => { if (frutillas < 8) frutillas++; updateFrutas(); });
+    if (resetFrutas) resetFrutas.addEventListener('click', () => { manzanas = 1; platanos = 1; frutillas = 1; updateFrutas(); });
+
+    // 2. FIGURAS 3D
     document.querySelectorAll('.demo-shape-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        document.querySelectorAll('.demo-shape-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
         const shape = btn.dataset.shape;
+        const visual = document.getElementById('demo-shape-visual');
+        const info = document.getElementById('demo-shape-info');
         const res = document.getElementById('demo-shape-result');
-        if (!res) return;
+        if (!res || !visual || !info) return;
+
         if (shape === 'cubo') {
-          res.textContent = '🎲 ¡El cubo tiene 6 caras planas! Se puede apilar perfectamente.';
+          visual.textContent = '🎲';
+          info.textContent = '6 caras planas cuadradas • 8 vértices • 12 aristas';
+          res.textContent = '🧱 ¡APILADO PERFECTO! Tiene caras planas para apoyarse firmemente en la torre.';
           res.style.background = '#10B981';
         } else if (shape === 'cilindro') {
-          res.textContent = '🛢️ ¡El cilindro tiene 2 caras planas circulares! Se puede apilar verticalmente.';
+          visual.textContent = '🛢️';
+          info.textContent = '2 caras planas circulares • 1 superficie curva • 0 vértices';
+          res.textContent = '🛢️ ¡SE APILA DE PIE! Sus 2 bases circulares son planas. Si lo acuestas, rueda.';
           res.style.background = '#6366F1';
-        } else {
-          res.textContent = '⚽ ¡La esfera no tiene caras planas! Rueda y NO se puede apilar en una torre.';
+        } else if (shape === 'esfera') {
+          visual.textContent = '⚽';
+          info.textContent = '0 caras planas • Toda su superficie es curva • 0 vértices';
+          res.textContent = '💨 ¡RUEDA Y SE CAE! Es totalmente redonda y NO tiene ninguna cara plana para apoyarse.';
           res.style.background = '#EF4444';
+        } else if (shape === 'cono') {
+          visual.textContent = '🍦';
+          info.textContent = '1 cara plana circular • 1 superficie curva • 1 cúspide o vértice';
+          res.textContent = '⚠️ ¡SOLO POR SU BASE! Se sostiene si apoyas su círculo plano abajo; por la punta se cae.';
+          res.style.background = '#F59E0B';
         }
+        if (window.soundFx) window.soundFx.playCorrect();
       });
     });
 
-    let largo = 6;
-    let ancho = 3;
+    // 3. PERÍMETRO GRANJA
+    let largoP = 6;
+    let anchoP = 4;
     const valLargo = document.getElementById('val-largo');
     const valAncho = document.getElementById('val-ancho');
     const calcPerim = document.getElementById('demo-perimetro-calc');
+    const lblTop = document.getElementById('lbl-perim-top');
+    const lblBottom = document.getElementById('lbl-perim-bottom');
+    const lblLeft = document.getElementById('lbl-perim-left');
+    const lblRight = document.getElementById('lbl-perim-right');
 
-    const updatePerim = () => {
-      if (valLargo) valLargo.textContent = largo;
-      if (valAncho) valAncho.textContent = ancho;
-      const p = 2 * (largo + ancho);
-      if (calcPerim) calcPerim.textContent = `P = ${largo} + ${ancho} + ${largo} + ${ancho} = ${p} cm`;
+    const updateGranjaPerim = () => {
+      if (valLargo) valLargo.textContent = largoP;
+      if (valAncho) valAncho.textContent = anchoP;
+      if (lblTop) lblTop.textContent = `${largoP} m`;
+      if (lblBottom) lblBottom.textContent = `${largoP} m`;
+      if (lblLeft) lblLeft.textContent = `${anchoP} m`;
+      if (lblRight) lblRight.textContent = `${anchoP} m`;
+      const p = 2 * (largoP + anchoP);
+      if (calcPerim) calcPerim.textContent = `P = ${largoP} m + ${anchoP} m + ${largoP} m + ${anchoP} m = ${p} metros de cerca 🪵`;
+      if (window.soundFx) window.soundFx.playCorrect();
     };
 
     const btnAddL = document.getElementById('btn-add-largo');
@@ -470,80 +657,361 @@ class PractiJuegosApp {
     const btnAddA = document.getElementById('btn-add-ancho');
     const btnSubA = document.getElementById('btn-sub-ancho');
 
-    if (btnAddL) btnAddL.addEventListener('click', () => { if (largo < 15) largo++; updatePerim(); });
-    if (btnSubL) btnSubL.addEventListener('click', () => { if (largo > 2) largo--; updatePerim(); });
-    if (btnAddA) btnAddA.addEventListener('click', () => { if (ancho < 10) ancho++; updatePerim(); });
-    if (btnSubA) btnSubA.addEventListener('click', () => { if (ancho > 1) ancho--; updatePerim(); });
+    if (btnAddL) btnAddL.addEventListener('click', () => { if (largoP < 12) largoP++; updateGranjaPerim(); });
+    if (btnSubL) btnSubL.addEventListener('click', () => { if (largoP > 2) largoP--; updateGranjaPerim(); });
+    if (btnAddA) btnAddA.addEventListener('click', () => { if (anchoP < 8) anchoP++; updateGranjaPerim(); });
+    if (btnSubA) btnSubA.addEventListener('click', () => { if (anchoP > 1) anchoP--; updateGranjaPerim(); });
 
-    const sliderPeso = document.getElementById('slider-peso');
-    const labelPeso = document.getElementById('slider-peso-label');
+    // 4. BALANZA PESO
+    let pesoActualDer = 0;
+    const txtDer = document.getElementById('txt-balanza-der');
+    const brazoBalanza = document.getElementById('balanza-brazo');
     const resPeso = document.getElementById('demo-peso-result');
 
-    if (sliderPeso && labelPeso && resPeso) {
-      sliderPeso.addEventListener('input', () => {
-        const kg = sliderPeso.value;
-        labelPeso.textContent = `${kg} kg`;
-        const g = (kg * 1000).toLocaleString('es-CL');
-        resPeso.textContent = `⚖️ ${kg} kg equivalen a ${g} gramos`;
-      });
-    }
+    const updateBalanza = () => {
+      if (txtDer) txtDer.textContent = `${pesoActualDer} g`;
+      if (brazoBalanza) {
+        if (pesoActualDer < 1000) {
+          brazoBalanza.style.transform = 'rotate(-10deg)';
+        } else if (pesoActualDer === 1000) {
+          brazoBalanza.style.transform = 'rotate(0deg)';
+        } else {
+          brazoBalanza.style.transform = 'rotate(10deg)';
+        }
+      }
+      if (resPeso) {
+        if (pesoActualDer < 1000) {
+          resPeso.textContent = `⚖️ Llevas ${pesoActualDer} g en el platillo. Faltan ${1000 - pesoActualDer} g para equilibrar 1 kg.`;
+          resPeso.style.background = '#FD9644';
+        } else if (pesoActualDer === 1000) {
+          resPeso.textContent = `🎉 ¡EQUILIBRIO EXACTO! 1.000 gramos = 1 Kilogramo (1 kg).`;
+          resPeso.style.background = '#10B981';
+          if (window.soundFx) window.soundFx.playWin();
+          if (window.confettiEffect) window.confettiEffect.fire(window.innerWidth / 2, window.innerHeight / 2);
+          return;
+        } else {
+          resPeso.textContent = `⚖️ ¡Demasiado pesado! Llevas ${pesoActualDer} g (> 1 kg). Quita paquetes para equilibrar.`;
+          resPeso.style.background = '#EF4444';
+        }
+      }
+      if (window.soundFx) window.soundFx.playCorrect();
+    };
 
-    const inputDesc = document.getElementById('input-desc-num');
-    const btnDesc = document.getElementById('btn-desc-calc');
+    const btnP500 = document.getElementById('btn-add-peso-500');
+    const btnP250 = document.getElementById('btn-add-peso-250');
+    const btnP100 = document.getElementById('btn-add-peso-100');
+    const btnPReset = document.getElementById('btn-reset-peso');
+
+    if (btnP500) btnP500.addEventListener('click', () => { if (pesoActualDer < 2000) pesoActualDer += 500; updateBalanza(); });
+    if (btnP250) btnP250.addEventListener('click', () => { if (pesoActualDer < 2000) pesoActualDer += 250; updateBalanza(); });
+    if (btnP100) btnP100.addEventListener('click', () => { if (pesoActualDer < 2000) pesoActualDer += 100; updateBalanza(); });
+    if (btnPReset) btnPReset.addEventListener('click', () => { pesoActualDer = 0; updateBalanza(); });
+
+    // 5. DESCOMPOSICIÓN MULTIBASE
+    let cantC = 3;
+    let cantD = 5;
+    let cantU = 4;
+    const visualBlocks = document.getElementById('desc-blocks-visual');
     const resDesc = document.getElementById('demo-desc-result');
 
-    if (inputDesc && btnDesc && resDesc) {
-      btnDesc.addEventListener('click', () => {
-        let n = parseInt(inputDesc.value, 10);
-        if (isNaN(n) || n < 1) n = 100;
-        if (n > 999) n = 999;
-        inputDesc.value = n;
-        const c = Math.floor(n / 100) * 100;
-        const d = Math.floor((n % 100) / 10) * 10;
-        const u = n % 10;
-        resDesc.textContent = `${n} = ${c} + ${d} + ${u} (${c/100}C + ${d/10}D + ${u}U)`;
-      });
-    }
+    const updateDescBlocks = () => {
+      const num = (cantC * 100) + (cantD * 10) + cantU;
+      if (visualBlocks) {
+        visualBlocks.innerHTML = `
+          <div style="background:#DCFCE7; border:2px solid #22C55E; padding:0.35rem 0.65rem; border-radius:8px; font-weight:800; font-size:0.9rem;">🟩 ${cantC} Placas (${cantC * 100})</div>
+          <div style="background:#EFF6FF; border:2px solid #3B82F6; padding:0.35rem 0.65rem; border-radius:8px; font-weight:800; font-size:0.9rem;">🟦 ${cantD} Barras (${cantD * 10})</div>
+          <div style="background:#FEF3C7; border:2px solid #EAB308; padding:0.35rem 0.65rem; border-radius:8px; font-weight:800; font-size:0.9rem;">🟨 ${cantU} Cubitos (${cantU})</div>
+        `;
+      }
+      if (resDesc) {
+        resDesc.textContent = `${num} = ${cantC * 100} + ${cantD * 10} + ${cantU} (${cantC}C + ${cantD}D + ${cantU}U) ⭐ Valor posicional en acción`;
+      }
+      if (window.soundFx) window.soundFx.playCorrect();
+    };
 
-    const btnDemoSuma = document.getElementById('btn-demo-suma');
-    const btnDemoResta = document.getElementById('btn-demo-resta');
+    const btnAddC = document.getElementById('btn-add-c');
+    const btnAddD = document.getElementById('btn-add-d');
+    const btnAddU = document.getElementById('btn-add-u');
+    const btnResetDesc = document.getElementById('btn-reset-desc');
+
+    if (btnAddC) btnAddC.addEventListener('click', () => { if (cantC < 9) cantC++; updateDescBlocks(); });
+    if (btnAddD) btnAddD.addEventListener('click', () => { if (cantD < 9) cantD++; updateDescBlocks(); });
+    if (btnAddU) btnAddU.addEventListener('click', () => { if (cantU < 9) cantU++; updateDescBlocks(); });
+    if (btnResetDesc) btnResetDesc.addEventListener('click', () => { cantC = 1; cantD = 1; cantU = 1; updateDescBlocks(); });
+
+    // 6. OPERACIONES (SUMA / RESTA)
+    const btnOpSuma = document.getElementById('btn-op-suma');
+    const btnOpResta = document.getElementById('btn-op-resta');
     const resOp = document.getElementById('demo-op-result');
-    if (btnDemoSuma && btnDemoResta && resOp) {
-      btnDemoSuma.addEventListener('click', () => {
-        resOp.textContent = '268 + 157 = 425 (reserva en decenas y centenas)';
+    const opLineReserva = document.getElementById('demo-op-reserva-line');
+    const opLine1 = document.getElementById('demo-op-line1');
+    const opLine2 = document.getElementById('demo-op-line2');
+    const opLine3 = document.getElementById('demo-op-line3');
+
+    if (btnOpSuma && btnOpResta) {
+      btnOpSuma.addEventListener('click', () => {
+        btnOpSuma.classList.add('active');
+        btnOpResta.classList.remove('active');
+        if (opLineReserva) opLineReserva.textContent = '¹ ¹ (Reserva)';
+        if (opLine1) opLine1.textContent = '  1 5 8';
+        if (opLine2) opLine2.textContent = '+ 2 7 4';
+        if (opLine3) opLine3.textContent = '  4 3 2';
+        if (resOp) resOp.textContent = '🚀 ¡El cohete de reserva sube a la siguiente columna al llegar a 10!';
+        if (window.soundFx) window.soundFx.playCorrect();
       });
-      btnDemoResta.addEventListener('click', () => {
-        resOp.textContent = '452 - 178 = 274 (canje en unidades y decenas)';
+      btnOpResta.addEventListener('click', () => {
+        btnOpResta.classList.add('active');
+        btnOpSuma.classList.remove('active');
+        if (opLineReserva) opLineReserva.textContent = '³ ¹² (Canje)';
+        if (opLine1) opLine1.textContent = '  4 3 2';
+        if (opLine2) opLine2.textContent = '- 1 6 8';
+        if (opLine3) opLine3.textContent = '  2 6 4';
+        if (resOp) resOp.textContent = '🤝 ¡Canje! Como al 2 no le alcanza para restar 8, le pide 1 decena a su compañero.';
+        if (window.soundFx) window.soundFx.playCorrect();
       });
     }
 
-    document.querySelectorAll('.demo-frac-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const frac = btn.dataset.frac;
-        const res = document.getElementById('demo-frac-result');
-        if (!res) return;
-        if (frac === '1/4') {
-          res.textContent = '🍕 1/4 representa un cuarto (1 de 4 partes iguales)';
-        } else if (frac === '1/2') {
-          res.textContent = '🍕 1/2 representa un medio (la mitad justa)';
-        } else {
-          res.textContent = '🍕 3/4 representa tres cuartos (3 de 4 partes iguales)';
-        }
+    // 7. MULTIPLICACIÓN (BANDEJA DE GALLETAS)
+    let mFilas = 3;
+    let mCols = 4;
+    const bandeja = document.getElementById('bandeja-galletas-display');
+    const bannerMult = document.getElementById('mult-res-banner');
+
+    const renderBandejaGalletas = () => {
+      if (!bandeja) return;
+      bandeja.style.gridTemplateColumns = `repeat(${mCols}, 45px)`;
+      bandeja.innerHTML = '';
+      const totalGalletas = mFilas * mCols;
+      for (let i = 0; i < totalGalletas; i++) {
+        const btnG = document.createElement('button');
+        btnG.className = 'galletita-btn';
+        btnG.textContent = '🍪';
+        btnG.title = '¡Tócame para comer!';
+        btnG.addEventListener('click', () => {
+          btnG.textContent = btnG.textContent === '🍪' ? '😋' : '🍪';
+          if (window.soundFx) window.soundFx.playCorrect();
+        });
+        bandeja.appendChild(btnG);
+      }
+      if (bannerMult) {
+        bannerMult.textContent = `${mFilas} filas × ${mCols} columnas = ${totalGalletas} galletas 🍪 (Suma: ${Array(mFilas).fill(mCols).join(' + ')} = ${totalGalletas})`;
+      }
+      if (window.soundFx) window.soundFx.playCorrect();
+    };
+
+    document.querySelectorAll('.btn-mult-filas').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.btn-mult-filas').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        mFilas = parseInt(b.dataset.filas, 10);
+        renderBandejaGalletas();
       });
     });
 
-    document.querySelectorAll('.demo-pat-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const rule = btn.dataset.rule;
-        const res = document.getElementById('demo-pat-result');
-        if (!res) return;
-        if (rule === '+2') {
-          res.textContent = '🔁 2, 4, 6, 8, 10, 12... (Regla: Sumar 2)';
-        } else if (rule === '+5') {
-          res.textContent = '🔁 5, 10, 15, 20, 25, 30... (Regla: Sumar 5)';
-        } else {
-          res.textContent = '🔁 100, 90, 80, 70, 60, 50... (Regla: Restar 10)';
+    document.querySelectorAll('.btn-mult-cols').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.btn-mult-cols').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        mCols = parseInt(b.dataset.cols, 10);
+        renderBandejaGalletas();
+      });
+    });
+    renderBandejaGalletas();
+
+    // 8. DIVISIÓN (MONSTRUOS AMIGOS)
+    let totalDulces = 12;
+    const m1Candies = document.getElementById('monstruo-1-candies');
+    const m2Candies = document.getElementById('monstruo-2-candies');
+    const m3Candies = document.getElementById('monstruo-3-candies');
+    const m1Count = document.getElementById('monstruo-1-count');
+    const m2Count = document.getElementById('monstruo-2-count');
+    const m3Count = document.getElementById('monstruo-3-count');
+    const bannerDiv = document.getElementById('demo-div-banner');
+    const btnRepartir = document.getElementById('btn-repartir-monstruos');
+
+    const repartirDulces = () => {
+      const cadaUno = Math.floor(totalDulces / 3);
+      const candiesStr = '🍬'.repeat(cadaUno);
+      if (m1Candies) m1Candies.textContent = candiesStr;
+      if (m2Candies) m2Candies.textContent = candiesStr;
+      if (m3Candies) m3Candies.textContent = candiesStr;
+      if (m1Count) m1Count.textContent = `(${cadaUno})`;
+      if (m2Count) m2Count.textContent = `(${cadaUno})`;
+      if (m3Count) m3Count.textContent = `(${cadaUno})`;
+      if (bannerDiv) {
+        bannerDiv.textContent = `${totalDulces} dulces ÷ 3 amigos = ${cadaUno} para cada uno (¡Resto 0, reparto justo!) 🥳`;
+      }
+      if (window.soundFx) window.soundFx.playWin();
+    };
+
+    document.querySelectorAll('.btn-div-total').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.btn-div-total').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        totalDulces = parseInt(b.dataset.total, 10);
+        repartirDulces();
+      });
+    });
+
+    if (btnRepartir) btnRepartir.addEventListener('click', repartirDulces);
+
+    // 9. PROBLEMAS Y MONEDAS (KIOSCO)
+    document.querySelectorAll('.btn-kiosco-item').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.btn-kiosco-item').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        const price = parseInt(b.dataset.price, 10);
+        const name = b.dataset.name;
+        const icon = b.textContent.trim().split(' ')[0];
+        const vuelto = 1000 - price;
+
+        const iconEl = document.getElementById('kiosco-item-icon');
+        const lblEl = document.getElementById('kiosco-item-label');
+        const vueltoEl = document.getElementById('kiosco-vuelto-label');
+        const bannerK = document.getElementById('demo-kiosco-banner');
+
+        if (iconEl) iconEl.textContent = icon;
+        if (lblEl) lblEl.textContent = `Cuesta: $${price}`;
+        if (vueltoEl) vueltoEl.textContent = `Vuelto: $${vuelto}`;
+        if (bannerK) {
+          bannerK.textContent = `🛒 Pagas $1.000 - Cuesta $${price} = $${vuelto} de vuelto 💵 (¡Excelente cálculo!)`;
         }
+        if (window.soundFx) window.soundFx.playCorrect();
+      });
+    });
+
+    // 10. FRACCIONES (PIZZA)
+    let cortesPizza = 4;
+    let porcionesComidas = 1;
+    const svgPizza = document.getElementById('svg-pizza-demo');
+    const bannerPizza = document.getElementById('demo-pizza-banner');
+
+    const renderPizzaInteractive = () => {
+      if (!svgPizza) return;
+      svgPizza.innerHTML = '';
+      const r = 68;
+      const cx = 80;
+      const cy = 80;
+
+      // Fondo plato
+      const basePlate = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      basePlate.setAttribute('cx', cx);
+      basePlate.setAttribute('cy', cy);
+      basePlate.setAttribute('r', r + 6);
+      basePlate.setAttribute('fill', '#FED7AA');
+      basePlate.setAttribute('stroke', '#EA580C');
+      basePlate.setAttribute('stroke-width', '4');
+      svgPizza.appendChild(basePlate);
+
+      // Rebanadas
+      const angleStep = (2 * Math.PI) / cortesPizza;
+      for (let i = 0; i < cortesPizza; i++) {
+        const a1 = i * angleStep;
+        const a2 = (i + 1) * angleStep;
+        const isComida = i < porcionesComidas;
+
+        const x1 = cx + r * Math.cos(a1);
+        const y1 = cy + r * Math.sin(a1);
+        const x2 = cx + r * Math.cos(a2);
+        const y2 = cy + r * Math.sin(a2);
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const d = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`;
+        path.setAttribute('d', d);
+        path.setAttribute('fill', isComida ? '#EF4444' : '#FEF08A');
+        path.setAttribute('stroke', '#EA580C');
+        path.setAttribute('stroke-width', '2');
+        path.style.cursor = 'pointer';
+
+        path.addEventListener('click', () => {
+          porcionesComidas = (porcionesComidas % cortesPizza) + 1;
+          renderPizzaInteractive();
+        });
+
+        svgPizza.appendChild(path);
+      }
+
+      // Nombre de la fracción
+      const nombresFrac = { 2: 'medios', 4: 'cuartos', 6: 'sextos', 8: 'octavos' };
+      if (bannerPizza) {
+        bannerPizza.textContent = `🍕 ${porcionesComidas} de ${cortesPizza} porciones comidas = ${porcionesComidas}/${cortesPizza} (${porcionesComidas} ${nombresFrac[cortesPizza] || 'partes'}). ¡Toca la pizza!`;
+      }
+      if (window.soundFx) window.soundFx.playCorrect();
+    };
+
+    document.querySelectorAll('.btn-pizza-cut').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.btn-pizza-cut').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        cortesPizza = parseInt(b.dataset.cut, 10);
+        porcionesComidas = 1;
+        renderPizzaInteractive();
+      });
+    });
+    renderPizzaInteractive();
+
+    // 11. PATRONES (TREN A VAPOR)
+    const wagonQ = document.getElementById('train-wagon-q');
+    const bannerTrain = document.getElementById('demo-train-banner');
+    if (wagonQ) {
+      wagonQ.addEventListener('click', () => {
+        wagonQ.textContent = '40';
+        wagonQ.classList.remove('missing');
+        wagonQ.style.background = '#86EFAC';
+        wagonQ.style.borderColor = '#16A34A';
+        wagonQ.style.color = '#15803D';
+        if (bannerTrain) {
+          bannerTrain.textContent = '🎉 ¡Excelente! 30 + 10 = 40. El tren avanza feliz a vapor 🚂💨';
+        }
+        if (window.soundFx) window.soundFx.playWin();
+      });
+    }
+
+    document.querySelectorAll('.btn-train-rule').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.btn-train-rule').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        const rule = parseInt(b.dataset.rule, 10);
+        const start = 10;
+        const w1 = start;
+        const w2 = start + rule;
+        const w3 = start + (2 * rule);
+        const w4 = start + (3 * rule);
+        const w5 = start + (4 * rule);
+
+        const track = document.getElementById('train-track-display');
+        if (track) {
+          track.innerHTML = `
+            <span class="train-loco">🚂</span>
+            <span class="train-wagon">${w1}</span>
+            <span style="color:#94A3B8;">➔</span>
+            <span class="train-wagon">${w2}</span>
+            <span style="color:#94A3B8;">➔</span>
+            <span class="train-wagon">${w3}</span>
+            <span style="color:#94A3B8;">➔</span>
+            <span class="train-wagon missing" id="train-wagon-q" style="cursor:pointer;" title="¡Tócame para revelar!">❓</span>
+            <span style="color:#94A3B8;">➔</span>
+            <span class="train-wagon">${w5}</span>
+          `;
+          const newWQ = document.getElementById('train-wagon-q');
+          if (newWQ) {
+            newWQ.addEventListener('click', () => {
+              newWQ.textContent = w4;
+              newWQ.classList.remove('missing');
+              newWQ.style.background = '#86EFAC';
+              newWQ.style.borderColor = '#16A34A';
+              newWQ.style.color = '#15803D';
+              if (bannerTrain) {
+                bannerTrain.textContent = `🎉 ¡Correcto! El número es ${w4}. Regla: ${rule > 0 ? '+' + rule : rule} en cada vagón.`;
+              }
+              if (window.soundFx) window.soundFx.playWin();
+            });
+          }
+        }
+        if (bannerTrain) {
+          bannerTrain.textContent = `🚂 Regla activa: ${rule > 0 ? 'Sumar ' + rule : 'Restar ' + Math.abs(rule)} en cada vagón. ¿Cuál número falta en el ❓?`;
+        }
+        if (window.soundFx) window.soundFx.playCorrect();
       });
     });
   }
@@ -631,17 +1099,17 @@ class PractiJuegosApp {
       // 1. CUADRADO DE PERÍMETRO CON PÍLDORAS
       case 'cuadrado': {
         return `
-          <svg class="figura-svg" width="260" height="220" viewBox="0 0 260 220" style="overflow: visible;">
-            <rect x="74" y="54" width="120" height="120" fill="#E2E8F0" rx="14"/>
-            <rect x="70" y="50" width="120" height="120" fill="#EEF2FF" stroke="#4F46E5" stroke-width="4" rx="12"/>
-            <rect x="105" y="14" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="130" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            <rect x="105" y="180" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="130" y="198" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            <rect x="10" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="35" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            <rect x="200" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="225" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+          <svg class="figura-svg" width="280" height="230" viewBox="0 0 280 230" style="overflow: visible;">
+            <rect x="84" y="58" width="112" height="112" fill="#E2E8F0" rx="14"/>
+            <rect x="80" y="54" width="112" height="112" fill="#EEF2FF" stroke="#4F46E5" stroke-width="4" rx="12"/>
+            <rect x="111" y="14" width="50" height="26" fill="#4F46E5" rx="6"/>
+            <text x="136" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+            <rect x="111" y="180" width="50" height="26" fill="#4F46E5" rx="6"/>
+            <text x="136" y="198" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+            <rect x="16" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
+            <text x="41" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+            <rect x="206" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
+            <text x="231" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
           </svg>
         `;
       }

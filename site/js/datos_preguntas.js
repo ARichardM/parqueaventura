@@ -493,7 +493,7 @@ const PREGUNTAS_DB = [
   }
 ];
 
-// Fichas de estudio enriquecidas con soporte interactivo
+// Fichas de estudio enriquecidas con soporte interactivo y mini-juegos
 const FICHAS_ESTUDIO = [
   {
     id: 1,
@@ -501,6 +501,8 @@ const FICHAS_ESTUDIO = [
     categoria: "datos",
     icono: "📊",
     color: "#FF7675",
+    mision: "¡Llena las canastas de frutas y observa cómo cobran vida en el pictograma!",
+    secreto: "En un pictograma cada dibujo representa datos. La fila más larga es la favorita y contando todos sabes el total.",
     regla: "Los pictogramas usan símbolos o dibujos para representar cantidades (ejemplo: 📕 = 1 libro).",
     puntos: [
       "Para saber el total, suma todos los símbolos de todas las filas.",
@@ -515,6 +517,8 @@ const FICHAS_ESTUDIO = [
     categoria: "geometria",
     icono: "🔷",
     color: "#6C5CE7",
+    mision: "¡Construye torres con cuerpos 3D y descubre cuáles ruedan y cuáles se apilan firmes!",
+    secreto: "Para apilar sin caerse, el cuerpo DEBE tener caras planas (como el cubo o cilindro). Las esferas ruedan porque son redondas.",
     regla: "Para apilar una torre, el cuerpo 3D DEBE tener al menos una cara plana (como el cubo o cilindro). La esfera rueda y no se puede apilar.",
     puntos: [
       "Figuras 2D (planas): Círculo, Triángulo (3 lados), Cuadrado (4 lados iguales), Rectángulo.",
@@ -529,6 +533,8 @@ const FICHAS_ESTUDIO = [
     categoria: "geometria",
     icono: "📐",
     color: "#00CEC9",
+    mision: "¡Modifica el tamaño de la granja de ovejitas y cuenta los metros de cerca!",
+    secreto: "El Perímetro (P) es la suma de TODO el contorno: P = Lado + Lado + Lado + Lado.",
     regla: "El Perímetro (P) es la medida de TODO el contorno. Se calcula sumando la longitud de TODOS sus lados.",
     puntos: [
       "Cuadrado de lado 4 cm: P = 4 + 4 + 4 + 4 = 16 cm.",
@@ -543,6 +549,8 @@ const FICHAS_ESTUDIO = [
     categoria: "geometria",
     icono: "⚖️",
     color: "#FD9644",
+    mision: "¡Coloca paquetes en la balanza mágica hasta equilibrar exactamente 1 Kilogramo!",
+    secreto: "1 Kilogramo (1 kg) son exactamente 1.000 gramos. Dos paquetes de 500 g logran el equilibrio perfecto.",
     regla: "1 kilogramo (1 kg) equivale exactamente a 1.000 gramos (1.000 g).",
     puntos: [
       "Objetos livianos se miden en gramos (g): una manzana (150 g), un lápiz (10 g).",
@@ -557,6 +565,8 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "🔢",
     color: "#0984E3",
+    mision: "¡Fabrica números de 3 cifras con placas de 100, barras de 10 y cubitos de 1!",
+    secreto: "Todo número de 3 cifras se desarma en Centenas (100), Decenas (10) y Unidades (1).",
     regla: "Descomposición aditiva según el valor posicional: Centenas (C = 100), Decenas (D = 10), Unidades (U = 1).",
     puntos: [
       "Ejemplo: 356 = 300 + 50 + 6 (3 centenas, 5 decenas y 6 unidades).",
@@ -571,6 +581,8 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "➕➖",
     color: "#E84393",
+    mision: "¡Activa la máquina sumadora y mira volar el cohete de reserva a la siguiente columna!",
+    secreto: "Si al sumar una columna llegas a 10 o más, el 1 vuela como reserva a la columna vecina de la izquierda.",
     regla: "Suma con reserva y resta con canje: alinear siempre columnas de unidades, decenas y centenas.",
     puntos: [
       "Suma con reserva: si la suma da 10 o más, anotas la unidad y pasas la decena a la siguiente columna como reserva.",
@@ -585,6 +597,8 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "✖️",
     color: "#2ED573",
+    mision: "¡Hornea filas y columnas de galletitas con chispas de chocolate y cómetelas!",
+    secreto: "Multiplicar es sumar el mismo número varias veces. ¡Y si cambias el orden de los factores, da exactamente el mismo total!",
     regla: "Multiplicar es sumar el mismo número varias veces (suma reiterada).",
     puntos: [
       "3 + 3 + 3 + 3 = 12 se escribe 4 × 3 = 12 (4 veces 3).",
@@ -599,6 +613,8 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "➗",
     color: "#1E90FF",
+    mision: "¡Reparte dulces en partes exactamente iguales a los 3 monstruos amigos!",
+    secreto: "Dividir es repartir sin que sobre nada. La división es lo contrario de multiplicar (12 ÷ 3 = 4 porque 3 × 4 = 12).",
     regla: "Dividir es repartir una cantidad en partes exactamente IGUALES sin que sobre nada.",
     puntos: [
       "9 ÷ 3 = 3 porque al repartir 9 elementos en 3 grupos, cada grupo recibe 3.",
@@ -613,6 +629,8 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "🛒",
     color: "#FFA502",
+    mision: "¡Compra en el kiosco escolar con un billete de $1.000 y recibe tus monedas de vuelto!",
+    secreto: "Para saber tu vuelto restas: Lo que pagas - Lo que gastas = Tu dinero de vuelta.",
     regla: "Para resolver problemas: lee con atención la pregunta, identifica los datos y selecciona la operación correcta.",
     puntos: [
       "Si juntas o agregas cosas: SUMA (+).",
@@ -628,6 +646,8 @@ const FICHAS_ESTUDIO = [
     categoria: "datos",
     icono: "🍕",
     color: "#FF4757",
+    mision: "¡Corta la pizza en porciones iguales y toca las rebanadas para servirlas!",
+    secreto: "El número de abajo (denominador) indica los cortes totales. El de arriba (numerador) los que te comes.",
     regla: "Una fracción representa partes iguales de un todo (el denominador indica el total de partes y el numerador las que tomas).",
     puntos: [
       "1/2 = Un medio (la mitad).",
@@ -643,6 +663,8 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "🔁",
     color: "#8E44AD",
+    mision: "¡Averigua el número secreto que falta en el vagón para que el tren a vapor avance!",
+    secreto: "Todo patrón sigue una regla fija: para descubrirla resta dos números vecinos seguidos.",
     regla: "Un patrón sigue una regla constante que se repite en cada paso.",
     puntos: [
       "Patrón creciente (suma): 2, 4, 6, 8, 10... (Regla: sumar 2).",

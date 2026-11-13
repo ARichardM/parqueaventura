@@ -19,28 +19,60 @@ class SoundEffects {
     const spanishVoices = this.voices.filter(v => v.lang.toLowerCase().startsWith('es'));
     if (spanishVoices.length === 0) return;
 
-    // Buscar voces de máxima calidez y naturalidad:
-    // 1. Voces "Natural" de Microsoft (ej. Salma, Dalia, Paloma)
-    // 2. Voces de Google (Chrome)
-    // 3. Voces de Latinoamérica / Chile (es-CL, es-419, es-MX)
-    // 4. Voces femeninas reconocidas por tono dulce
-    const naturalVoice = spanishVoices.find(v => {
+    // Priorizar voces súper amigables, dulces y claras (estilo narradora de cuentos para niños):
+    // 1. Voces dulces reconocidas (Laura en Windows, Salma, Dalia, Paloma, Paulina, Sofia)
+    // 2. Voces "Natural" de Microsoft o Google español
+    // 3. Voces de Latinoamérica
+    // EVITAR voces graves o robóticas como Pablo, Raúl, Helena
+    const friendlyVoice = spanishVoices.find(v => {
       const n = v.name.toLowerCase();
-      return n.includes('natural') && (n.includes('salma') || n.includes('dalia') || n.includes('paloma') || n.includes('female'));
-    }) || spanishVoices.find(v => v.name.toLowerCase().includes('natural'));
-
-    const googleVoice = spanishVoices.find(v => v.name.toLowerCase().includes('google'));
-    const chileanVoice = spanishVoices.find(v => v.lang.toLowerCase().includes('es-cl'));
-    const latamVoice = spanishVoices.find(v => v.lang.toLowerCase().includes('es-419') || v.lang.toLowerCase().includes('es-mx'));
-    
-    const femaleVoice = spanishVoices.find(v => {
-      const n = v.name.toLowerCase();
-      return n.includes('paulina') || n.includes('monica') || n.includes('sofia') || 
-             n.includes('helena') || n.includes('laura') || n.includes('sabina') || 
-             n.includes('jimena') || n.includes('dalia') || n.includes('salma');
+      return n.includes('laura') || n.includes('dalia') || n.includes('salma') || 
+             n.includes('paloma') || n.includes('paulina') || n.includes('sofia') ||
+             n.includes('monica') || n.includes('sabina');
     });
 
-    this.selectedVoice = naturalVoice || googleVoice || chileanVoice || latamVoice || femaleVoice || spanishVoices[0];
+    const naturalVoice = spanishVoices.find(v => {
+      const n = v.name.toLowerCase();
+      return n.includes('natural') && !n.includes('pablo') && !n.includes('raul') && !n.includes('helena');
+    });
+
+    const googleVoice = spanishVoices.find(v => {
+      const n = v.name.toLowerCase();
+      return n.includes('google') && !n.includes('male') && !n.includes('hombre');
+    });
+
+    const latamVoice = spanishVoices.find(v => {
+      const l = v.lang.toLowerCase();
+      const n = v.name.toLowerCase();
+      return (l.includes('es-cl') || l.includes('es-419') || l.includes('es-mx')) &&
+             !n.includes('pablo') && !n.includes('raul');
+    });
+
+    const anyNonRobotic = spanishVoices.find(v => {
+      const n = v.name.toLowerCase();
+      return !n.includes('pablo') && !n.includes('raul') && !n.includes('jorge');
+    });
+
+    this.selectedVoice = friendlyVoice || naturalVoice || googleVoice || latamVoice || anyNonRobotic || spanishVoices[0];
+  }
+
+  playChime() {
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now); // La5
+      osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.12); // Mi6 (timbre dulce y alegre)
+      gain.gain.setValueAtTime(0.09, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.22);
+    } catch (e) {}
   }
 
   init() {
@@ -144,9 +176,12 @@ class SoundEffects {
     }
 
     // Tono cálido, alegre, dulce y calmado (estilo tía de colegio / narradora de cuentos)
-    utter.rate = 0.92;   // Ritmo pausado y fácil de entender
-    utter.pitch = 1.22;  // Tono más agudo, dulce y amigable (evita voz grave o robótica)
+    utter.rate = 0.94;   // Ritmo pausado y claro para niños
+    utter.pitch = 1.26;  // Tono dulce, agudo y amigable (cero robótico o asustadizo)
     utter.volume = 1.0;
+
+    // Tocar campanita alegre previa
+    this.playChime();
 
     if (onStartCallback) utter.onstart = onStartCallback;
     if (onEndCallback) utter.onend = onEndCallback;
