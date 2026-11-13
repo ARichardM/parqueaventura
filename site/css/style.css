@@ -451,6 +451,133 @@ body {
   color: #1E293B;
 }
 
+/* Fila de Metadatos: Nivel de Dificultad y Página del Libro */
+.quiz-badges-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.badge-dificultad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.badge-dificultad-facil {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1.5px solid #86EFAC;
+}
+
+.badge-dificultad-medio {
+  background: #FEF9C3;
+  color: #854D0E;
+  border: 1.5px solid #FDE047;
+}
+
+.badge-dificultad-dificil {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1.5px solid #FCA5A5;
+}
+
+.badge-libro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #F1F5F9;
+  color: #334155;
+  border: 1.5px solid #CBD5E1;
+  font-size: 0.84rem;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.badge-libro strong {
+  color: #0F172A;
+  font-weight: 900;
+}
+
+/* Indicador de progresión de dificultad en tarjetas de temas */
+.tema-diff-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0.5rem 0 0.85rem 0;
+  padding: 0.35rem 0.4rem;
+  background: #F8FAFC;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  flex-wrap: nowrap;
+}
+
+.pill-diff {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.pill-diff-facil {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.pill-diff-medio {
+  background: #FEF9C3;
+  color: #854D0E;
+}
+
+.pill-diff-dificil {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.diff-arrow {
+  color: #94A3B8;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+/* Referencia del libro en feedback */
+.feedback-libro-ref {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1.5px dashed rgba(0, 0, 0, 0.15);
+  font-size: 0.85rem;
+  color: #334155;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Tag de referencia del libro en la cabecera de fichas */
+.ficha-libro-tag {
+  background: rgba(255, 255, 255, 0.28);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
 .question-header {
   display: flex;
   align-items: flex-start;

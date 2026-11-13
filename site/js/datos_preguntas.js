@@ -1,7 +1,7 @@
 /**
- * Banco Extendido de Preguntas Interactivas - Matemática 3° Básico
- * Extraídas directamente de las páginas del texto escolar Santillana y la Guía Oficial.
- * 100% Anónimo, sin nombres personales, y con gráficos visuales para CADA pregunta.
+ * Banco de Preguntas y Fichas de Repaso - Matemática 3° Básico
+ * Extraídas directamente de los textos escolares oficiales Santillana (Tomo 1 y 2).
+ * Estructuradas por nivel de dificultad: 🟢 Fácil -> 🟡 Medio -> 🔴 Desafío.
  */
 
 const TEMAS_INFO = {
@@ -23,8 +23,14 @@ const PREGUNTAS_DB = [
   // TEMA 1: PICTOGRAMAS Y GRÁFICOS (OA 25)
   // ==========================================
   {
+    id: 1,
     temaId: 1,
-    origen: "Libro Tomo 2 - Pág. 236",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 2 - Pág. 40",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Lección 3, Pág. 40",
     pregunta: "En la feria del libro del colegio se registraron los libros recolectados en un pictograma donde cada 📕 representa 1 libro. ¿Cuál fue el tipo de libro MÁS recolectado?",
     grafico: {
       tipo: "pictograma",
@@ -40,8 +46,14 @@ const PREGUNTAS_DB = [
     explicacion: "¡Muy bien! La fila de 'Cuentos' tiene 7 libros representados, siendo la fila más larga del pictograma."
   },
   {
+    id: 2,
     temaId: 1,
-    origen: "Libro Tomo 2 - Pág. 82 (Huerto escolar)",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 2 - Pág. 82",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Actividades de Huerto, Pág. 82",
     pregunta: "En el huerto escolar se plantaron diferentes hortalizas durante la semana. Cada 🌱 representa 2 plantas. Si hay 4 plantitas de Lechuga en el pictograma, ¿cuántas lechugas se plantaron en total?",
     grafico: {
       tipo: "pictograma_escala",
@@ -57,8 +69,14 @@ const PREGUNTAS_DB = [
     explicacion: "Como cada 🌱 vale 2 plantas (escala de 2 en 2): 4 símbolos × 2 plantas = 8 lechugas en total."
   },
   {
+    id: 3,
     temaId: 1,
-    origen: "Libro Tomo 2 - Gráfico de Barras Reciclaje",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 2 - Pág. 84",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Campaña de Reciclaje, Pág. 84",
     pregunta: "En una campaña de reciclaje del barrio se recolectaron sacos de residuos: Plástico (8 sacos) y Vidrio (5 sacos). ¿Cuántos sacos MÁS de plástico que de vidrio se recolectaron?",
     grafico: {
       tipo: "barras_reciclaje",
@@ -77,8 +95,14 @@ const PREGUNTAS_DB = [
   // TEMA 2: FIGURAS 2D Y 3D (OA 15)
   // ==========================================
   {
+    id: 4,
     temaId: 2,
-    origen: "Libro Tomo 2 - Pág. 139 (Apilar torres)",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 2 - Pág. 139",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Lección 2 (Apilar torres), Pág. 139",
     pregunta: "En una actividad de geometría se quiere construir una torre apilando figuras (poniendo una encima de otra). ¿Cuál de estas figuras NO se puede usar porque rodaría y botaría la torre?",
     grafico: {
       tipo: "figuras3d"
@@ -88,8 +112,14 @@ const PREGUNTAS_DB = [
     explicacion: "La esfera es un cuerpo redondo sin caras planas. Si intentas poner algo sobre ella o apilarla, rodará y se caerá."
   },
   {
+    id: 5,
     temaId: 2,
-    origen: "Libro Tomo 2 - Cuerpos Geométricos",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 2 - Pág. 142",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Cuerpos Geométricos y Elementos 3D, Pág. 142",
     pregunta: "¿Qué cuerpo geométrico 3D tiene exactamente 6 caras cuadradas iguales, 8 vértices y 12 aristas?",
     grafico: {
       tipo: "cubo_3d"
@@ -99,23 +129,35 @@ const PREGUNTAS_DB = [
     explicacion: "¡Exacto! El cubo tiene 6 caras que son cuadrados idénticos, como un dado de juego clásico."
   },
   {
+    id: 6,
     temaId: 2,
-    origen: "Libro Tomo 2 - Caras de Cuerpos 3D",
-    pregunta: "El cilindro tiene dos caras planas. ¿Qué forma geométrica 2D tienen esas dos caras?",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 2 - Pág. 144",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Caras y Huellas de Cuerpos 3D, Pág. 144",
+    pregunta: "El cilindro tiene dos caras planas basales. ¿Qué forma geométrica 2D tienen esas dos caras?",
     grafico: {
-      tipo: "cilindro_despiece"
+      tipo: "cilindro_caras"
     },
-    opciones: ["Cuadrados", "Círculos", "Triángulos", "Rectángulos"],
-    correcta: 1,
-    explicacion: "¡Muy bien! Las dos bases planas del cilindro (la de arriba y la de abajo) son círculos perfectos."
+    opciones: ["Cuadrados", "Triángulos", "Círculos", "Rectángulos"],
+    correcta: 2,
+    explicacion: "Las bases superior e inferior de un cilindro son círculos planos. Al estamparlas sobre papel forman dos círculos perfectos."
   },
 
   // ==========================================
   // TEMA 3: PERÍMETRO (OA 21)
   // ==========================================
   {
+    id: 7,
     temaId: 3,
-    origen: "Libro Tomo 2 - Pág. 149 (Cuadrículas de perímetro)",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 2 - Pág. 50",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Descubro Perímetro, Pág. 50",
     pregunta: "Un cuadrado mide 4 cm en cada uno de sus 4 lados. ¿Cuál es su perímetro (P)?",
     grafico: {
       tipo: "cuadrado",
@@ -126,8 +168,14 @@ const PREGUNTAS_DB = [
     explicacion: "El perímetro es la medida de todo el contorno: sumamos sus 4 lados: 4 cm + 4 cm + 4 cm + 4 cm = 16 cm."
   },
   {
+    id: 8,
     temaId: 3,
-    origen: "Libro Tomo 2 - Pág. 149 (Rectángulos)",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 2 - Pág. 149",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Perímetro de Rectángulos, Pág. 149",
     pregunta: "Una tarjeta rectangular mide 6 cm de largo y 3 cm de ancho. ¿Cuál es su perímetro total?",
     grafico: {
       tipo: "rectangulo",
@@ -139,8 +187,14 @@ const PREGUNTAS_DB = [
     explicacion: "El rectángulo tiene dos lados de 6 cm y dos lados de 3 cm: 6 + 3 + 6 + 3 = 18 cm."
   },
   {
+    id: 9,
     temaId: 3,
-    origen: "Libro Tomo 2 - Cuadrícula 1x1 cm",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 2 - Pág. 180",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Cuadrícula y Cercos de Perímetro, Pág. 180",
     pregunta: "Un patio de juegos cuadrado mide 5 metros en cada lado. Si se cerca con una cuerda alrededor de todo su contorno, ¿cuántos metros de cuerda se necesitan?",
     grafico: {
       tipo: "cuadrado_5m"
@@ -154,19 +208,31 @@ const PREGUNTAS_DB = [
   // TEMA 4: MEDIDAS DE PESO (OA 22)
   // ==========================================
   {
+    id: 10,
     temaId: 4,
-    origen: "Libro Tomo 1 - Balanzas y Peso",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 1 - Pág. 104",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Descubro Kilogramo y Gramo, Pág. 104",
     pregunta: "¿A cuántos gramos (g) equivale exactamente 1 kilogramo (1 kg)?",
     grafico: {
       tipo: "balanza"
     },
-    opciones: ["100 gramos", "500 gramos", "1.000 gramos", "10 gramos"],
+    opciones: ["10 gramos", "100 gramos", "1.000 gramos", "10.000 gramos"],
     correcta: 2,
     explicacion: "¡Regla fundamental! 1 kilogramo (1 kg) son exactamente 1.000 gramos (1.000 g)."
   },
   {
+    id: 11,
     temaId: 4,
-    origen: "Libro Tomo 1 - Comparación de Peso",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 1 - Pág. 106",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Comparación en Balanzas, Pág. 106",
     pregunta: "Si en la despensa hay dos paquetes de azúcar de 500 gramos cada uno, ¿cuánto pesan juntos?",
     grafico: {
       tipo: "paquetes"
@@ -176,40 +242,35 @@ const PREGUNTAS_DB = [
     explicacion: "500 g + 500 g = 1.000 gramos, y 1.000 gramos equivalen exactamente a 1 kilogramo (1 kg)."
   },
   {
+    id: 12,
     temaId: 4,
-    origen: "Libro Tomo 1 - Estimar Pesos Cotidianos",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 1 - Pág. 108",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Estimar Pesos Cotidianos, Pág. 108",
     pregunta: "¿Cuál de estos objetos se mide habitualmente en GRAMOS (g) y NO en kilogramos (kg) porque es muy liviano?",
     grafico: {
       tipo: "estimar_peso"
     },
     opciones: ["Un saco de papas", "Una manzana pequeña", "Una bicicleta", "Una persona adulta"],
     correcta: 1,
-    explicacion: "Una manzana pequeña pesa aproximadamente 150 gramos. Los sacos de papas, bicicletas y personas se miden en kilogramos."
+    explicacion: "Los objetos livianos como una manzana pequeña pesan cerca de 150 a 200 gramos (g). Los demás pesan varios kilogramos (kg)."
   },
 
   // ==========================================
   // TEMA 5: NÚMEROS HASTA EL 1.000 (OA 2, 5 Y 3)
   // ==========================================
   {
+    id: 13,
     temaId: 5,
-    origen: "Libro Tomo 1 - Pág. 10 (Bloques multibase)",
-    pregunta: "¿Cuál es la descomposición aditiva correcta del número 356 según su valor posicional?",
-    grafico: {
-      tipo: "descomposicion",
-      numero: 356
-    },
-    opciones: [
-      "30 + 50 + 6",
-      "300 + 50 + 6",
-      "300 + 5 + 6",
-      "300 + 500 + 6"
-    ],
-    correcta: 1,
-    explicacion: "El 3 vale 300 (3 centenas), el 5 vale 50 (5 decenas) y el 6 vale 6 (6 unidades): 300 + 50 + 6 = 356."
-  },
-  {
-    temaId: 5,
-    origen: "Libro Tomo 1 - Lectura y Escritura",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 1 - Pág. 12",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Lectura y Escritura de Números, Pág. 12",
     pregunta: "¿Cómo se escribe en palabras el número 125?",
     grafico: {
       tipo: "descomposicion",
@@ -225,8 +286,37 @@ const PREGUNTAS_DB = [
     explicacion: "Los números de la familia del veinte se escriben en una sola palabra: 'veinticinco', por lo tanto es 'ciento veinticinco'."
   },
   {
+    id: 14,
     temaId: 5,
-    origen: "Libro Tomo 1 - Comparar Números hasta 1.000",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 1 - Pág. 10",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Bloques Multibase y Valor Posicional, Pág. 10",
+    pregunta: "¿Cuál es la descomposición aditiva correcta del número 356 según su valor posicional?",
+    grafico: {
+      tipo: "descomposicion",
+      numero: 356
+    },
+    opciones: [
+      "30 + 50 + 6",
+      "300 + 50 + 6",
+      "300 + 5 + 6",
+      "300 + 500 + 6"
+    ],
+    correcta: 1,
+    explicacion: "El 3 vale 300 (3 centenas), el 5 vale 50 (5 decenas) y el 6 vale 6 (6 unidades): 300 + 50 + 6 = 356."
+  },
+  {
+    id: 15,
+    temaId: 5,
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 1 - Pág. 18",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Comparar y Ordenar Números hasta 1.000, Pág. 18",
     pregunta: "¿Cuál de los siguientes números es el MAYOR de todos?",
     grafico: {
       tipo: "comparar_numeros",
@@ -238,11 +328,37 @@ const PREGUNTAS_DB = [
   },
 
   // ==========================================
-  // TEMA 6: ADICIÓN Y SUSTRACCIÓN HASTA EL 1.000 (OA 6)
+  // TEMA 6: ADICIÓN Y SUSTRACCIÓN (OA 6)
   // ==========================================
   {
+    id: 16,
     temaId: 6,
-    origen: "Libro Tomo 1 - Pág. 230 (Suma con reserva)",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 1 - Pág. 77",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Estrategias de Cálculo Mental sin Canje, Pág. 77",
+    pregunta: "En una biblioteca escolar habían 340 libros y llegaron 120 libros nuevos. ¿Cuántos libros hay ahora en total?",
+    grafico: {
+      tipo: "operacion_vertical",
+      op: "+",
+      n1: 340,
+      n2: 120
+    },
+    opciones: ["450 libros", "460 libros", "470 libros", "360 libros"],
+    correcta: 1,
+    explicacion: "Sumamos centenas y decenas: 300 + 100 = 400; 40 + 20 = 60. Resultado: 460 libros en total."
+  },
+  {
+    id: 17,
+    temaId: 6,
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 1 - Pág. 230",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Resolver Adiciones hasta el 1.000 con Reserva, Pág. 230",
     pregunta: "Calcula la suma alineando columnas: 268 + 157",
     grafico: {
       tipo: "operacion_vertical",
@@ -255,8 +371,14 @@ const PREGUNTAS_DB = [
     explicacion: "8 + 7 = 15 (colocamos 5 y reservamos 1); 6 + 5 + 1 = 12 (colocamos 2 y reservamos 1); 2 + 1 + 1 = 4. Resultado: 425."
   },
   {
+    id: 18,
     temaId: 6,
-    origen: "Libro Tomo 1 - Pág. 88 (Resta con canje)",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 1 - Pág. 88",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Resolver Sustracciones hasta el 1.000 con Canje, Pág. 88",
     pregunta: "Calcula la resta con canje: 452 - 178",
     grafico: {
       tipo: "operacion_vertical",
@@ -268,27 +390,19 @@ const PREGUNTAS_DB = [
     correcta: 0,
     explicacion: "Al 2 no le podemos restar 8, hacemos canje con la decena (12 - 8 = 4). Luego 14 - 7 = 7 y 3 - 1 = 2. Resultado: 274."
   },
-  {
-    temaId: 6,
-    origen: "Libro Tomo 1 - Pág. 88 (Estrategias de cálculo mental)",
-    pregunta: "En una biblioteca escolar habían 340 libros y llegaron 120 libros nuevos. ¿Cuántos libros hay ahora en total?",
-    grafico: {
-      tipo: "operacion_vertical",
-      op: "+",
-      n1: 340,
-      n2: 120
-    },
-    opciones: ["450 libros", "460 libros", "470 libros", "360 libros"],
-    correcta: 1,
-    explicacion: "Sumamos centenas y decenas: 300 + 100 = 400; 40 + 20 = 60. Resultado: 460 libros en total."
-  },
 
   // ==========================================
   // TEMA 7: MULTIPLICACIÓN (OA 8)
   // ==========================================
   {
+    id: 19,
     temaId: 7,
-    origen: "Libro Tomo 2 - Lección 3 (Suma reiterada)",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 2 - Pág. 58",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Descubro Multiplicación como Suma Reiterada, Pág. 58",
     pregunta: "¿Qué multiplicación representa la suma reiterada: 3 + 3 + 3 + 3 = 12?",
     grafico: {
       tipo: "multiplicacion_grupos",
@@ -300,8 +414,14 @@ const PREGUNTAS_DB = [
     explicacion: "El número 3 se repite 4 veces, por eso se expresa como 4 × 3 = 12 (4 veces 3)."
   },
   {
+    id: 20,
     temaId: 7,
-    origen: "Libro Tomo 2 - Cajas de lápices",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 2 - Pág. 60",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Comprender Tablas de Multiplicar, Pág. 60",
     pregunta: "En una librería hay 6 cajas con 5 lápices cada una. ¿Cuántos lápices hay en total?",
     grafico: {
       tipo: "multiplicacion_grupos",
@@ -313,9 +433,15 @@ const PREGUNTAS_DB = [
     explicacion: "Multiplicamos 6 cajas × 5 lápices cada una = 30 lápices en total."
   },
   {
+    id: 21,
     temaId: 7,
-    origen: "Libro Tomo 2 - Tablas del 7",
-    pregunta: "Un paquete de galletas trae 7 galletas. Si compras 4 paquetes iguales, ¿cuántas galletas compraste?",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 2 - Pág. 63",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Tablas de Multiplicar Aplicadas, Pág. 63",
+    pregunta: "Un paquete de galletas trae 7 galletas. Si compras 4 paquetes iguales, ¿cuántas galletas compraste en total?",
     grafico: {
       tipo: "multiplicacion_grupos",
       grupos: 4,
@@ -323,15 +449,38 @@ const PREGUNTAS_DB = [
     },
     opciones: ["21 galletas", "24 galletas", "28 galletas", "32 galletas"],
     correcta: 2,
-    explicacion: "4 paquetes × 7 galletas cada uno = 28 galletas (4 × 7 = 28)."
+    explicacion: "4 paquetes × 7 galletas cada uno = 28 galletas en total (4 × 7 = 28)."
   },
 
   // ==========================================
   // TEMA 8: DIVISIÓN (OA 9)
   // ==========================================
   {
+    id: 22,
     temaId: 8,
-    origen: "Libro Tomo 2 - Pág. 30 (Campeonato de fútbol)",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 2 - Pág. 36",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Ejemplo 3: División con Restas Sucesivas, Pág. 36",
+    pregunta: "¿Cuánto es 15 ÷ 5 resolviendo con restas sucesivas: 15 - 5 = 10, 10 - 5 = 5, 5 - 5 = 0?",
+    grafico: {
+      tipo: "restas_sucesivas"
+    },
+    opciones: ["15 ÷ 5 = 2", "15 ÷ 5 = 3", "15 ÷ 5 = 4", "15 ÷ 5 = 5"],
+    correcta: 1,
+    explicacion: "Como pudimos restar el número 5 exactamente 3 veces hasta llegar a cero, el resultado es 3."
+  },
+  {
+    id: 23,
+    temaId: 8,
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 2 - Pág. 30",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Descubro División: Equipos de Fútbol, Pág. 30",
     pregunta: "Los 30 estudiantes de 3º básico deciden formar equipos para un torneo de fútbol. Si forman 5 equipos con igual cantidad de integrantes, ¿cuántos jugadores tiene cada equipo?",
     grafico: {
       tipo: "division_reparto",
@@ -343,8 +492,14 @@ const PREGUNTAS_DB = [
     explicacion: "Dividimos el total de estudiantes entre la cantidad de equipos: 30 ÷ 5 = 6 jugadores por equipo (porque 6 × 5 = 30)."
   },
   {
+    id: 24,
     temaId: 8,
-    origen: "Libro Tomo 2 - Pág. 167 (Sara y los pinches)",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 2 - Pág. 42",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Actividades de Reparto Equitativo, Pág. 42",
     pregunta: "Sara tiene 36 pinches y los reparte en 4 bolsitas en partes exactamente iguales. ¿Cuántos pinches habrá en cada bolsita?",
     grafico: {
       tipo: "division_reparto",
@@ -355,24 +510,19 @@ const PREGUNTAS_DB = [
     correcta: 1,
     explicacion: "36 ÷ 4 = 9 pinches en cada bolsita (porque 9 × 4 = 36)."
   },
-  {
-    temaId: 8,
-    origen: "Libro Tomo 2 - Pág. 167 (Restas sucesivas)",
-    pregunta: "¿Cuánto es 15 ÷ 5 resolviendo con restas sucesivas: 15 - 5 = 10, 10 - 5 = 5, 5 - 5 = 0?",
-    grafico: {
-      tipo: "restas_sucesivas"
-    },
-    opciones: ["15 ÷ 5 = 2", "15 ÷ 5 = 3", "15 ÷ 5 = 4", "15 ÷ 5 = 5"],
-    correcta: 1,
-    explicacion: "Como pudimos restar el número 5 exactamente 3 veces hasta llegar a cero, el resultado es 3."
-  },
 
   // ==========================================
   // TEMA 9: PROBLEMAS COTIDIANOS (OA 10)
   // ==========================================
   {
+    id: 25,
     temaId: 9,
-    origen: "Guía de Estudio Oficial (OA 10)",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 1 - Pág. 64",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Problemas Cotidianos en Almacén, Pág. 64",
     pregunta: "Si compras 3 lápices que cuestan $200 cada uno, ¿cuánto debes pagar en total en el almacén?",
     grafico: {
       tipo: "problema_compra",
@@ -384,8 +534,14 @@ const PREGUNTAS_DB = [
     explicacion: "3 lápices × $200 cada uno = $600 en total (200 + 200 + 200 = 600)."
   },
   {
+    id: 26,
     temaId: 9,
-    origen: "Guía de Estudio Oficial (OA 10)",
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 1 - Pág. 65",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Resolución de Vuelto con Dinero, Pág. 65",
     pregunta: "Si pagas los $600 de la compra con una moneda de $1.000, ¿cuánto dinero te deben dar de vuelto?",
     grafico: {
       tipo: "problema_vuelto",
@@ -397,8 +553,14 @@ const PREGUNTAS_DB = [
     explicacion: "Restamos el dinero entregado menos el costo: $1.000 - $600 = $400 de vuelto."
   },
   {
+    id: 27,
     temaId: 9,
-    origen: "Libro Tomo 1 - Problemas de lectura",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 1 - Pág. 66",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Problemas Cotidianos de Varios Pasos, Pág. 66",
     pregunta: "Un estudiante está leyendo un libro de 60 páginas. Si lee 10 páginas cada día, ¿en cuántos días terminará de leer el libro completo?",
     grafico: {
       tipo: "problema_lectura"
@@ -412,8 +574,31 @@ const PREGUNTAS_DB = [
   // TEMA 10: FRACCIONES (OA 11)
   // ==========================================
   {
+    id: 28,
     temaId: 10,
-    origen: "Guía Oficial - Partes de un todo",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 2 - Pág. 120",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Descubro Mitades y Fracciones de Barra, Pág. 120",
+    pregunta: "Una barra de chocolate tiene 2 partes iguales. Si le compartes 1 mitad a un compañero, ¿qué fracción de la barra le diste?",
+    grafico: {
+      tipo: "chocolate"
+    },
+    opciones: ["1/4 (un cuarto)", "1/2 (un medio)", "2/2 (toda la barra)", "1/3 (un tercio)"],
+    correcta: 1,
+    explicacion: "1 parte de un total de 2 partes iguales es 1/2, que se lee 'un medio' o la mitad."
+  },
+  {
+    id: 29,
+    temaId: 10,
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 2 - Pág. 122",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Fracciones Circulares y Cuartos, Pág. 122",
     pregunta: "Una pizza redonda se dividió en 4 porciones iguales. Si alguien se come 1 porción, ¿qué fracción de la pizza se comió?",
     grafico: {
       tipo: "pizza",
@@ -425,19 +610,14 @@ const PREGUNTAS_DB = [
     explicacion: "La pizza está dividida en 4 partes iguales (denominador = 4) y se tomó 1 (numerador = 1): representa 1/4 (un cuarto)."
   },
   {
+    id: 30,
     temaId: 10,
-    origen: "Libro Tomo 2 - Fracciones de barra",
-    pregunta: "Una barra de chocolate tiene 2 partes iguales. Si le compartes 1 mitad a un compañero, ¿qué fracción le diste?",
-    grafico: {
-      tipo: "chocolate"
-    },
-    opciones: ["1/4 (un cuarto)", "1/2 (un medio)", "2/2 (toda la barra)", "1/3 (un tercio)"],
-    correcta: 1,
-    explicacion: "1 parte de un total de 2 partes iguales es 1/2, que se lee 'un medio' o la mitad."
-  },
-  {
-    temaId: 10,
-    origen: "Libro Tomo 2 - Tres cuartos",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 2 - Pág. 124",
+    origenDetalle: "Santillana 3° Básico, Tomo 2, Partes del Todo: Tres Cuartos, Pág. 124",
     pregunta: "Si un pastel se divide en 4 trozos iguales y se sirven 3 trozos en una fiesta, ¿qué fracción del pastel se sirvió?",
     grafico: {
       tipo: "pizza_tres_cuartos"
@@ -451,8 +631,32 @@ const PREGUNTAS_DB = [
   // TEMA 11: PATRONES NUMÉRICOS (OA 12)
   // ==========================================
   {
+    id: 31,
     temaId: 11,
-    origen: "Guía Oficial - Secuencia creciente",
+    dificultad: 1,
+    dificultadNivel: "facil",
+    dificultadTexto: "Fácil",
+    dificultadBadge: "🟢 Nivel: Fácil",
+    origen: "Libro Tomo 1 - Pág. 24",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Patrones Crecientes de 5 en 5, Pág. 24",
+    pregunta: "Observa la secuencia: 5 - 10 - 15 - 20 - ... ¿Cuál es el siguiente número?",
+    grafico: {
+      tipo: "secuencia",
+      numeros: ["5", "10", "15", "20", "❓"]
+    },
+    opciones: ["22", "25", "30", "35"],
+    correcta: 1,
+    explicacion: "La regla es sumar 5 en cada paso (patrón de 5 en 5): 20 + 5 = 25."
+  },
+  {
+    id: 32,
+    temaId: 11,
+    dificultad: 2,
+    dificultadNivel: "medio",
+    dificultadTexto: "Medio",
+    dificultadBadge: "🟡 Nivel: Medio",
+    origen: "Libro Tomo 1 - Pág. 25",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Identificar la Regla del Patrón, Pág. 25",
     pregunta: "Observa la secuencia: 2 - 4 - 6 - 8 - ... ¿Cuál es la regla del patrón y qué número viene a continuación?",
     grafico: {
       tipo: "secuencia",
@@ -465,11 +669,17 @@ const PREGUNTAS_DB = [
       "Regla: Sumar 4 / Viene el 12"
     ],
     correcta: 1,
-    explicacion: "Cada número se obtiene sumando 2 al número anterior: 2+2=4, 4+2=6, 6+2=8. Por lo tanto, 8 + 2 = 10."
+    explicacion: "Cada número se obtiene sumando 2 al anterior: 2+2=4, 4+2=6, 6+2=8. Por lo tanto, 8 + 2 = 10."
   },
   {
+    id: 33,
     temaId: 11,
-    origen: "Libro Tomo 1 - Secuencia decreciente",
+    dificultad: 3,
+    dificultadNivel: "dificil",
+    dificultadTexto: "Desafío",
+    dificultadBadge: "🔴 Nivel: Desafío",
+    origen: "Libro Tomo 1 - Pág. 26",
+    origenDetalle: "Santillana 3° Básico, Tomo 1, Patrones Decrecientes Hacia Atrás, Pág. 26",
     pregunta: "Observa esta secuencia hacia atrás: 100 - 90 - 80 - 70 - ... ¿Qué número sigue?",
     grafico: {
       tipo: "secuencia",
@@ -478,22 +688,10 @@ const PREGUNTAS_DB = [
     opciones: ["80", "65", "60", "50"],
     correcta: 2,
     explicacion: "La regla es restar 10 en cada paso (patrón decreciente): 70 - 10 = 60."
-  },
-  {
-    temaId: 11,
-    origen: "Libro Tomo 1 - Patrones de 5 en 5",
-    pregunta: "Observa la secuencia del libro: 5 - 10 - 15 - 20 - ... ¿Cuál es el siguiente número?",
-    grafico: {
-      tipo: "secuencia",
-      numeros: ["5", "10", "15", "20", "❓"]
-    },
-    opciones: ["22", "25", "30", "35"],
-    correcta: 1,
-    explicacion: "La regla es sumar 5 en cada paso: 20 + 5 = 25."
   }
 ];
 
-// Fichas de estudio enriquecidas con soporte interactivo y mini-juegos
+// Fichas de estudio enriquecidas con soporte interactivo y referencias al libro
 const FICHAS_ESTUDIO = [
   {
     id: 1,
@@ -501,6 +699,7 @@ const FICHAS_ESTUDIO = [
     categoria: "datos",
     icono: "📊",
     color: "#FF7675",
+    libroRef: "Libro Tomo 2 · Págs. 40 - 84",
     mision: "¡Llena las canastas de frutas y observa cómo cobran vida en el pictograma!",
     secreto: "En un pictograma cada dibujo representa datos. La fila más larga es la favorita y contando todos sabes el total.",
     regla: "Los pictogramas usan símbolos o dibujos para representar cantidades (ejemplo: 📕 = 1 libro).",
@@ -517,6 +716,7 @@ const FICHAS_ESTUDIO = [
     categoria: "geometria",
     icono: "🔷",
     color: "#6C5CE7",
+    libroRef: "Libro Tomo 2 · Págs. 139 - 144",
     mision: "¡Construye torres con cuerpos 3D y descubre cuáles ruedan y cuáles se apilan firmes!",
     secreto: "Para apilar sin caerse, el cuerpo DEBE tener caras planas (como el cubo o cilindro). Las esferas ruedan porque son redondas.",
     regla: "Para apilar una torre, el cuerpo 3D DEBE tener al menos una cara plana (como el cubo o cilindro). La esfera rueda y no se puede apilar.",
@@ -533,6 +733,7 @@ const FICHAS_ESTUDIO = [
     categoria: "geometria",
     icono: "📐",
     color: "#00CEC9",
+    libroRef: "Libro Tomo 2 · Págs. 50 - 180",
     mision: "¡Modifica el tamaño de la granja de ovejitas y cuenta los metros de cerca!",
     secreto: "El Perímetro (P) es la suma de TODO el contorno: P = Lado + Lado + Lado + Lado.",
     regla: "El Perímetro (P) es la medida de TODO el contorno. Se calcula sumando la longitud de TODOS sus lados.",
@@ -549,6 +750,7 @@ const FICHAS_ESTUDIO = [
     categoria: "geometria",
     icono: "⚖️",
     color: "#FD9644",
+    libroRef: "Libro Tomo 1 · Págs. 104 - 108",
     mision: "¡Coloca paquetes en la balanza mágica hasta equilibrar exactamente 1 Kilogramo!",
     secreto: "1 Kilogramo (1 kg) son exactamente 1.000 gramos. Dos paquetes de 500 g logran el equilibrio perfecto.",
     regla: "1 kilogramo (1 kg) equivale exactamente a 1.000 gramos (1.000 g).",
@@ -565,6 +767,7 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "🔢",
     color: "#0984E3",
+    libroRef: "Libro Tomo 1 · Págs. 10 - 18",
     mision: "¡Fabrica números de 3 cifras con placas de 100, barras de 10 y cubitos de 1!",
     secreto: "Todo número de 3 cifras se desarma en Centenas (100), Decenas (10) y Unidades (1).",
     regla: "Descomposición aditiva según el valor posicional: Centenas (C = 100), Decenas (D = 10), Unidades (U = 1).",
@@ -581,15 +784,16 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "➕➖",
     color: "#E84393",
-    mision: "¡Activa la máquina sumadora y mira volar el cohete de reserva a la siguiente columna!",
-    secreto: "Si al sumar una columna llegas a 10 o más, el 1 vuela como reserva a la columna vecina de la izquierda.",
-    regla: "Suma con reserva y resta con canje: alinear siempre columnas de unidades, decenas y centenas.",
+    libroRef: "Libro Tomo 1 · Págs. 77 - 230",
+    mision: "¡Activa los cohetes de reserva y domina la suma vertical sin equivocarte jamás!",
+    secreto: "Si al sumar las unidades te pasas de 9, el número se convierte en un cohete de reserva y vuela a la columna vecina.",
+    regla: "En la adición con reserva, agrupas 10 unidades en 1 decena que pasa arriba como reserva.",
     puntos: [
-      "Suma con reserva: si la suma da 10 o más, anotas la unidad y pasas la decena a la siguiente columna como reserva.",
-      "Resta con canje: si el número de arriba es menor, le pides prestada 1 decena al compañero de la izquierda.",
-      "Ejemplo suma: 268 + 157 = 425 | Ejemplo resta: 452 - 178 = 274."
+      "Alinea siempre unidades con unidades, decenas con decenas y centenas con centenas.",
+      "Ejemplo con reserva: 268 + 157 = 425 (8+7=15, 6+5+1=12, 2+1+1=4).",
+      "En la sustracción con canje, pides 1 decena prestada que se convierte en 10 unidades."
     ],
-    widget: "operaciones"
+    widget: "adicion"
   },
   {
     id: 7,
@@ -597,6 +801,7 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "✖️",
     color: "#2ED573",
+    libroRef: "Libro Tomo 2 · Págs. 58 - 63",
     mision: "¡Hornea filas y columnas de galletitas con chispas de chocolate y cómetelas!",
     secreto: "Multiplicar es sumar el mismo número varias veces. ¡Y si cambias el orden de los factores, da exactamente el mismo total!",
     regla: "Multiplicar es sumar el mismo número varias veces (suma reiterada).",
@@ -613,13 +818,14 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "➗",
     color: "#1E90FF",
+    libroRef: "Libro Tomo 2 · Págs. 30 - 42",
     mision: "¡Reparte dulces en partes exactamente iguales a los 3 monstruos amigos!",
     secreto: "Dividir es repartir sin que sobre nada. La división es lo contrario de multiplicar (12 ÷ 3 = 4 porque 3 × 4 = 12).",
     regla: "Dividir es repartir una cantidad en partes exactamente IGUALES sin que sobre nada.",
     puntos: [
-      "9 ÷ 3 = 3 porque al repartir 9 elementos en 3 grupos, cada grupo recibe 3.",
-      "La división es la operación inversa de la multiplicación (3 × 3 = 9).",
-      "También se puede resolver restando el divisor sucesivamente: 15 - 5 - 5 - 5 = 0 (3 veces)."
+      "12 dulces entre 3 amigos: a cada uno le tocan 4 dulces (12 ÷ 3 = 4).",
+      "También se puede calcular restando sucesivamente el mismo número hasta llegar a 0.",
+      "La multiplicación y la división son operaciones inversas: 4 × 3 = 12 y 12 ÷ 3 = 4."
     ],
     widget: "division"
   },
@@ -629,14 +835,14 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "🛒",
     color: "#FFA502",
-    mision: "¡Compra en el kiosco escolar con un billete de $1.000 y recibe tus monedas de vuelto!",
-    secreto: "Para saber tu vuelto restas: Lo que pagas - Lo que gastas = Tu dinero de vuelta.",
-    regla: "Para resolver problemas: lee con atención la pregunta, identifica los datos y selecciona la operación correcta.",
+    libroRef: "Libro Tomo 1 · Págs. 64 - 66",
+    mision: "¡Maneja la caja registradora de la tienda escolar y cobra los útiles!",
+    secreto: "Lee con calma, subraya la pregunta, decide qué operación necesitas (+, -, ×, ÷) y calcula el vuelto restando lo que pagas.",
+    regla: "Para resolver un problema: 1. Lee atentamente. 2. Identifica los datos. 3. Decide la operación. 4. Comprueba tu respuesta.",
     puntos: [
-      "Si juntas o agregas cosas: SUMA (+).",
-      "Si quitas, buscas una diferencia o calculas un vuelto: RESTA (-).",
-      "Si repites la misma cantidad varias veces: MULTIPLICACIÓN (×).",
-      "Si repartes equitativamente en partes iguales: DIVISIÓN (÷)."
+      "Cálculo de total: Precio unitario × Cantidad de productos.",
+      "Cálculo de vuelto: Dinero entregado para pagar MENOS el costo total de la compra.",
+      "Ejemplo: Si pagas $1.000 por una compra de $600, tu vuelto es $1.000 - $600 = $400."
     ],
     widget: "problemas"
   },
@@ -646,14 +852,14 @@ const FICHAS_ESTUDIO = [
     categoria: "datos",
     icono: "🍕",
     color: "#FF4757",
-    mision: "¡Corta la pizza en porciones iguales y toca las rebanadas para servirlas!",
-    secreto: "El número de abajo (denominador) indica los cortes totales. El de arriba (numerador) los que te comes.",
-    regla: "Una fracción representa partes iguales de un todo (el denominador indica el total de partes y el numerador las que tomas).",
+    libroRef: "Libro Tomo 2 · Págs. 120 - 124",
+    mision: "¡Corta pizzas artesanales en partes iguales y sirve las porciones!",
+    secreto: "El número de abajo (denominador) dice en cuántas partes se cortó el todo. El de arriba (numerador) dice cuántas partes tomaste.",
+    regla: "Una fracción representa partes iguales de un todo. El numerador indica las partes consideradas y el denominador el total de partes iguales.",
     puntos: [
-      "1/2 = Un medio (la mitad).",
-      "1/4 = Un cuarto (1 de 4 partes iguales).",
-      "3/4 = Tres cuartos (3 de 4 partes iguales).",
-      "Para que sea fracción, las partes SIEMPRE deben ser del mismo tamaño."
+      "1/2 (un medio): El todo se dividió en 2 partes iguales y se tomó 1.",
+      "1/4 (un cuarto): El todo se dividió en 4 partes iguales y se tomó 1.",
+      "3/4 (tres cuartos): El todo se dividió en 4 partes iguales y se tomaron 3."
     ],
     widget: "fracciones"
   },
@@ -663,14 +869,25 @@ const FICHAS_ESTUDIO = [
     categoria: "numeros",
     icono: "🔁",
     color: "#8E44AD",
-    mision: "¡Averigua el número secreto que falta en el vagón para que el tren a vapor avance!",
-    secreto: "Todo patrón sigue una regla fija: para descubrirla resta dos números vecinos seguidos.",
-    regla: "Un patrón sigue una regla constante que se repite en cada paso.",
+    libroRef: "Libro Tomo 1 · Págs. 24 - 26",
+    mision: "¡Descifra la clave secreta del tren a vapor agregando o restando el número mágico!",
+    secreto: "Calcula la diferencia entre dos números vecinos. Si va creciendo, se suma; si va hacia atrás, se resta.",
+    regla: "Un patrón es una secuencia que sigue una regla fija: creciente (sumando o multiplicando) o decreciente (restando o dividiendo).",
     puntos: [
-      "Patrón creciente (suma): 2, 4, 6, 8, 10... (Regla: sumar 2).",
-      "Patrón decreciente (resta): 100, 90, 80, 70, 60... (Regla: restar 10).",
-      "Para encontrar la regla, resta dos números consecutivos de la secuencia."
+      "Patrón de 2 en 2: 2, 4, 6, 8, 10... (Regla: sumar 2).",
+      "Patrón de 5 en 5: 5, 10, 15, 20, 25... (Regla: sumar 5).",
+      "Patrón decreciente: 100, 90, 80, 70, 60... (Regla: restar 10)."
     ],
     widget: "patrones"
   }
 ];
+
+if (typeof window !== 'undefined') {
+  window.TEMAS_INFO = TEMAS_INFO;
+  window.PREGUNTAS_DB = PREGUNTAS_DB;
+  window.FICHAS_ESTUDIO = FICHAS_ESTUDIO;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { TEMAS_INFO, PREGUNTAS_DB, FICHAS_ESTUDIO };
+}

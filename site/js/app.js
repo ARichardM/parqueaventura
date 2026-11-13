@@ -149,8 +149,15 @@ class PractiJuegosApp {
           <span class="tema-oa-badge">OA ${t.oa}</span>
         </div>
         <h3 class="tema-title">${t.nombre}</h3>
-        <p class="tema-desc">${countQuestions} ejercicios extraídos del texto escolar y guía oficial.</p>
-        <button class="tema-btn">Practicar ${countQuestions} retos →</button>
+        <p class="tema-desc">${countQuestions} ejercicios del libro Santillana ordenados pedagógicamente.</p>
+        <div class="tema-diff-flow">
+          <span class="pill-diff pill-diff-facil">🟢 Fácil</span>
+          <span class="diff-arrow">➜</span>
+          <span class="pill-diff pill-diff-medio">🟡 Medio</span>
+          <span class="diff-arrow">➜</span>
+          <span class="pill-diff pill-diff-dificil">🔴 Desafío</span>
+        </div>
+        <button class="tema-btn">Comenzar entrenamiento →</button>
       `;
       card.addEventListener('click', () => {
         this.startTemaQuiz(t.id);
@@ -177,11 +184,13 @@ class PractiJuegosApp {
       const temaInfo = TEMAS_INFO[f.id];
       const oaText = temaInfo ? `OA ${temaInfo.oa}` : '';
       const tituloLimpio = f.tema.split('(')[0].trim();
+      const libroBadge = f.libroRef ? `<span class="ficha-libro-tag">📖 ${f.libroRef}</span>` : '';
 
       card.innerHTML = `
         <div class="ficha-header-bar" style="background: linear-gradient(135deg, ${f.color}, #6366F1);">
           <div class="ficha-header-top">
             <span class="ficha-oa-tag">${oaText}</span>
+            ${libroBadge}
             <span class="badge-interactive">⚡ Mini-Juego</span>
           </div>
           <div class="ficha-header-main">
@@ -1028,7 +1037,8 @@ class PractiJuegosApp {
       }
     });
 
-    this.questionsList = selected.sort(() => Math.random() - 0.5);
+    // Ordenar ESTRICTAMENTE de menor a mayor dificultad: 1 (Fácil) -> 2 (Medio) -> 3 (Desafío)
+    this.questionsList = selected.sort((a, b) => (a.dificultad || 1) - (b.dificultad || 1));
     this.currentIndex = 0;
     this.score = 0;
 
@@ -1041,7 +1051,10 @@ class PractiJuegosApp {
     this.currentTemaId = temaId;
 
     const filtered = PREGUNTAS_DB.filter(q => q.temaId === temaId);
-    this.questionsList = filtered.length > 0 ? filtered : PREGUNTAS_DB.slice(0, 3);
+    // Ordenar ESTRICTAMENTE del más fácil al más difícil: 1 (Fácil) -> 2 (Medio) -> 3 (Desafío)
+    this.questionsList = (filtered.length > 0 ? filtered : PREGUNTAS_DB.slice(0, 3))
+      .slice()
+      .sort((a, b) => (a.dificultad || 1) - (b.dificultad || 1));
     this.currentIndex = 0;
     this.score = 0;
 
@@ -1060,8 +1073,20 @@ class PractiJuegosApp {
     document.getElementById('quiz-progress-fill').style.width = `${percent}%`;
 
     const temaInfo = TEMAS_INFO[q.temaId] || { nombre: "Matemática", icono: "📘", oa: "" };
-    const origenBadge = q.origen ? `<span style="opacity: 0.8; font-weight: 600; margin-left: 0.4rem;">📖 ${q.origen}</span>` : '';
-    document.getElementById('quiz-tema-badge').innerHTML = `${temaInfo.icono} ${temaInfo.nombre} (OA ${temaInfo.oa}) ${origenBadge}`;
+    document.getElementById('quiz-tema-badge').innerHTML = `${temaInfo.icono} ${temaInfo.nombre} (OA ${temaInfo.oa})`;
+
+    // Metadatos Visibles: Nivel de Dificultad y Página del Libro
+    const difBadge = document.getElementById('quiz-dificultad-badge');
+    if (difBadge) {
+      difBadge.className = `badge-dificultad badge-dificultad-${q.dificultadNivel || 'facil'}`;
+      difBadge.innerHTML = q.dificultadBadge || '🟢 Nivel: Fácil';
+    }
+
+    const libroBadge = document.getElementById('quiz-libro-badge');
+    if (libroBadge) {
+      libroBadge.innerHTML = `📖 <strong>${q.origen}</strong>`;
+      libroBadge.title = q.origenDetalle || q.origen;
+    }
 
     // Texto de la pregunta
     document.getElementById('question-text').textContent = q.pregunta;
@@ -1097,17 +1122,22 @@ class PractiJuegosApp {
       // 1. CUADRADO DE PERÍMETRO CON PÍLDORAS
       case 'cuadrado': {
         return `
-          <svg class="figura-svg" width="280" height="230" viewBox="0 0 280 230" style="overflow: visible;">
-            <rect x="84" y="58" width="112" height="112" fill="#E2E8F0" rx="14"/>
-            <rect x="80" y="54" width="112" height="112" fill="#EEF2FF" stroke="#4F46E5" stroke-width="4" rx="12"/>
-            <rect x="111" y="14" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="136" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            <rect x="111" y="180" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="136" y="198" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            <rect x="16" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="41" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
-            <rect x="206" y="97" width="50" height="26" fill="#4F46E5" rx="6"/>
-            <text x="231" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+          <svg class="figura-svg" width="320" height="230" viewBox="0 0 320 230" style="overflow: visible; max-width: 100%;">
+            <rect x="108" y="58" width="112" height="112" fill="#E2E8F0" rx="14"/>
+            <rect x="104" y="54" width="112" height="112" fill="#EEF2FF" stroke="#4F46E5" stroke-width="4" rx="12"/>
+            <text x="160" y="117" font-size="14" font-weight="900" fill="#4F46E5" text-anchor="middle">Cuadrado</text>
+            <!-- Lado Superior -->
+            <rect x="131" y="14" width="58" height="26" fill="#4F46E5" rx="7"/>
+            <text x="160" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+            <!-- Lado Inferior -->
+            <rect x="131" y="180" width="58" height="26" fill="#4F46E5" rx="7"/>
+            <text x="160" y="198" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+            <!-- Lado Izquierdo -->
+            <rect x="24" y="97" width="58" height="26" fill="#4F46E5" rx="7"/>
+            <text x="53" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
+            <!-- Lado Derecho -->
+            <rect x="238" y="97" width="58" height="26" fill="#4F46E5" rx="7"/>
+            <text x="267" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">4 cm</text>
           </svg>
         `;
       }
@@ -1115,17 +1145,22 @@ class PractiJuegosApp {
       // 2. RECTÁNGULO DE PERÍMETRO CON PÍLDORAS
       case 'rectangulo': {
         return `
-          <svg class="figura-svg" width="300" height="200" viewBox="0 0 300 200" style="overflow: visible;">
-            <rect x="69" y="54" width="170" height="90" fill="#E2E8F0" rx="14"/>
-            <rect x="65" y="50" width="170" height="90" fill="#D1FAE5" stroke="#10B981" stroke-width="4" rx="12"/>
-            <rect x="125" y="14" width="50" height="26" fill="#10B981" rx="6"/>
-            <text x="150" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">6 cm</text>
-            <rect x="125" y="150" width="50" height="26" fill="#10B981" rx="6"/>
-            <text x="150" y="168" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">6 cm</text>
-            <rect x="8" y="82" width="50" height="26" fill="#10B981" rx="6"/>
-            <text x="33" y="100" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">3 cm</text>
-            <rect x="242" y="82" width="50" height="26" fill="#10B981" rx="6"/>
-            <text x="267" y="100" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">3 cm</text>
+          <svg class="figura-svg" width="340" height="210" viewBox="0 0 340 210" style="overflow: visible; max-width: 100%;">
+            <rect x="88" y="58" width="172" height="94" fill="#E2E8F0" rx="14"/>
+            <rect x="84" y="54" width="172" height="94" fill="#D1FAE5" stroke="#10B981" stroke-width="4" rx="12"/>
+            <text x="170" y="107" font-size="14" font-weight="900" fill="#047857" text-anchor="middle">Rectángulo</text>
+            <!-- Lado Superior -->
+            <rect x="141" y="14" width="58" height="26" fill="#10B981" rx="7"/>
+            <text x="170" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">6 cm</text>
+            <!-- Lado Inferior -->
+            <rect x="141" y="162" width="58" height="26" fill="#10B981" rx="7"/>
+            <text x="170" y="180" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">6 cm</text>
+            <!-- Lado Izquierdo -->
+            <rect x="12" y="88" width="58" height="26" fill="#10B981" rx="7"/>
+            <text x="41" y="106" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">3 cm</text>
+            <!-- Lado Derecho -->
+            <rect x="270" y="88" width="58" height="26" fill="#10B981" rx="7"/>
+            <text x="299" y="106" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">3 cm</text>
           </svg>
         `;
       }
@@ -1133,16 +1168,23 @@ class PractiJuegosApp {
       // 3. PATIO CUADRADO DE 5 METROS
       case 'cuadrado_5m': {
         return `
-          <svg class="figura-svg" width="260" height="200" viewBox="0 0 260 200">
-            <rect x="70" y="40" width="120" height="120" fill="#FEF3C7" stroke="#D97706" stroke-width="3" rx="10"/>
-            <rect x="105" y="8" width="50" height="24" fill="#D97706" rx="6"/>
-            <text x="130" y="24" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
-            <rect x="105" y="168" width="50" height="24" fill="#D97706" rx="6"/>
-            <text x="130" y="184" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
-            <rect x="10" y="88" width="50" height="24" fill="#D97706" rx="6"/>
-            <text x="35" y="104" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
-            <rect x="200" y="88" width="50" height="24" fill="#D97706" rx="6"/>
-            <text x="225" y="104" font-size="12" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+          <svg class="figura-svg" width="320" height="230" viewBox="0 0 320 230" style="overflow: visible; max-width: 100%;">
+            <rect x="108" y="58" width="112" height="112" fill="#E2E8F0" rx="14"/>
+            <rect x="104" y="54" width="112" height="112" fill="#FEF3C7" stroke="#D97706" stroke-width="4" stroke-dasharray="6,4" rx="12"/>
+            <text x="160" y="105" font-size="1.8rem" text-anchor="middle">🏡</text>
+            <text x="160" y="126" font-size="12" font-weight="800" fill="#B45309" text-anchor="middle">Patio cercado</text>
+            <!-- Lado Superior -->
+            <rect x="131" y="14" width="58" height="26" fill="#D97706" rx="7"/>
+            <text x="160" y="32" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+            <!-- Lado Inferior -->
+            <rect x="131" y="180" width="58" height="26" fill="#D97706" rx="7"/>
+            <text x="160" y="198" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+            <!-- Lado Izquierdo -->
+            <rect x="24" y="97" width="58" height="26" fill="#D97706" rx="7"/>
+            <text x="53" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
+            <!-- Lado Derecho -->
+            <rect x="238" y="97" width="58" height="26" fill="#D97706" rx="7"/>
+            <text x="267" y="115" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">5 m</text>
           </svg>
         `;
       }
@@ -1303,12 +1345,13 @@ class PractiJuegosApp {
       }
 
       // 12. CILINDRO DESPIECE (BASES CIRCULARES)
+      case 'cilindro_caras':
       case 'cilindro_despiece': {
         return `
-          <div style="display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: white; padding: 0.8rem 1.5rem; border-radius: 12px; border: 2px solid #E2E8F0;">
-            <div style="text-align: center;"><span style="font-size: 2.5rem;">🛢️</span><br><b style="font-size: 0.85rem;">Cilindro</b></div>
-            <span style="font-size: 1.5rem; color: #6366F1;">➔</span>
-            <div style="text-align: center;"><span style="font-size: 2rem;">⭕ ⭕</span><br><b style="font-size: 0.85rem; color: #10B981;">2 caras planas circulares</b></div>
+          <div style="display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: white; padding: 0.9rem 1.6rem; border-radius: 12px; border: 2px solid #E2E8F0; box-shadow: var(--shadow-sm);">
+            <div style="text-align: center;"><span style="font-size: 2.8rem;">🛢️</span><br><b style="font-size: 0.85rem; color: #475569;">Cilindro (3D)</b></div>
+            <span style="font-size: 1.8rem; color: #6366F1; font-weight: 900;">➔</span>
+            <div style="text-align: center;"><span style="font-size: 2.2rem; letter-spacing: 4px;">⭕ ⭕</span><br><b style="font-size: 0.88rem; color: #10B981;">2 Caras Planas Circulares (2D)</b></div>
           </div>
         `;
       }
@@ -1378,15 +1421,31 @@ class PractiJuegosApp {
         `;
       }
 
-      // 16. MULTIPLICACIÓN GRUPOS
+      // 16. MULTIPLICACIÓN GRUPOS (SUMA REITERADA ULTRA CLARA)
       case 'multiplicacion_grupos': {
+        const grupos = grafico.grupos || 4;
+        const porGrupo = grafico.porGrupo || 3;
+        const total = grupos * porGrupo;
         const rows = [];
-        for (let g = 0; g < grafico.grupos; g++) {
-          rows.push(`<div style="background: white; border: 1.5px solid #CBD5E1; padding: 0.4rem 0.6rem; border-radius: 8px; font-weight: 700;">📦 Grupo ${g+1}: <span style="letter-spacing: 2px;">${'⭐'.repeat(grafico.porGrupo)}</span></div>`);
+        for (let g = 0; g < grupos; g++) {
+          rows.push(`
+            <div style="background: white; border: 2px solid #10B981; padding: 0.6rem 0.85rem; border-radius: 10px; text-align: center; box-shadow: var(--shadow-sm); min-width: 90px;">
+              <div style="font-size: 0.78rem; font-weight: 800; color: #047857; text-transform: uppercase;">Grupo ${g + 1}</div>
+              <div style="font-size: 1.4rem; letter-spacing: 3px; margin: 0.25rem 0;">${'🍎'.repeat(porGrupo)}</div>
+              <div style="font-size: 0.82rem; font-weight: 900; color: #1E293B; background: #ECFDF5; padding: 0.15rem 0.4rem; border-radius: 6px;">${porGrupo} unidades</div>
+            </div>
+          `);
         }
         return `
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; max-width: 450px;">
-            ${rows.join('')}
+          <div style="width: 100%; max-width: 480px; text-align: center;">
+            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap; justify-content: center; margin-bottom: 0.75rem;">
+              ${rows.join('')}
+            </div>
+            <div style="background: #F0FDF4; border: 1.5px solid #BBF7D0; padding: 0.4rem 0.85rem; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 800; color: #15803D; flex-wrap: wrap; justify-content: center;">
+              <span>Suma reiterada:</span>
+              <strong style="color: #047857; font-size: 1.05rem;">${Array(grupos).fill(porGrupo).join(' + ')} = ${total}</strong>
+              <span style="color: #64748B; font-weight: 700;">(${grupos} veces ${porGrupo})</span>
+            </div>
           </div>
         `;
       }
@@ -1553,6 +1612,7 @@ class PractiJuegosApp {
   showFeedback(isCorrect, explicacion, puntosTexto) {
     const container = document.getElementById('feedback-container');
     const isLast = (this.currentIndex === this.questionsList.length - 1);
+    const q = this.questionsList[this.currentIndex];
 
     container.innerHTML = `
       <div class="feedback-card ${isCorrect ? 'correct' : 'wrong'}">
@@ -1563,7 +1623,12 @@ class PractiJuegosApp {
             ${isCorrect && puntosTexto ? `<span style="background: #10B981; color: white; font-size: 0.82rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 999px; box-shadow: var(--shadow-sm);">${puntosTexto}</span>` : (!isCorrect ? `<span style="background: #F59E0B; color: white; font-size: 0.8rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 999px;">Racha a 0 (¡a seguir!)</span>` : '')}
           </div>
           <p>${explicacion}</p>
-          <button id="btn-next-question" class="btn-next">
+          <div class="feedback-libro-ref">
+            <span>📖</span>
+            <span><strong>${q.origenDetalle || ('Texto escolar: ' + q.origen)}</strong></span>
+            <span style="margin-left: auto;" class="badge-dificultad badge-dificultad-${q.dificultadNivel || 'facil'}">${q.dificultadBadge || '🟢 Fácil'}</span>
+          </div>
+          <button id="btn-next-question" class="btn-next" style="margin-top: 0.85rem;">
             ${isLast ? 'Ver Resultados Finales 🏆' : 'Siguiente Desafío ➜'}
           </button>
         </div>
