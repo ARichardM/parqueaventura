@@ -220,36 +220,35 @@ class PractiJuegosApp {
       case 'pictograma':
         return `
           <div>
-            <div class="mini-game-controls" style="margin-bottom: 0.75rem;">
-              <span style="font-size: 0.82rem; font-weight: 800; color: #475569;">Canastas:</span>
-              <button class="btn-game-chip" id="btn-add-manzana">🍎 +1 Manzana</button>
-              <button class="btn-game-chip" id="btn-add-platano">🍌 +1 Plátano</button>
-              <button class="btn-game-chip" id="btn-add-frutilla">🍓 +1 Frutilla</button>
-              <button class="btn-game-chip" id="btn-reset-frutas" style="color: #64748B;">🔄 Reiniciar</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.85rem;">
+              <button class="btn-game-chip" id="btn-add-manzana">🍎 +1</button>
+              <button class="btn-game-chip" id="btn-add-platano">🍌 +1</button>
+              <button class="btn-game-chip" id="btn-add-frutilla">🍓 +1</button>
+              <button class="btn-game-chip" id="btn-reset-frutas" style="color: #64748B;">🔄 Borrar</button>
             </div>
-            <div class="mini-game-stage" style="align-items: stretch; text-align: left;">
-              <div style="font-size: 0.8rem; font-weight: 800; color: #64748B; margin-bottom: 0.4rem; text-transform: uppercase;">
+            <div class="mini-game-stage" style="align-items: stretch; text-align: left; padding: 1rem 1.25rem;">
+              <div style="font-size: 0.82rem; font-weight: 800; color: #64748B; margin-bottom: 0.6rem; text-transform: uppercase;">
                 📊 Pictograma en vivo (1 dibujo = 1 fruta):
               </div>
-              <div id="demo-picto-rows" style="display: flex; flex-direction: column; gap: 0.4rem; background: #F8FAFC; padding: 0.6rem; border-radius: 8px;">
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <span style="width: 75px; font-weight: 800; font-size: 0.85rem;">🍎 Manzanas</span>
-                  <span id="picto-row-manzana" style="font-size: 1.3rem; letter-spacing: 3px; flex: 1;">🍎🍎🍎</span>
-                  <span id="picto-count-manzana" style="font-weight: 900; color: #DC2626; background: #FEE2E2; padding: 0.1rem 0.5rem; border-radius: 6px;">3</span>
+              <div id="demo-picto-rows" style="display: flex; flex-direction: column; gap: 0.6rem; background: #F8FAFC; padding: 0.85rem 1rem; border-radius: 10px;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span style="width: 105px; font-weight: 800; font-size: 0.95rem;">🍎 Manzanas</span>
+                  <span id="picto-row-manzana" style="font-size: 1.5rem; letter-spacing: 5px; flex: 1;">🍎🍎🍎</span>
+                  <span id="picto-count-manzana" style="font-weight: 900; color: #DC2626; background: #FEE2E2; padding: 0.2rem 0.65rem; border-radius: 8px; font-size: 1rem;">3</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <span style="width: 75px; font-weight: 800; font-size: 0.85rem;">🍌 Plátanos</span>
-                  <span id="picto-row-platano" style="font-size: 1.3rem; letter-spacing: 3px; flex: 1;">🍌🍌</span>
-                  <span id="picto-count-platano" style="font-weight: 900; color: #D97706; background: #FEF3C7; padding: 0.1rem 0.5rem; border-radius: 6px;">2</span>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span style="width: 105px; font-weight: 800; font-size: 0.95rem;">🍌 Plátanos</span>
+                  <span id="picto-row-platano" style="font-size: 1.5rem; letter-spacing: 5px; flex: 1;">🍌🍌</span>
+                  <span id="picto-count-platano" style="font-weight: 900; color: #D97706; background: #FEF3C7; padding: 0.2rem 0.65rem; border-radius: 8px; font-size: 1rem;">2</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <span style="width: 75px; font-weight: 800; font-size: 0.85rem;">🍓 Frutillas</span>
-                  <span id="picto-row-frutilla" style="font-size: 1.3rem; letter-spacing: 3px; flex: 1;">🍓🍓🍓🍓</span>
-                  <span id="picto-count-frutilla" style="font-weight: 900; color: #E11D48; background: #FFE4E6; padding: 0.1rem 0.5rem; border-radius: 6px;">4</span>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span style="width: 105px; font-weight: 800; font-size: 0.95rem;">🍓 Frutillas</span>
+                  <span id="picto-row-frutilla" style="font-size: 1.5rem; letter-spacing: 5px; flex: 1;">🍓🍓🍓🍓</span>
+                  <span id="picto-count-frutilla" style="font-weight: 900; color: #E11D48; background: #FFE4E6; padding: 0.2rem 0.65rem; border-radius: 8px; font-size: 1rem;">4</span>
                 </div>
               </div>
             </div>
-            <div id="demo-picto-stats" class="mini-game-banner" style="margin-top: 0.65rem; background: #FF7675;">
+            <div id="demo-picto-stats" class="mini-game-banner" style="margin-top: 0.75rem; background: #FF7675;">
               🍓 La fruta más elegida es la Frutilla (4). Total de frutas: 9 🌟
             </div>
           </div>
@@ -258,21 +257,21 @@ class PractiJuegosApp {
       case 'figuras3d':
         return `
           <div>
-            <div class="mini-game-controls" style="margin-bottom: 0.75rem;">
+            <div class="mini-game-controls" style="margin-bottom: 0.85rem;">
               <button class="btn-game-chip active demo-shape-btn" data-shape="cubo">🎲 Cubo</button>
               <button class="btn-game-chip demo-shape-btn" data-shape="cilindro">🛢️ Cilindro</button>
               <button class="btn-game-chip demo-shape-btn" data-shape="esfera">⚽ Esfera</button>
               <button class="btn-game-chip demo-shape-btn" data-shape="cono">🍦 Cono</button>
             </div>
-            <div id="demo-shape-stage" class="mini-game-stage" style="min-height: 140px;">
-              <div id="demo-shape-visual" style="font-size: 3.5rem; line-height: 1; margin-bottom: 0.4rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">
+            <div id="demo-shape-stage" class="mini-game-stage" style="min-height: 160px; padding: 1.25rem;">
+              <div id="demo-shape-visual" style="font-size: 4.5rem; line-height: 1; margin-bottom: 0.6rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));">
                 🎲
               </div>
-              <div id="demo-shape-info" style="font-size: 0.88rem; font-weight: 800; color: #1E293B; text-align: center;">
+              <div id="demo-shape-info" style="font-size: 0.95rem; font-weight: 800; color: #1E293B; text-align: center;">
                 6 caras planas cuadradas • 8 vértices • 12 aristas
               </div>
             </div>
-            <div id="demo-shape-result" class="mini-game-banner" style="margin-top: 0.65rem; background: #10B981;">
+            <div id="demo-shape-result" class="mini-game-banner" style="margin-top: 0.75rem; background: #10B981;">
               🧱 ¡APILADO PERFECTO! Tiene caras planas para apoyarse firmemente en la torre.
             </div>
           </div>
@@ -281,38 +280,38 @@ class PractiJuegosApp {
       case 'perimetro':
         return `
           <div>
-            <div style="display: flex; gap: 0.75rem; justify-content: space-around; margin-bottom: 0.6rem;">
-              <div style="display: flex; align-items: center; gap: 0.35rem;">
-                <span style="font-weight: 800; font-size: 0.88rem;">Largo: <b id="val-largo" style="color:#0284C7;">6</b> m</span>
-                <button class="btn-stepper" id="btn-sub-largo" style="width:30px; height:30px; font-size:1rem;">-</button>
-                <button class="btn-stepper" id="btn-add-largo" style="width:30px; height:30px; font-size:1rem;">+</button>
+            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; background: white; padding: 0.35rem 0.85rem; border-radius: 10px; border: 1.5px solid #CBD5E1;">
+                <span style="font-weight: 800; font-size: 0.92rem;">Largo: <b id="val-largo" style="color:#0284C7;">6</b> m</span>
+                <button class="btn-stepper" id="btn-sub-largo" style="width:32px; height:32px; font-size:1.1rem;">-</button>
+                <button class="btn-stepper" id="btn-add-largo" style="width:32px; height:32px; font-size:1.1rem;">+</button>
               </div>
-              <div style="display: flex; align-items: center; gap: 0.35rem;">
-                <span style="font-weight: 800; font-size: 0.88rem;">Ancho: <b id="val-ancho" style="color:#0284C7;">4</b> m</span>
-                <button class="btn-stepper" id="btn-sub-ancho" style="width:30px; height:30px; font-size:1rem;">-</button>
-                <button class="btn-stepper" id="btn-add-ancho" style="width:30px; height:30px; font-size:1rem;">+</button>
+              <div style="display: flex; align-items: center; gap: 0.5rem; background: white; padding: 0.35rem 0.85rem; border-radius: 10px; border: 1.5px solid #CBD5E1;">
+                <span style="font-weight: 800; font-size: 0.92rem;">Ancho: <b id="val-ancho" style="color:#0284C7;">4</b> m</span>
+                <button class="btn-stepper" id="btn-sub-ancho" style="width:32px; height:32px; font-size:1.1rem;">-</button>
+                <button class="btn-stepper" id="btn-add-ancho" style="width:32px; height:32px; font-size:1.1rem;">+</button>
               </div>
             </div>
-            <div class="mini-game-stage" style="background: #F0FDF4; border-color: #86EFAC; padding: 0.75rem;">
-              <svg id="svg-granja-perimetro" width="260" height="130" viewBox="0 0 260 130">
-                <!-- Pasto verde -->
-                <rect x="35" y="25" width="190" height="80" fill="#DCFCE7" stroke="#16A34A" stroke-width="4" stroke-dasharray="6,4" rx="10"/>
-                <!-- Ovejitas dentro -->
-                <text x="80" y="70" font-size="22">🐑</text>
-                <text x="140" y="70" font-size="22">🐑</text>
-                <text x="180" y="70" font-size="20">🌱</text>
-                <!-- Etiquetas de los 4 lados con píldoras -->
-                <rect x="105" y="6" width="50" height="20" fill="#16A34A" rx="5"/>
-                <text id="lbl-perim-top" x="130" y="20" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">6 m</text>
-                <rect x="105" y="104" width="50" height="20" fill="#16A34A" rx="5"/>
-                <text id="lbl-perim-bottom" x="130" y="118" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">6 m</text>
-                <rect x="4" y="55" width="45" height="20" fill="#16A34A" rx="5"/>
-                <text id="lbl-perim-left" x="26" y="69" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">4 m</text>
-                <rect x="211" y="55" width="45" height="20" fill="#16A34A" rx="5"/>
-                <text id="lbl-perim-right" x="233" y="69" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">4 m</text>
+            <div class="mini-game-stage" style="background: #F0FDF4; border-color: #86EFAC; padding: 1rem;">
+              <svg id="svg-granja-perimetro" width="340" height="180" viewBox="0 0 340 180" style="max-width:100%; height:auto;">
+                <!-- Pasto verde amplio y proporcionado -->
+                <rect x="50" y="30" width="240" height="120" fill="#DCFCE7" stroke="#16A34A" stroke-width="4" stroke-dasharray="6,4" rx="14"/>
+                <!-- Ovejitas dentro con espacio natural -->
+                <text x="100" y="95" font-size="28">🐑</text>
+                <text x="175" y="95" font-size="28">🐑</text>
+                <text x="240" y="95" font-size="24">🌱</text>
+                <!-- Etiquetas de los 4 lados con píldoras y márgenes amplios -->
+                <rect x="145" y="6" width="50" height="22" fill="#16A34A" rx="6"/>
+                <text id="lbl-perim-top" x="170" y="21" font-size="12" font-weight="900" fill="#FFF" text-anchor="middle">6 m</text>
+                <rect x="145" y="152" width="50" height="22" fill="#16A34A" rx="6"/>
+                <text id="lbl-perim-bottom" x="170" y="167" font-size="12" font-weight="900" fill="#FFF" text-anchor="middle">6 m</text>
+                <rect x="4" y="79" width="42" height="22" fill="#16A34A" rx="6"/>
+                <text id="lbl-perim-left" x="25" y="94" font-size="12" font-weight="900" fill="#FFF" text-anchor="middle">4 m</text>
+                <rect x="294" y="79" width="42" height="22" fill="#16A34A" rx="6"/>
+                <text id="lbl-perim-right" x="315" y="94" font-size="12" font-weight="900" fill="#FFF" text-anchor="middle">4 m</text>
               </svg>
             </div>
-            <div id="demo-perimetro-calc" class="mini-game-banner" style="margin-top: 0.65rem; background: #00CEC9;">
+            <div id="demo-perimetro-calc" class="mini-game-banner" style="margin-top: 0.75rem; background: #00CEC9;">
               P = 6 m + 4 m + 6 m + 4 m = 20 metros de cerca 🪵
             </div>
           </div>
@@ -321,35 +320,35 @@ class PractiJuegosApp {
       case 'peso':
         return `
           <div>
-            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
-              <button class="btn-game-chip" id="btn-add-peso-500">🍚 +500 g Azúcar</button>
-              <button class="btn-game-chip" id="btn-add-peso-250">🌾 +250 g Harina</button>
-              <button class="btn-game-chip" id="btn-add-peso-100">🍬 +100 g Dulces</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.85rem;">
+              <button class="btn-game-chip" id="btn-add-peso-500">🍚 +500 g</button>
+              <button class="btn-game-chip" id="btn-add-peso-250">🌾 +250 g</button>
+              <button class="btn-game-chip" id="btn-add-peso-100">🍬 +100 g</button>
               <button class="btn-game-chip" id="btn-reset-peso" style="color:#64748B;">🔄 Vaciar</button>
             </div>
-            <div class="mini-game-stage" style="padding: 0.5rem; background: #FFFBEB;">
-              <svg id="svg-balanza-demo" width="240" height="110" viewBox="0 0 240 110">
+            <div class="mini-game-stage" style="padding: 1rem; background: #FFFBEB;">
+              <svg id="svg-balanza-demo" width="300" height="140" viewBox="0 0 300 140" style="max-width:100%; height:auto;">
                 <!-- Base -->
-                <polygon points="120,50 90,100 150,100" fill="#64748B"/>
+                <polygon points="150,65 110,130 190,130" fill="#64748B"/>
                 <!-- Brazo que se inclina -->
-                <g id="balanza-brazo" style="transform-origin: 120px 50px; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                  <line x1="30" y1="50" x2="210" y2="50" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                <g id="balanza-brazo" style="transform-origin: 150px 65px; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                  <line x1="40" y1="65" x2="260" y2="65" stroke="#334155" stroke-width="7" stroke-linecap="round"/>
                   <!-- Platillo Izquierdo (Fijo 1 kg) -->
-                  <line x1="45" y1="50" x2="30" y2="85" stroke="#94A3B8" stroke-width="2"/>
-                  <line x1="45" y1="50" x2="60" y2="85" stroke="#94A3B8" stroke-width="2"/>
-                  <ellipse cx="45" cy="85" rx="28" ry="6" fill="#CBD5E1"/>
-                  <rect x="33" y="65" width="24" height="20" fill="#F59E0B" rx="3"/>
-                  <text x="45" y="79" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">1 kg</text>
+                  <line x1="55" y1="65" x2="35" y2="105" stroke="#94A3B8" stroke-width="2.5"/>
+                  <line x1="55" y1="65" x2="75" y2="105" stroke="#94A3B8" stroke-width="2.5"/>
+                  <ellipse cx="55" cy="105" rx="34" ry="7" fill="#CBD5E1"/>
+                  <rect x="40" y="80" width="30" height="25" fill="#F59E0B" rx="4"/>
+                  <text x="55" y="97" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle">1 kg</text>
                   <!-- Platillo Derecho (Interactiva) -->
-                  <line x1="195" y1="50" x2="180" y2="85" stroke="#94A3B8" stroke-width="2"/>
-                  <line x1="195" y1="50" x2="210" y2="85" stroke="#94A3B8" stroke-width="2"/>
-                  <ellipse cx="195" cy="85" rx="28" ry="6" fill="#CBD5E1"/>
-                  <rect x="180" y="65" width="30" height="20" fill="#0284C7" rx="3"/>
-                  <text id="txt-balanza-der" x="195" y="79" font-size="8" font-weight="900" fill="#FFFFFF" text-anchor="middle">0 g</text>
+                  <line x1="245" y1="65" x2="225" y2="105" stroke="#94A3B8" stroke-width="2.5"/>
+                  <line x1="245" y1="65" x2="265" y2="105" stroke="#94A3B8" stroke-width="2.5"/>
+                  <ellipse cx="245" cy="105" rx="34" ry="7" fill="#CBD5E1"/>
+                  <rect x="227" y="80" width="36" height="25" fill="#0284C7" rx="4"/>
+                  <text id="txt-balanza-der" x="245" y="97" font-size="10" font-weight="900" fill="#FFFFFF" text-anchor="middle">0 g</text>
                 </g>
               </svg>
             </div>
-            <div id="demo-peso-result" class="mini-game-banner" style="margin-top: 0.65rem; background: #FD9644;">
+            <div id="demo-peso-result" class="mini-game-banner" style="margin-top: 0.75rem; background: #FD9644;">
               ⚖️ Platillo derecho vacío (0 g). ¡Agrega paquetes hasta equilibrar 1.000 g!
             </div>
           </div>
@@ -501,12 +500,11 @@ class PractiJuegosApp {
       case 'fracciones':
         return `
           <div>
-            <div class="mini-game-controls" style="margin-bottom: 0.6rem;">
-              <span style="font-weight: 800; font-size: 0.85rem;">Cortes de pizza:</span>
-              <button class="btn-game-chip btn-pizza-cut" data-cut="2">2 mitades (1/2)</button>
-              <button class="btn-game-chip active btn-pizza-cut" data-cut="4">4 cuartos (1/4)</button>
-              <button class="btn-game-chip btn-pizza-cut" data-cut="6">6 sextos (1/6)</button>
-              <button class="btn-game-chip btn-pizza-cut" data-cut="8">8 octavos (1/8)</button>
+            <div class="mini-game-controls" style="margin-bottom: 0.85rem;">
+              <button class="btn-game-chip btn-pizza-cut" data-cut="2">1/2 Medios</button>
+              <button class="btn-game-chip active btn-pizza-cut" data-cut="4">1/4 Cuartos</button>
+              <button class="btn-game-chip btn-pizza-cut" data-cut="6">1/6 Sextos</button>
+              <button class="btn-game-chip btn-pizza-cut" data-cut="8">1/8 Octavos</button>
             </div>
             <div class="mini-game-stage" style="padding: 0.4rem; background: #FFF7ED;">
               <svg id="svg-pizza-demo" width="160" height="160" viewBox="0 0 160 160" style="cursor: pointer;">
