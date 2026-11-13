@@ -175,14 +175,20 @@ class PractiJuegosApp {
       card.className = 'ficha-card-interactive';
       const itemsHtml = f.puntos.map(p => `<li>${p}</li>`).join('');
       const widgetHtml = this.buildInteractiveWidget(f.widget, f.id);
+      const temaInfo = TEMAS_INFO[f.id];
+      const oaText = temaInfo ? `OA ${temaInfo.oa}` : '';
+      const tituloLimpio = f.tema.split('(')[0].trim();
 
       card.innerHTML = `
         <div class="ficha-header-bar" style="background: linear-gradient(135deg, ${f.color}, #6366F1);">
-          <div class="ficha-header-title">
-            <span style="font-size: 1.8rem;">${f.icono}</span>
-            <h3>${f.tema}</h3>
+          <div class="ficha-header-top">
+            <span class="ficha-oa-tag">${oaText}</span>
+            <span class="badge-interactive">⚡ Interactivo</span>
           </div>
-          <span class="badge-interactive">⚡ Interactivo</span>
+          <div class="ficha-header-main">
+            <span class="ficha-header-icon">${f.icono}</span>
+            <h3>${tituloLimpio}</h3>
+          </div>
         </div>
 
         <div class="ficha-content-body">
